@@ -2,18 +2,36 @@
 import { Pet } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
+import { Request } from "express";
+import { uploadInSpace } from "../../../helpers/uploadInSpace";
 
-const createPetIntoDB = async (payload: Pet) => {
-  const user = await prisma.user.findUnique({
+const createPetIntoDB = async (req: Request) => {
+  const payload = req.body;
+  console.log(req.user, "middleware user");
+  const existingUser = await prisma.user.findUnique({
     where: {
-      id: payload.userId,
+      id: req.user.id,
     },
   });
-  if (!user) {
+  if (!existingUser) {
     throw new ApiError(404, "User not found");
   }
+  let petImage;
+
+  const file = req.file;
+  if (file) {
+    petImage = await uploadInSpace(file, "pets/petImage");
+  }
+
+  if (!petImage) {
+    throw new ApiError(400, "Pet image is required");
+  }
   const result = await prisma.pet.create({
-    data: payload,
+    data: {
+      ...payload,
+      userId: req.user.id,
+      petImage,
+    },
   });
   return result;
 };

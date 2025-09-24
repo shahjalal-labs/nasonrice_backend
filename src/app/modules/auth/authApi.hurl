@@ -4,7 +4,7 @@ POST {{baseUrl}}/auth/login
 Content-Type:application/json
 
 {
- "email": "shahjalal.backend@gmail.com",
+ "email": "mir.developer.hasan@gmail.com",
  "password": "Test@123",
  "fcmToken": "fcm_token_example_12345"
 }

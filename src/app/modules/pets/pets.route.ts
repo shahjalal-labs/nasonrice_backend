@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post(
   "/create",
+  auth(),
   fileUploader.upload.single("petImage"),
   parseBodyData,
   PetController.createPet,

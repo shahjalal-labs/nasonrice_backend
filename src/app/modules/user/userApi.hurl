@@ -33,7 +33,7 @@ Content-Type: application/json
 
 {
   "email": "mir.developer.hasan@gmail.com",
-  "otp": "5276"
+  "otp": "1568"
 }
 
 # (END)   ==========  SIGNUP VERIFICATION (END)   ==========
