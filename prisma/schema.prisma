@@ -10,12 +10,12 @@ generator client {
 //-----//-----//-------START USER MODEL- -----//-----//-------
 model User {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
-  firstName    String
-  lastName     String?
-  phoneNumber  String
+  firstName    String?
+  lastName     String
+  phoneNumber  String?
   email        String     @unique
   password     String
-  nationality  String
+  nationality  String?
   fcmToken     String?
   profileImage String?
   role         UserRole   @default(User)

@@ -13,16 +13,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YzkzY2M3MzVkNDAz
 
 # (START) ==========  CREATE USER WITH OTP EMAIL VERIFICATION (START) ==========
 
-POST http://localhost:5002/api/v1/users/create
+POST {{baseUrl}}/users/create
 Content-Type: application/json
 
 {
  "firstName": "Michael",
   "lastName": "David",
-  "email": "muhommodshahjalal@gmail.com",
-  "password": "Test@123", 
-  "nationality": "British",
-  "fcmToken": "fcm_token_example_12345"
+  "email": "mir.developer.hasan@gmail.com",
+  "password": "Test@123" 
 }
 
 # (END) ========== CREATE USER WITH OTP EMAIL VERIFICATION  (END)   ==========
@@ -30,12 +28,12 @@ Content-Type: application/json
 
 # (START) ==========  SIGNUP VERIFICATION (START) ==========
 
-POST http://localhost:5002/api/v1/users/signup-verification
+POST {{baseUrl}}/users/signup-verification
 Content-Type: application/json
 
 {
-  "email": "shahjalal.backend@gmail.com",
-  "otp": "2798"
+  "email": "mir.developer.hasan@gmail.com",
+  "otp": "5276"
 }
 
 # (END)   ==========  SIGNUP VERIFICATION (END)   ==========

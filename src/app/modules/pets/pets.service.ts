@@ -4,7 +4,7 @@ import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 
 const createPetIntoDB = async (payload: Pet) => {
-  const user = await prisma.user.findFirst({
+  const user = await prisma.user.findUnique({
     where: {
       id: payload.userId,
     },
