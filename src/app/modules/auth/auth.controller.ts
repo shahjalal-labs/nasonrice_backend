@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import { authService } from "./auth.service";
 import sendResponse from "../../../shared/sendResponse";
+import httpStatus from "http-status";
 
 //login user
 const loginUser = catchAsync(async (req, res) => {
@@ -108,6 +109,19 @@ const updateProfile = catchAsync(async (req, res) => {
   });
 });
 
+const changePassword = catchAsync(async (req, res) => {
+  const userId = req.user?.id;
+
+  const currentPassword = req.body?.currentPassword;
+  const newPassword = req.body?.newPassword;
+
+  await authService.changePasswordIntoDB(userId, currentPassword, newPassword);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Password changed successfully",
+  });
+});
 export const authController = {
   loginUser,
   // googleLogin,
@@ -117,4 +131,5 @@ export const authController = {
   sendForgotPasswordOtp,
   verifyForgotPasswordOtpCode,
   resetPassword,
+  changePassword,
 };

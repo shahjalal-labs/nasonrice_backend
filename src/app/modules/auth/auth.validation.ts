@@ -39,10 +39,22 @@ const updateProfileSchema = z.object({
 const sendForgotPasswordOtpValidationSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
+
+const changePasswordValidationSchema = z.object({
+  currentPassword: z.string(),
+  newPassword: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character",
+    ),
+});
 export const authValidation = {
   updateProfileSchema,
   authLoginSchema,
   googleLoginSchema,
   locationUpdateSchema,
   sendForgotPasswordOtpValidationSchema,
+  changePasswordValidationSchema,
 };

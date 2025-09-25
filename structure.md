@@ -27,11 +27,19 @@
 │   │   │   └── validateRequest.ts
 │   │   ├── modules
 │   │   │   ├── auth
+│   │   │   │   ├── authApi.hurl
 │   │   │   │   ├── auth.controller.ts
 │   │   │   │   ├── auth.routes.ts
 │   │   │   │   ├── auth.service.ts
 │   │   │   │   └── auth.validation.ts
+│   │   │   ├── pets
+│   │   │   │   ├── petApi.hurl
+│   │   │   │   ├── pets.controller.ts
+│   │   │   │   ├── pets.route.ts
+│   │   │   │   ├── pets.service.ts
+│   │   │   │   └── pets.validation.ts
 │   │   │   └── user
+│   │   │       ├── userApi.hurl
 │   │   │       ├── user.controller.ts
 │   │   │       ├── user.route.ts
 │   │   │       ├── user.services.ts
@@ -68,11 +76,12 @@
 │       ├── prisma.ts
 │       ├── searchFilter.ts
 │       └── sendResponse.ts
+├── structure.md
 ├── tsconfig.json
 ├── uploads
 │   └── google.png
 └── vercel.json
 
-17 directories, 54 files
+18 directories, 62 files
 
 ```

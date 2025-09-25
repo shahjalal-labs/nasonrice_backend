@@ -4,7 +4,7 @@ POST {{baseUrl}}/auth/login
 Content-Type:application/json
 
 {
- "email": "mir.developer.hasan@gmail.com",
+ "email": "hasan.developer@gmail.com",
  "password": "Test@123",
  "fcmToken": "fcm_token_example_12345"
 }
@@ -17,7 +17,7 @@ Content-Type:application/json
 
 {
  "email": "shahjalal.backend@gmail.com",
- "password": "newPassword",
+ "password": "Test@123",
  "fcmToken": "token"
 }
 
@@ -131,6 +131,29 @@ Content-Type: application/json
 
 # ============================================================
 # ===============   UPDATE PROFILE               =============
+# ============================================================
+
+
+
+
+
+# ============================================================
+# ===============   CHANGE-PASSWORD               =============
+# ============================================================
+
+PATCH {{baseUrl}}/auth/change-password
+
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDRlNzgyMmE2ZDE4NzUyMTVkNGNmOCIsImVtYWlsIjoiaGFzYW4uZGV2ZWxvcGVyQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzU4NzgzNTAwLCJleHAiOjE3NjAwNzk1MDB9.M8Gu3aAGdqxfcmKfN6WlmdXnBN7Fr3cVKJ4YlMgwKNg
+
+Content-Type: application/json
+
+{
+  "currentPassword": "Test@123",
+  "newPassword": "@1A123BCd"
+}
+
+# ============================================================
+# ===============   CHANGE-PASSWORD              =============
 # ============================================================
 
 

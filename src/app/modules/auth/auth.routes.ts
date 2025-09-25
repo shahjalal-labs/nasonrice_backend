@@ -43,4 +43,11 @@ router.patch(
   authController.updateProfile,
 );
 
+router.patch(
+  "/change-password",
+  auth(),
+  validateRequest(authValidation.changePasswordValidationSchema),
+  authController.changePassword,
+);
+
 export const authRoute = router;

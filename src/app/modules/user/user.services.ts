@@ -1,3 +1,11 @@
+//w: ╭──────────── Block Start ────────────╮
+
+//w: ╰───────────── Block End ─────────────╯
+
+//w: (start)╭──────────── create new user with otp verification ────────────╮
+
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+
 import { User } from "@prisma/client";
 import ApiError from "../../../errors/ApiErrors";
 import bcrypt from "bcryptjs";
@@ -10,45 +18,8 @@ import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import config from "../../../config";
 //p: AUTH SERVICE INTERPRET WITH CHATGPT: https://chatgpt.com/share/68ce4ed1-9374-800c-8299-01a5d9b0dec8
 //
-// create new user without otp verification
-const createUserIntoDB = async (payload: User) => {
-  const existingUser = await prisma.user.findFirst({
-    where: { email: payload.email },
-  });
 
-  if (existingUser) {
-    throw new ApiError(409, "email already exist!");
-  }
-
-  const hashedPassword = await bcrypt.hash(payload.password as string, 10);
-
-  const user = await prisma.user.create({
-    data: {
-      ...payload,
-
-      password: hashedPassword,
-
-      // stripeCustomerId: stripeAccount.id,
-    },
-  });
-
-  const accessToken = jwtHelpers.generateToken(
-    { id: user.id, email: user.email, role: user.role },
-
-    config.jwt.jwt_secret as string,
-
-    config.jwt.expires_in as string,
-  );
-
-  const { password, ...sanitizedUser } = user;
-
-  return {
-    accessToken,
-
-    user: sanitizedUser,
-  };
-};
-//
+//w: (start)╭──────────── create new user with otp verification ────────────╮
 //create new user with otp verification
 const createUser = async (payload: User) => {
   const existingUser = await prisma.user.findFirst({
@@ -96,6 +67,49 @@ const createUser = async (payload: User) => {
   return otp;
 };
 
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//
+//w: (Start)╭────────────  create new user without otp verification ────────────╮
+// create new user without otp verification
+const createUserIntoDB = async (payload: User) => {
+  const existingUser = await prisma.user.findFirst({
+    where: { email: payload.email },
+  });
+
+  if (existingUser) {
+    throw new ApiError(409, "email already exist!");
+  }
+
+  const hashedPassword = await bcrypt.hash(payload.password as string, 10);
+
+  const user = await prisma.user.create({
+    data: {
+      ...payload,
+
+      password: hashedPassword,
+
+      // stripeCustomerId: stripeAccount.id,
+    },
+  });
+  const accessToken = jwtHelpers.generateToken(
+    { id: user.id, email: user.email, role: user.role },
+
+    config.jwt.jwt_secret as string,
+
+    config.jwt.expires_in as string,
+  );
+
+  const { password, ...sanitizedUser } = user;
+
+  return {
+    accessToken,
+
+    user: sanitizedUser,
+  };
+};
+//w:(end)╰───────────── create new user without otp verification ─────────────╯
+
+//w: (start)╭──────────── Verify user using OTP for signup ────────────╮
 // Verify user using OTP for signup
 const signupVerification = async (payload: { email: string; otp: string }) => {
   const { email, otp } = payload;
@@ -135,7 +149,10 @@ const signupVerification = async (payload: { email: string; otp: string }) => {
 
   return;
 };
+//w: (end) ╰──────────── Verify user using OTP for signup ────────────╯
 
+//
+//w: (start)╭──────────── get single user ────────────╮
 //get single user
 const getSingleUser = async (id: string) => {
   const user = await prisma.user.findUnique({ where: { id } });
@@ -147,6 +164,9 @@ const getSingleUser = async (id: string) => {
   return sanitizedUser;
 };
 
+//w: (end) ╰──────────── get single user ────────────╯
+
+//w: (start)╭──────────── create new user with otp verification ────────────╮
 //get all users
 const getUsers = async () => {
   const users = await prisma.user.findMany();
@@ -160,6 +180,13 @@ const getUsers = async () => {
   return sanitizedUsers;
 };
 
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+
+//w: ╭──────────── Block Start ────────────╮
+
+//w: ╰───────────── Block End ─────────────╯
+
+//w: (start)╭──────────── create new user with otp verification ────────────╮
 //update user
 const updateUser = async (id: string, userData: any) => {
   if (userData?.role || userData?.status) {
@@ -182,6 +209,9 @@ const updateUser = async (id: string, userData: any) => {
   return sanitizedUser;
 };
 
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+
+//w: (start)╭──────────── create new user with otp verification ────────────╮
 //delete user
 const deleteUser = async (userId: string, loggedId: string) => {
   if (!ObjectId.isValid(userId)) {
@@ -200,6 +230,8 @@ const deleteUser = async (userId: string, loggedId: string) => {
   });
   return;
 };
+
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
 
 export const userService = {
   createUser,

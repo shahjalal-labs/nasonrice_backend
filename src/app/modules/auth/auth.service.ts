@@ -9,6 +9,7 @@ import generateOTP from "../../../helpers/generateOtp";
 import sendEmail from "../../../helpers/sendEmail";
 import redisClient from "../../../helpers/redis";
 import { uploadInSpace } from "../../../helpers/uploadInSpace";
+import { Request } from "express";
 
 //login user
 const loginUserIntoDB = async (payload: {
@@ -242,6 +243,46 @@ const updateProfileIntoDB = async (
   return;
 };
 
+const changePasswordIntoDB = async (
+  userId: string,
+  currentPassword: string,
+  newPassword: string,
+) => {
+  // const userId = req.user?.id;
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  if (!existingUser) {
+    throw new ApiError(404, "user not found.");
+  }
+
+  const passwordAuthencity = await bcrypt.compare(
+    currentPassword,
+    existingUser.password,
+  );
+
+  if (!passwordAuthencity) {
+    throw new ApiError(401, "Invalid password.");
+  }
+
+  const hashedPassword = await bcrypt.hash(
+    newPassword,
+    Number(config.jwt.gen_salt),
+  );
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      password: hashedPassword,
+    },
+  });
+  return;
+};
+
 export const authService = {
   loginUserIntoDB,
   // googleLogin,
@@ -251,4 +292,5 @@ export const authService = {
   sendForgotPasswordOtpDB,
   verifyForgotPasswordOtpCodeDB,
   resetForgotPasswordDB,
+  changePasswordIntoDB,
 };

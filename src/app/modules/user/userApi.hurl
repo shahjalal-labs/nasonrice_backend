@@ -17,9 +17,9 @@ POST {{baseUrl}}/users/create
 Content-Type: application/json
 
 {
- "firstName": "Michael",
-  "lastName": "David",
-  "email": "mir.developer.hasan@gmail.com",
+ "firstName": "Hasan",
+  "lastName": "Bin Ali",
+  "email": "hasan.developer@gmail.com",
   "password": "Test@123" 
 }
 
@@ -32,8 +32,8 @@ POST {{baseUrl}}/users/signup-verification
 Content-Type: application/json
 
 {
-  "email": "mir.developer.hasan@gmail.com",
-  "otp": "1568"
+  "email": "hasan.developer@gmail.com",
+  "otp": "1565"
 }
 
 # (END)   ==========  SIGNUP VERIFICATION (END)   ==========
