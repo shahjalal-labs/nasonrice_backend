@@ -1,3 +1,7 @@
+//w: (start)╭──────────── create new user with otp verification ────────────╮
+
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+
 // prisma chatgpt reference: https://chatgpt.com/share/68ce35fd-296c-800c-98ee-55228af26de8
 import prisma from "../../../shared/prisma";
 import bcrypt from "bcryptjs";
@@ -11,7 +15,8 @@ import redisClient from "../../../helpers/redis";
 import { uploadInSpace } from "../../../helpers/uploadInSpace";
 import { Request } from "express";
 
-//login user
+//w: (start)╭──────────── user auth login ────────────╮
+// user auth login
 const loginUserIntoDB = async (payload: {
   email: string;
   password: string;
@@ -55,6 +60,8 @@ const loginUserIntoDB = async (payload: {
     accessToken,
   };
 };
+
+//w: (end) ╰──────────── user auth login ────────────╯
 
 //google login
 /* const googleLogin = async (payload: {
@@ -100,6 +107,7 @@ const loginUserIntoDB = async (payload: {
 }; */
 
 // update or add user location in Redis using GEO
+//w: (start)╭──────────── userLocationUpdateInRedis ────────────╮
 const userLocationUpdateInRedis = async (
   userId: string,
   userLocation: { longitude: number; latitude: number },
@@ -116,7 +124,9 @@ const userLocationUpdateInRedis = async (
   return;
 };
 
-//send forgot password otp
+//w: (end) ╰──────────── userLocationUpdateInRedis  ────────────╯
+
+//w: (start)╭──────────── sendForgotPasswordOtpCode  ────────────╮
 const sendForgotPasswordOtpDB = async (email: string) => {
   const existringUser = await prisma.user.findUnique({
     where: {
@@ -144,7 +154,9 @@ const sendForgotPasswordOtpDB = async (email: string) => {
 
   return otp;
 };
-
+//w: (end) ╰──────────── sendForgotPasswordOtpCode ────────────╯
+//
+//w: (start)╭──────────── verify otp code ────────────╮
 // verify otp code
 const verifyForgotPasswordOtpCodeDB = async (payload: {
   email: string;
@@ -180,6 +192,9 @@ const verifyForgotPasswordOtpCodeDB = async (payload: {
   return { forgetToken };
 };
 
+//w: (end) ╰──────────── verify otp code ────────────╯
+//
+//w: (start)╭──────────── reset password ────────────╮
 // reset password
 const resetForgotPasswordDB = async (newPassword: string, userId: string) => {
   const existingUser = await prisma.user.findUnique({ where: { id: userId } });
@@ -202,7 +217,10 @@ const resetForgotPasswordDB = async (newPassword: string, userId: string) => {
   });
   return;
 };
-
+//w: (end) ╰──────────── reset password ────────────╯
+//
+//
+//w: (start)╭──────────── get profile for logged in user ────────────╮
 // get profile for logged in user
 const myProfile = async (userId: string) => {
   const user = await prisma.user.findUnique({
@@ -214,9 +232,10 @@ const myProfile = async (userId: string) => {
   if (!user) {
     throw new ApiError(404, "user not found!");
   }
-
   return user;
 };
+//w: (end) ╰──────────── get profile for logged in user ────────────╯
+//
 
 // update user profile only logged in user
 const updateProfileIntoDB = async (
