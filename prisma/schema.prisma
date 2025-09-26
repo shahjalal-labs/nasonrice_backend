@@ -49,11 +49,12 @@ model Product {
   id          String          @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   price       Float
-  inStock     Boolean         @default(true)
+  inStock     Int
   description String
   images      String[] // multiple product images 
   rating      Float? // average rating
   reviews     Review[]
+  totalReviews Int @default(0)
   petType     PetType[]
   weight      String
   colorOptions String[]

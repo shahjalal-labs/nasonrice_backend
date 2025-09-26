@@ -4,7 +4,8 @@ import sendResponse from "../../../shared/sendResponse";
 import { ProductService } from "./product.service";
 
 const createProduct = catchAsync(async (req, res) => {
-  const result = await ProductService.createProductIntoDB(req.body);
+  const { id: userId } = req.user;
+  const result = await ProductService.createProductIntoDB(req.body, userId);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
