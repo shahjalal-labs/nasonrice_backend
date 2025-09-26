@@ -18,6 +18,27 @@ const createProductValidationSchema = z.object({
   inStock: z.number(),
 });
 
+const updateProductValidationSchema = z.object({
+  name: z.string().min(2, { message: "Name is too short" }).optional(),
+  price: z.number().optional(),
+  description: z
+    .string()
+    .min(5, { message: "Description is too short" })
+    .optional(),
+  images: z
+    .array(z.string().min(1, { message: "At least one image is required" }))
+    .optional(),
+  petType: z.array(PetTypeEnum).nonempty().optional(),
+  weight: z.string().optional(),
+  colorOptions: z.array(z.string()).optional(),
+  suitableFor: z.array(z.string()).optional(),
+  category: z.enum(["Food", "Toy", "Accessories"]).optional(),
+  fastShipping: z.string().optional(),
+  easyReturns: z.string().optional(),
+  inStock: z.number().optional(),
+});
+
 export const ProductValidation = {
   createProductValidationSchema,
+  updateProductValidationSchema,
 };
