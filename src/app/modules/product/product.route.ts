@@ -12,10 +12,10 @@ router.post(
   ProductController.createProduct,
 );
 router.patch(
-  "/update",
+  "/update/:id",
   auth(),
   validateRequest(ProductValidation.updateProductValidationSchema),
   ProductController.updateProduct,
 );
-router.get("/", auth("Admin"), ProductController.getAllProducts);
+router.get("/", auth(), ProductController.getAllProducts);
 export const ProductRoute = router;
