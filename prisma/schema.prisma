@@ -44,6 +44,23 @@ model Pet {
 
 // -----//-----//-------END USER MODEL- -----//-----//-------
 
+model Product {
+  id          String          @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       Float
+  stockStatus StockStatus     @default(InStock)
+  description String?
+  images      String[] // multiple product images
+  rating      Float? // average rating
+  reviews     Review[]
+  shipping    ShippingInfo?
+  category    ProductCategory
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@map("products")
+}
+
 // -----//-----//-------END BOOKING MODEL- -----//-----//-------
 enum UserStatus {
   Active
