@@ -47,12 +47,12 @@ model Pet {
 
 model Product {
   id          String          @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
+  name        String  @unique
   price       Float
-  inStock     Int
+  inStock     Int 
   description String
   images      String[] // multiple product images 
-  rating      Float? // average rating
+  rating      Float? @default(0) // average rating
   reviews     Review[]
   totalReviews Int @default(0)
   petType     PetType[]

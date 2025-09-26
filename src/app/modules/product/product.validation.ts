@@ -15,6 +15,7 @@ const createProductValidationSchema = z.object({
   category: z.enum(["Food", "Toy", "Accessories"]),
   fastShipping: z.string().optional(),
   easyReturns: z.string().optional(),
+  inStock: z.number(),
 });
 
 export const ProductValidation = {
