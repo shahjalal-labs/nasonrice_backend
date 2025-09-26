@@ -36,7 +36,7 @@ model Pet {
   weight    String
   petImage  String
   userId    String   @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -46,26 +46,26 @@ model Pet {
 // -----//-----//-------END USER MODEL- -----//-----//-------
 
 model Product {
-  id          String          @id @default(auto()) @map("_id") @db.ObjectId
-  name        String  @unique
-  price       Float
-  inStock     Int 
-  description String
-  images      String[] // multiple product images 
-  rating      Float? @default(0) // average rating
-  reviews     Review[]
-  totalReviews Int @default(0)
-  petType     PetType[]
-  weight      String
+  id           String          @id @default(auto()) @map("_id") @db.ObjectId
+  name         String          @unique
+  price        Float
+  inStock      Int
+  description  String
+  images       String[] // multiple product images 
+  rating       Float?          @default(0) // average rating
+  reviews      Review[]
+  totalReviews Int             @default(0)
+  petType      PetType[]
+  weight       String
   colorOptions String[]
   suitableFor  String[]
-  category    ProductCategory
-  fastShipping  String @default("2-5 business days")
-  easyReturns  String @default("30 Day money back guarantee")
-  userId      String          @db.ObjectId
-  user        User?           @relation(fields: [userId], references: [id])
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  category     ProductCategory
+  fastShipping String          @default("2-5 business days")
+  easyReturns  String          @default("30 Day money back guarantee")
+  userId       String          @db.ObjectId
+  user         User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
 
   @@map("products")
 }
