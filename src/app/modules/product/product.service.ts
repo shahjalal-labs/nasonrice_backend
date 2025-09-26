@@ -1,6 +1,7 @@
 import { Product } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
+import httpStatus from "http-status";
 
 //w: (start)╭──────────── createProductIntoDB  ────────────╮
 const createProductIntoDB = async (payload: Product, userId: string) => {
@@ -32,7 +33,29 @@ const getAllProductsFromDB = async () => {
 };
 //w: (end) ╰──────────── create new user with otp verification ────────────╯
 
+//w: (start)╭──────────── create new user with otp verification ────────────╮
+
+const deleteProductFromDB = async (userId, productId) => {
+  const existingProduct = await prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+
+  if (!existingProduct) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Product not found.");
+  }
+  await prisma.product.delete({
+    where: {
+      id: productId,
+    },
+  });
+  return;
+};
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
+  deleteProductFromDB,
 };
