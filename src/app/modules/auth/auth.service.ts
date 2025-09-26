@@ -243,9 +243,9 @@ const updateProfileIntoDB = async (
   userData: User,
   file: Express.Multer.File,
 ) => {
-  if (userData.role || userData.status || userData.password) {
+  if (["password", "status", "role"].some((key) => key in userData))
     throw new ApiError(400, "You can't update this field");
-  }
+
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
     throw new ApiError(404, "user not found for edit user");
