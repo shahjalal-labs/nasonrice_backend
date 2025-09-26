@@ -48,17 +48,23 @@ model Product {
   id          String          @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   price       Float
-  stockStatus StockStatus     @default(InStock)
+  inStock     Boolean         @default(true)
   description String?
-  images      String[] // multiple product images
+  images      String[] // multiple product images 
   rating      Float? // average rating
   reviews     Review[]
-  shipping    ShippingInfo?
+  PetType     PetType[]
   category    ProductCategory
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
   @@map("products")
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
 }
 
 // -----//-----//-------END BOOKING MODEL- -----//-----//-------
@@ -77,4 +83,10 @@ enum PetType {
   Dog
   Cat
   Bird
+}
+
+enum ProductCategory {
+  Food
+  Toy
+  Accessories
 }
