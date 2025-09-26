@@ -17,12 +17,19 @@ const createProduct = catchAsync(async (req, res) => {
 
 //w: (end) ╰──────────── createProduct  ────────────╯
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
+//w: (start)╭──────────── getAllProducts  ────────────╮
 
 const getAllProducts = catchAsync(async (req, res) => {
   const result = await ProductService.getAllProductsFromDB();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All products retrieved successfully",
+    data: result,
+  });
 });
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── getAllProducts  ────────────╯
 export const ProductController = {
   createProduct,
+  getAllProducts,
 };

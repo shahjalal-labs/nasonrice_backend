@@ -10,4 +10,5 @@ router.post(
   validateRequest(ProductValidation.createProductValidationSchema),
   ProductController.createProduct,
 );
+router.get("/", auth("Admin"), ProductController.getAllProducts);
 export const ProductRoute = router;
