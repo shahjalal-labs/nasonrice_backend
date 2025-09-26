@@ -35,7 +35,7 @@ const getAllProductsFromDB = async () => {
 //w: (end) ╰──────────── getAllProductsFromDB ────────────╯
 
 //
-//w: (start)╭──────────── create new user with otp verification ────────────╮
+//w: (start)╭──────────── deleteProductFromDB  ────────────╮
 
 const deleteProductFromDB = async (userId, productId) => {
   const existingProduct = await prisma.product.findUnique({
@@ -54,10 +54,31 @@ const deleteProductFromDB = async (userId, productId) => {
   });
   return;
 };
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── deleteProductFromDB  ────────────╯
+
+//w: (start)╭──────────── updateProductIntoDB   ────────────╮
+const updateProductIntoDB = async (payload, productId) => {
+  const existingProduct = await prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+  if (!existingProduct) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Product not found.");
+  }
+
+  await prisma.product.update({
+    where: {
+      id: productId,
+    },
+    data: payload,
+  });
+};
+//w: (end) ╰──────────── updateProductIntoDB   ────────────╯
 
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
   deleteProductFromDB,
+  updateProductIntoDB,
 };
