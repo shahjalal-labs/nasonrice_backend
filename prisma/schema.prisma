@@ -23,6 +23,7 @@ model User {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   Pet          Pet[]
+  Product      Product[]
 
   @@map("users")
 }
@@ -54,7 +55,14 @@ model Product {
   rating      Float? // average rating
   reviews     Review[]
   PetType     PetType[]
+  weight      String
+  colorOptions String[]
+  suitableFor  String[]
   category    ProductCategory
+  fastShipping  String @default("2-5 business days")
+  easyReturns  String @default("30 Day money back guarantee")
+  userId      String          @db.ObjectId
+  user        User?           @relation(fields: [userId], references: [id])
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
