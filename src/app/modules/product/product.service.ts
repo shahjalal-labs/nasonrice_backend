@@ -37,7 +37,7 @@ const getAllProductsFromDB = async () => {
 //
 //w: (start)╭──────────── deleteProductFromDB  ────────────╮
 
-const deleteProductFromDB = async (userId, productId) => {
+const deleteProductFromDB = async (userId: string, productId: string) => {
   const existingProduct = await prisma.product.findUnique({
     where: {
       id: productId,
@@ -67,12 +67,13 @@ const updateProductIntoDB = async (payload: any, productId: string) => {
     throw new ApiError(httpStatus.NOT_FOUND, "Product not found.");
   }
 
-  await prisma.product.update({
+  const result = await prisma.product.update({
     where: {
       id: productId,
     },
     data: payload,
   });
+  return result;
 };
 //w: (end) ╰──────────── updateProductIntoDB   ────────────╯
 
