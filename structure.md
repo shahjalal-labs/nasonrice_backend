@@ -9,8 +9,6 @@
 ├── package-lock.json
 ├── prisma
 │   └── schema.prisma
-├── public
-│   └── CNAME
 ├── README.md
 ├── src
 │   ├── app
@@ -38,6 +36,12 @@
 │   │   │   │   ├── pets.route.ts
 │   │   │   │   ├── pets.service.ts
 │   │   │   │   └── pets.validation.ts
+│   │   │   ├── product
+│   │   │   │   ├── productApi.hurl
+│   │   │   │   ├── product.controller.ts
+│   │   │   │   ├── product.route.ts
+│   │   │   │   ├── product.service.ts
+│   │   │   │   └── product.validation.ts
 │   │   │   └── user
 │   │   │       ├── userApi.hurl
 │   │   │       ├── user.controller.ts
@@ -80,8 +84,9 @@
 ├── tsconfig.json
 ├── uploads
 │   └── google.png
-└── vercel.json
+├── vercel.json
+└── vps_deploy.md
 
-18 directories, 62 files
+18 directories, 67 files
 
 ```

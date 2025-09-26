@@ -25,14 +25,16 @@ const createProductIntoDB = async (payload: Product, userId: string) => {
 
 //w: (end) ╰──────────── createProductIntoDB  ────────────╯
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
+//
+//w: (start)╭──────────── getAllProductsFromDB ────────────╮
 
 const getAllProductsFromDB = async () => {
   const result = await prisma.product.findMany();
   return result;
 };
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── getAllProductsFromDB ────────────╯
 
+//
 //w: (start)╭──────────── create new user with otp verification ────────────╮
 
 const deleteProductFromDB = async (userId, productId) => {

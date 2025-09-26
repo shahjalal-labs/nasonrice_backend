@@ -243,6 +243,7 @@ const updateProfileIntoDB = async (
   userData: User,
   file: Express.Multer.File,
 ) => {
+  // restrict updating password, status, role
   if (["password", "status", "role"].some((key) => key in userData))
     throw new ApiError(400, "You can't update this field");
 
