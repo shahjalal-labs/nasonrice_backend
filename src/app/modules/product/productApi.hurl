@@ -1,0 +1,1 @@
+POST {{baseUrl}}/product/create

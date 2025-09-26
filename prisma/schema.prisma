@@ -54,7 +54,7 @@ model Product {
   images      String[] // multiple product images 
   rating      Float? // average rating
   reviews     Review[]
-  PetType     PetType[]
+  petType     PetType[]
   weight      String
   colorOptions String[]
   suitableFor  String[]
