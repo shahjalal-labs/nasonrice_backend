@@ -50,7 +50,7 @@ model Product {
   name        String
   price       Float
   inStock     Boolean         @default(true)
-  description String?
+  description String
   images      String[] // multiple product images 
   rating      Float? // average rating
   reviews     Review[]

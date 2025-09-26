@@ -1,2 +1,4 @@
 import express from "express";
-export const ProductRoute = express.Router();
+const router = express.Router();
+router.post();
+export const ProductRoute = router;
