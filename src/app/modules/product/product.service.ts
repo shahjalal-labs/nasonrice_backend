@@ -56,6 +56,7 @@ const deleteProductFromDB = async (userId: string, productId: string) => {
 };
 //w: (end) ╰──────────── deleteProductFromDB  ────────────╯
 
+//
 //w: (start)╭──────────── updateProductIntoDB   ────────────╮
 const updateProductIntoDB = async (payload: any, productId: string) => {
   const existingProduct = await prisma.product.findUnique({
@@ -75,6 +76,7 @@ const updateProductIntoDB = async (payload: any, productId: string) => {
   });
   return result;
 };
+//
 //w: (end) ╰──────────── updateProductIntoDB   ────────────╯
 
 export const ProductService = {

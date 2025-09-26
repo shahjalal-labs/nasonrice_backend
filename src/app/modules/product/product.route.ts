@@ -11,5 +11,11 @@ router.post(
   validateRequest(ProductValidation.createProductValidationSchema),
   ProductController.createProduct,
 );
+router.patch(
+  "/update",
+  auth(),
+  validateRequest(ProductValidation.updateProductValidationSchema),
+  ProductController.updateProduct,
+);
 router.get("/", auth("Admin"), ProductController.getAllProducts);
 export const ProductRoute = router;

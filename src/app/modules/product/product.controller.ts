@@ -29,7 +29,8 @@ const getAllProducts = catchAsync(async (req, res) => {
   });
 });
 //w: (end) ╰──────────── getAllProducts  ────────────╯
-
+//
+//w: (start)╭──────────── updateProduct   ────────────╮
 const updateProduct = catchAsync(async (req, res) => {
   const productId = req.params.id;
   const result = await ProductService.updateProductIntoDB(req.body, productId);
@@ -40,7 +41,11 @@ const updateProduct = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+//w: (end) ╰──────────── updateProduct   ────────────╯
+
 export const ProductController = {
   createProduct,
   getAllProducts,
+  updateProduct,
 };
