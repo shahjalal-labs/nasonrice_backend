@@ -24,5 +24,6 @@ router.patch(
   ProductController.updateProduct,
 );
 router.get("/:id", auth(), ProductController.getProductById);
+router.delete("/:id", auth(), ProductController.deleteProduct);
 router.get("/", auth(), ProductController.getAllProducts);
 export const ProductRoute = router;

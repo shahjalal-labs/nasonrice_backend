@@ -58,7 +58,12 @@ const createProductIntoDB = async (
 //w: (start)╭──────────── getAllProductsFromDB ────────────╮
 
 const getAllProductsFromDB = async () => {
-  const result = await prisma.product.findMany();
+  const result = await prisma.product.findMany({
+    omit: {
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
   return result;
 };
 //w: (end) ╰──────────── getAllProductsFromDB ────────────╯
@@ -66,7 +71,7 @@ const getAllProductsFromDB = async () => {
 //
 //w: (start)╭──────────── deleteProductFromDB  ────────────╮
 
-const deleteProductFromDB = async (userId: string, productId: string) => {
+const deleteProductFromDB = async (productId: string) => {
   const existingProduct = await prisma.product.findUnique({
     where: {
       id: productId,

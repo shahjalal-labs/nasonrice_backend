@@ -68,12 +68,23 @@ const getProductById = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── updateProduct   ────────────╯
 
-//w: (start)╭──────────── prduct details/getProductById  ────────────╮
+//w: (start)╭──────────── delete product  ────────────╮
 
-//w: (end) ╰──────────── prduct details/getProductById   ────────────╯
+const deleteProduct = catchAsync(async (req, res) => {
+  const { id: productId } = req.params;
+
+  await ProductService.deleteProductFromDB(productId);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Product deleted successfully",
+  });
+});
+//w: (end) ╰──────────── delete product   ────────────╯
 export const ProductController = {
   createProduct,
   getAllProducts,
   updateProduct,
   getProductById,
+  deleteProduct,
 };
