@@ -64,3 +64,33 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 # (end)=========     updateProduct  =============
 # ============================================================
 
+
+
+# ============================================================
+#(start) =========   create product               ===========
+# ============================================================
+POST {{baseUrl}}/product/create
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1ODg2MTg1MSwiZXhwIjoxNzYwMTU3ODUxfQ.7gPbQL7sh9xZXwK_HUt-m25KJ2iWJqaI2oPE06cmyqA
+
+{
+  "name": "Purina Pro Plan Dental Chew Sticks",
+  "price": 32.99,
+  "description": "Dental health chew sticks that help reduce tartar and freshen breath for dogs.",
+  "images": [
+    "https://example.com/images/purina-dental-front.jpg",
+    "https://example.com/images/purina-dental-side.jpg"
+  ],
+  "petType": ["Dog"],
+  "weight": "500g",
+  "colorOptions": ["Green", "Brown"],
+  "suitableFor": ["Adult Dogs", "Senior Dogs"],
+  "category": "Toy",
+  "fastShipping": "Available",
+  "inStock": 30,
+  "easyReturns": "30-day return policy"
+}
+
+# ============================================================
+# (end)=========   create product               =============
+# ============================================================
