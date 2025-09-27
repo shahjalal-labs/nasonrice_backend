@@ -41,4 +41,28 @@ const user = {
   name: "John",
 };
 
-const includeProfile = true;
+const includeProfile = false;
+
+const updated = {
+  ...user,
+  ...(includeProfile ? { age: 25, country: "USA" } : {}),
+};
+
+// console.log(updated, "[1;31mupdated in spread.js at line 47[0m");
+
+const cart = {
+  items: ["apple"],
+};
+
+const newItems = ["banana", "orange"];
+
+const newCart = {
+  ...cart,
+  ...(newItems?.length
+    ? {
+        items: [...cart.items, ...newItems],
+      }
+    : {}),
+};
+
+console.log(newCart, "[1;31mnewCart in spread.js at line 60[0m");

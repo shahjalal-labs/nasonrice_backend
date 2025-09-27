@@ -137,6 +137,18 @@ const updateProductIntoDB = async (
 //
 //w: (end) ╰──────────── updateProductIntoDB   ────────────╯
 
+//w: (start)╭──────────── createProductIntoDB  ────────────╮
+
+const getProductByIdFromDB = async (productId: string) => {
+  const result = await prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+  return result;
+};
+//w: (end) ╰──────────── updateProductIntoDB   ────────────╯
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
