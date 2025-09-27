@@ -144,9 +144,25 @@ const getProductByIdFromDB = async (productId: string) => {
     where: {
       id: productId,
     },
+    omit: {
+      createdAt: true,
+      updatedAt: true,
+    },
+    include: {
+      user: {
+        select: {
+          firstName: true,
+          email: true,
+        },
+      },
+    },
   });
   return result;
 };
+//w: (end) ╰──────────── prduct details/getProductById   ────────────╯
+
+//w: (start)╭──────────── prduct details/getProductById  ────────────╮
+
 //w: (end) ╰──────────── prduct details/getProductById   ────────────╯
 
 export const ProductService = {

@@ -68,6 +68,9 @@ const getProductById = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── updateProduct   ────────────╯
 
+//w: (start)╭──────────── prduct details/getProductById  ────────────╮
+
+//w: (end) ╰──────────── prduct details/getProductById   ────────────╯
 export const ProductController = {
   createProduct,
   getAllProducts,
