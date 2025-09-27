@@ -166,10 +166,18 @@ const getSingleUser = async (id: string) => {
 
 //w: (end) ╰──────────── get single user ────────────╯
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
-//get all users
+//
+//w: (start)╭──────────── get all users ────────────╮
 const getUsers = async () => {
-  const users = await prisma.user.findMany();
+  const users = await prisma.user.findMany({
+    select: {
+      Pet: {
+        select: {
+          petType: true,
+        },
+      },
+    },
+  });
   if (users.length === 0) {
     throw new ApiError(404, "Users not found!");
   }
@@ -180,14 +188,10 @@ const getUsers = async () => {
   return sanitizedUsers;
 };
 
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── get all users ────────────╯
+//
 
-//w: ╭──────────── Block Start ────────────╮
-
-//w: ╰───────────── Block End ─────────────╯
-
-//w: (start)╭──────────── create new user with otp verification ────────────╮
-//update user
+//w: (start)╭──────────── update user ────────────╮
 const updateUser = async (id: string, userData: any) => {
   if (userData?.role || userData?.status) {
     throw new ApiError(403, "You can't update role and status");
@@ -209,10 +213,10 @@ const updateUser = async (id: string, userData: any) => {
   return sanitizedUser;
 };
 
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── update user ────────────╯
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
-//delete user
+//
+//w: (start)╭──────────── deleteUser ────────────╮
 const deleteUser = async (userId: string, loggedId: string) => {
   if (!ObjectId.isValid(userId)) {
     throw new ApiError(400, "Invalid user ID format");
@@ -230,8 +234,7 @@ const deleteUser = async (userId: string, loggedId: string) => {
   });
   return;
 };
-
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── deleteUser ────────────╯
 
 export const userService = {
   createUser,
