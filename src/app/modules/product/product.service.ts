@@ -137,7 +137,7 @@ const updateProductIntoDB = async (
 //
 //w: (end) ╰──────────── updateProductIntoDB   ────────────╯
 
-//w: (start)╭──────────── createProductIntoDB  ────────────╮
+//w: (start)╭──────────── prduct details/getProductById  ────────────╮
 
 const getProductByIdFromDB = async (productId: string) => {
   const result = await prisma.product.findUnique({
@@ -147,11 +147,12 @@ const getProductByIdFromDB = async (productId: string) => {
   });
   return result;
 };
-//w: (end) ╰──────────── updateProductIntoDB   ────────────╯
+//w: (end) ╰──────────── prduct details/getProductById   ────────────╯
 
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
   deleteProductFromDB,
   updateProductIntoDB,
+  getProductByIdFromDB,
 };

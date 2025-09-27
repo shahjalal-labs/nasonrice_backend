@@ -23,5 +23,6 @@ router.patch(
   validateRequest(ProductValidation.updateProductValidationSchema),
   ProductController.updateProduct,
 );
+router.get("/:id", auth(), ProductController.getProductById);
 router.get("/", auth(), ProductController.getAllProducts);
 export const ProductRoute = router;
