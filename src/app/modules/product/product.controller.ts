@@ -6,12 +6,11 @@ import { ProductService } from "./product.service";
 //w: (start)╭──────────── createProduct  ────────────╮
 const createProduct = catchAsync(async (req, res) => {
   const { id: userId } = req.user;
-  const file = req.file as Express.Multer.File;
 
   const result = await ProductService.createProductIntoDB(
     req.body,
     userId,
-    file,
+    req,
   );
   sendResponse(res, {
     success: true,

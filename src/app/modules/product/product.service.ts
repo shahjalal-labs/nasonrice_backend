@@ -2,13 +2,37 @@ import { Product } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import httpStatus from "http-status";
+import { uploadInSpace } from "../../../helpers/uploadInSpace";
+import { Request } from "express";
 
 //w: (start)╭──────────── createProductIntoDB  ────────────╮
 const createProductIntoDB = async (
   payload: Product,
   userId: string,
-  file: Express.Multer.File,
+  req: Request,
 ) => {
+  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+  const processImages = async (
+    files: Express.Multer.File[],
+
+    folder: string,
+  ) => {
+    if (!files || files.length === 0) return null;
+
+    return Promise.all(
+      files.map((file) => uploadInSpace(file, `brand/class/${folder}`)),
+    );
+  };
+
+  const [productUrls] = await Promise.all([
+    processImages(files?.productUrls, "productUrls"),
+  ]);
+
+  if (!productUrls) {
+    throw new ApiError(404, "Brand images are required");
+  }
+
   const existingUser = await prisma.user.findUnique({
     where: {
       id: userId,
@@ -21,6 +45,7 @@ const createProductIntoDB = async (
   const result = await prisma.product.create({
     data: {
       ...payload,
+      images: productUrls,
       userId: existingUser.id,
     },
   });

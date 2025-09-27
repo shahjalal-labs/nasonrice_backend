@@ -27,6 +27,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
   "suitableFor": ["Kittens", "Adult Cats"],
   "category": "Food",
   "fastShipping": "Available",
+  "inStock": 30,
   "easyReturns": "30-day return policy"
 }
 

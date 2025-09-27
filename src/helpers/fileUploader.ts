@@ -26,8 +26,8 @@ const coverPhoto = upload.single("coverPhoto");
 
 // upload multiple image
 const uploadMultiple = upload.fields([
-  { name: "thumbnail", maxCount: 1 },
-  { name: "classVideo", maxCount: 1 },
+  { name: "productUrls", maxCount: 4 },
+  // { name: "classVideo", maxCount: 1 },
 ]);
 
 export const fileUploader = {
