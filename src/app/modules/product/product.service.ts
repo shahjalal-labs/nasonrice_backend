@@ -30,7 +30,7 @@ const createProductIntoDB = async (
   ]);
 
   if (!productUrls) {
-    throw new ApiError(404, "Brand images are required");
+    throw new ApiError(404, "Product images are required");
   }
 
   const existingUser = await prisma.user.findUnique({

@@ -10,9 +10,9 @@ const router = express.Router();
 router.post(
   "/create",
   auth(),
-  validateRequest(ProductValidation.createProductValidationSchema),
   fileUploader.uploadMultiple,
   parseBodyData,
+  validateRequest(ProductValidation.createProductValidationSchema),
   ProductController.createProduct,
 );
 router.patch(

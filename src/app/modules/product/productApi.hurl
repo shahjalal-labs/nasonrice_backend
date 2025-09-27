@@ -17,10 +17,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
   "name": "Whiskas Food Pouch Gravy",
   "price": 49.0,
   "description": "Tasty chicken gravy pouch suitable for cats and dogs.",
-  "images": [
-    "https://example.com/images/whiskas-front.png",
-    "https://example.com/images/whiskas-back.png"
-  ],
   "petType": ["Cat", "Dog"],
   "weight": "85g",
   "colorOptions": ["Purple", "Yellow"],
@@ -78,10 +74,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
   "name": "Purina Pro Plan Dental Chew Sticks",
   "price": 32.99,
   "description": "Dental health chew sticks that help reduce tartar and freshen breath for dogs.",
-  "images": [
-    "https://example.com/images/purina-dental-front.jpg",
-    "https://example.com/images/purina-dental-side.jpg"
-  ],
   "petType": ["Dog"],
   "weight": "500g",
   "colorOptions": ["Green", "Brown"],
