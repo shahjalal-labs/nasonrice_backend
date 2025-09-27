@@ -115,10 +115,6 @@ const updateProductIntoDB = async (
     processImages(files?.productUrls, "productUrls"),
   ]);
 
-  /*   if (!productUrls) {
-    throw new ApiError(404, "Product images are required");
-  } */
-
   const existingProduct = await prisma.product.findUnique({
     where: {
       id: productId,
