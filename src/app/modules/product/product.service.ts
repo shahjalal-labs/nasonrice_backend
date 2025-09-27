@@ -4,7 +4,11 @@ import ApiError from "../../../errors/ApiErrors";
 import httpStatus from "http-status";
 
 //w: (start)╭──────────── createProductIntoDB  ────────────╮
-const createProductIntoDB = async (payload: Product, userId: string) => {
+const createProductIntoDB = async (
+  payload: Product,
+  userId: string,
+  file: Express.Multer.File,
+) => {
   const existingUser = await prisma.user.findUnique({
     where: {
       id: userId,
