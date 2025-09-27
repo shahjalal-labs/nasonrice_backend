@@ -170,10 +170,13 @@ const getSingleUser = async (id: string) => {
 //w: (start)╭──────────── get all users ────────────╮
 const getUsers = async () => {
   const users = await prisma.user.findMany({
-    select: {
+    include: {
       Pet: {
+        orderBy: {
+          petAge: "asc",
+        },
         select: {
-          petType: true,
+          petName: true,
         },
       },
     },

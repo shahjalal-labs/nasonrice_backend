@@ -18,6 +18,8 @@ router.post(
 router.patch(
   "/update/:id",
   auth(),
+  fileUploader.uploadMultiple,
+  parseBodyData,
   validateRequest(ProductValidation.updateProductValidationSchema),
   ProductController.updateProduct,
 );

@@ -28,9 +28,6 @@ const updateProductValidationSchema = z.object({
     .string()
     .min(5, { message: "Description is too short" })
     .optional(),
-  images: z
-    .array(z.string().min(1, { message: "At least one image is required" }))
-    .optional(),
   petType: z.array(PetTypeEnum).nonempty().optional(),
   weight: z.string().optional(),
   colorOptions: z.array(z.string()).optional(),

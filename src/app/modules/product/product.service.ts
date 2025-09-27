@@ -87,7 +87,33 @@ const deleteProductFromDB = async (userId: string, productId: string) => {
 
 //
 //w: (start)╭──────────── updateProductIntoDB   ────────────╮
-const updateProductIntoDB = async (payload: any, productId: string) => {
+const updateProductIntoDB = async (
+  payload: any,
+  productId: string,
+  req: Request,
+) => {
+  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+  const processImages = async (
+    files: Express.Multer.File[],
+
+    folder: string,
+  ) => {
+    if (!files || files.length === 0) return null;
+
+    return Promise.all(
+      files.map((file) => uploadInSpace(file, `brand/class/${folder}`)),
+    );
+  };
+
+  const [productUrls] = await Promise.all([
+    processImages(files?.productUrls, "productUrls"),
+  ]);
+
+  if (!productUrls) {
+    throw new ApiError(404, "Product images are required");
+  }
+
   const existingProduct = await prisma.product.findUnique({
     where: {
       id: productId,
@@ -101,7 +127,10 @@ const updateProductIntoDB = async (payload: any, productId: string) => {
     where: {
       id: productId,
     },
-    data: payload,
+    data: {
+      ...payload,
+      images: productUrls,
+    },
   });
   return result;
 };
