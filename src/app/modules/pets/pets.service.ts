@@ -85,6 +85,7 @@ const updatePetIntoDB = async (payload: any, petId: string) => {
     },
   });
   if (!existingPet) throw new ApiError(404, "Pet not found");
+const match= ;
 
   const result = await prisma.pet.update({
     where: {
