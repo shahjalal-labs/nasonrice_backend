@@ -155,7 +155,21 @@ const signupVerification = async (payload: { email: string; otp: string }) => {
 //w: (start)╭──────────── get single user ────────────╮
 //get single user
 const getSingleUser = async (id: string) => {
-  const user = await prisma.user.findUnique({ where: { id } });
+  const user = await prisma.user.findUnique({
+    where: { id },
+    include: {
+      Pet: {
+        omit: {
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+    },
+    omit: {
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
   if (!user) {
     throw new ApiError(404, "user not found!");
   }
