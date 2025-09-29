@@ -16,7 +16,7 @@ POST {{baseUrl}}/auth/login
 Content-Type:application/json
 
 {
- "email": "shahjalal.backend@gmail.com",
+ "email": "mir.developer.hasan@gmail.com",
  "password": "Test@123",
  "fcmToken": "token"
 }
@@ -80,7 +80,7 @@ POST {{baseUrl}}/auth/send-otp
 
 Content-Type: application/json
 {
-  "email": "jamil.ux@gmail.com"
+  "email": "mir.developer.hasan@gmail.com"
 }
 
 # ===============end   SEND FORGOT PASSWORD OTP ==============
@@ -94,8 +94,8 @@ POST {{baseUrl}}/auth/verify-otp
 
 Content-Type: application/json
 {
-  "email": "shahjalal.backend@gmail.com",
-  "otp": "3039"
+  "email": "mir.developer.hasan@gmail.com",
+  "otp": "8417"
 }
 
 
@@ -106,12 +106,12 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Y2U0Y2QwOGYyOWQ5YTUxNGVkZjc5YyI
 
 PATCH {{baseUrl}}/auth/reset-password
 
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Y2U0Y2QwOGYyOWQ5YTUxNGVkZjc5YyIsImVtYWlsIjoic2hhaGphbGFsLmJhY2tlbmRAZ21haWwuY29tIiwiaWF0IjoxNzU4MzYzNTc3LCJleHAiOjE3NTk2NTk1Nzd9.3AVJAPMdwGp_AExfSaEuzs_PbrGRFwn7Wg5dEj9HahI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJpYXQiOjE3NTkxMjQyNjYsImV4cCI6MTc2MDQyMDI2Nn0.t3VPPIg0P6iYdMrcBgALkJZPEtjmsKpYAED2b0jUmNk
 
 Content-Type: application/json
 
 {
-  "newPassword": "newPassword"
+  "newPassword": "Test@123"
 }
 
 

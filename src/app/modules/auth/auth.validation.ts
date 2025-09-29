@@ -30,10 +30,11 @@ const updateProfileSchema = z.object({
     .string()
     .min(2, "Last name must be at least 2 characters long")
     .optional(),
-  mobile: z
+  phoneNumber: z
     .string()
-    .min(10, "Mobile must be at least 10 characters long")
+    .min(5, "Mobile must be at least 10 characters long")
     .optional(),
+  nationality: z.string().optional(),
 });
 
 const sendForgotPasswordOtpValidationSchema = z.object({
