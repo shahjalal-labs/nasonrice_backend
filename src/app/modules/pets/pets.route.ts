@@ -20,7 +20,7 @@ router.get("/:id", auth(), PetController.getPetById);
 router.patch(
   "/:id",
   auth(),
-  fileUploader.profileImage,
+  fileUploader.upload.single("petImage"),
   parseBodyData,
   validateRequest(PetValidationSchema.updatePetValidationSchema),
   PetController.updatePet,
