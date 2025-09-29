@@ -78,7 +78,11 @@ const getPetByIdFromDB = async (petId: string) => {
   return result;
 };
 
-const updatePetIntoDB = async (payload: any, petId: string, userId: string) => {
+const updatePetIntoDB = async (payload: any,  req: Request) => {
+  const { id: petId } = req.params;
+
+  const userId = req.user.id;
+
   const existingPet = await prisma.pet.findUnique({
     where: {
       id: petId,

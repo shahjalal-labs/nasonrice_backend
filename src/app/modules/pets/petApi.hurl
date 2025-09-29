@@ -47,10 +47,10 @@ Content-Type: application/json
 
 
 PATCH {{baseUrl}}/pets/68d3c97366697eb785bd145f
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEzNTgxOCwiZXhwIjoxNzYwNDMxODE4fQ.5hGAyjms6H8j15abKw2bW7wvrcZXMGtuu2t_KimI0C0
 
 Content-Type: application/json
 
 {
-  "Name": "Whiskers updated"
+  "petName": "Whiskers "
 }
