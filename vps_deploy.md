@@ -1,6 +1,9 @@
 cd /var/www
 cd /project
 or directly
+
+---
+
 cd /var/www/nasonrice_backend
 git pull
 npm install
