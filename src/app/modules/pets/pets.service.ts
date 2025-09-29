@@ -37,7 +37,21 @@ const createPetIntoDB = async (req: Request) => {
 };
 
 const getAllPetsFromDB = async () => {
-  const result = await prisma.pet.findMany();
+  const result = await prisma.pet.findMany({
+    include: {
+      user: {
+        select: {
+          firstName: true,
+          lastName: true,
+          email: true,
+        },
+      },
+    },
+    omit: {
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
   if (!result) {
     throw new ApiError(404, "User not found");
   }
