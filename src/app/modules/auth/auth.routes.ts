@@ -40,6 +40,11 @@ router.patch(
   auth(),
   fileUploader.profileImage,
   parseBodyData,
+  (r, s, n) => {
+    console.log(`hitting`);
+    n();
+  },
+  validateRequest(authValidation.updateProfileSchema),
   authController.updateProfile,
 );
 

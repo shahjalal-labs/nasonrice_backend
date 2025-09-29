@@ -21,21 +21,23 @@ const locationUpdateSchema = z.object({
     .max(180, "Longitude must be less than or equal to 180"),
 });
 
-const updateProfileSchema = z.object({
-  firstName: z
-    .string()
-    .min(2, "First name must be at least 2 characters long")
-    .optional(),
-  lastName: z
-    .string()
-    .min(2, "Last name must be at least 2 characters long")
-    .optional(),
-  phoneNumber: z
-    .string()
-    .min(5, "Mobile must be at least 10 characters long")
-    .optional(),
-  nationality: z.string().optional(),
-});
+const updateProfileSchema = z
+  .object({
+    firstName: z
+      .string()
+      .min(2, "First name must be at least 2 characters long")
+      .optional(),
+    lastName: z
+      .string()
+      .min(2, "Last name must be at least 2 characters long")
+      .optional(),
+    phoneNumber: z
+      .string()
+      .min(5, "Mobile must be at least 10 characters long")
+      .optional(),
+    nationality: z.string().optional(),
+  })
+  .strict();
 
 const sendForgotPasswordOtpValidationSchema = z.object({
   email: z.string().email("Invalid email address"),
