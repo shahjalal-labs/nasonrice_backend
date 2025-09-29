@@ -9,6 +9,13 @@ const createPetValidationSchema = z.object({
   userId: z.string().refine((v) => ObjectId.isValid(v), "Invalid ObjectId"),
 });
 
+
+
+
+ const updatePetValidationSchema=z.object({
+petType:z.enum(["Cat", "Dog", "Bird"]):w!
+  ,
+})
 export const PetValidationSchema = {
   createPetValidationSchema,
 };

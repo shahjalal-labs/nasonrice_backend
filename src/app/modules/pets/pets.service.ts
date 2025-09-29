@@ -78,13 +78,23 @@ const getPetByIdFromDB = async (petId: string) => {
   return result;
 };
 
-const updatePetIntoDB = async (petId: string) => {
+const updatePetIntoDB = async (payload: any, petId: string) => {
   const existingPet = await prisma.pet.findUnique({
     where: {
       id: petId,
     },
   });
   if (!existingPet) throw new ApiError(404, "Pet not found");
+
+  const result = await prisma.pet.update({
+    where: {
+      id: petId,
+    },
+    data: {
+      ...payload,
+    },
+  });
+  return result;
 };
 
 export const PetService = {

@@ -33,9 +33,14 @@ const getPetById = catchAsync(async (req, res) => {
   });
 });
 
-const updatePet = catchAsync(async (req, res) => {});
+const updatePet = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await PetService.updatePetIntoDB();
+});
 export const PetController = {
   createPet,
   getPet,
   getPetById,
+  updatePet,
 };
