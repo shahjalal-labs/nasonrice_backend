@@ -4,7 +4,7 @@ import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import { Request } from "express";
 import { uploadInSpace } from "../../../helpers/uploadInSpace";
-
+import { ObjectId } from "mongodb";
 const createPetIntoDB = async (req: Request) => {
   const payload = req.body;
   console.log(req.user, "middleware user");
@@ -68,6 +68,8 @@ const getPetByIdFromDB = async (petId: string) => {
       user: {
         select: {
           email: true,
+          firstName: true,
+          lastName: true,
         },
       },
     },
@@ -76,8 +78,18 @@ const getPetByIdFromDB = async (petId: string) => {
   return result;
 };
 
+const updatePetIntoDB = async (petId: string) => {
+  const existingPet = await prisma.pet.findUnique({
+    where: {
+      id: petId,
+    },
+  });
+  if (!existingPet) throw new ApiError(404, "Pet not found");
+};
+
 export const PetService = {
   createPetIntoDB,
   getAllPetsFromDB,
   getPetByIdFromDB,
+  updatePetIntoDB,
 };

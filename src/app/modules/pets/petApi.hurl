@@ -10,7 +10,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgy
 
 
 GET {{baseUrl}}//
-GET {{baseUrl}}/products/usersproduct/68ca50e21768bf9be41c45da
 
 POST {{baseUrl}}/pets/create
 Content-Type: application/json

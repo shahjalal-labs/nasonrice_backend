@@ -32,6 +32,8 @@ const getPetById = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+const updatePet = catchAsync(async (req, res) => {});
 export const PetController = {
   createPet,
   getPet,
