@@ -14,5 +14,6 @@ router.post(
 );
 
 router.get("/", auth(), PetController.getPet);
+router.get("/:id", auth(), PetController.getPetById);
 
 export const PetRoute = router;

@@ -59,7 +59,25 @@ const getAllPetsFromDB = async () => {
   return result;
 };
 
+const getPetByIdFromDB = async (petId: string) => {
+  const result = await prisma.pet.findUnique({
+    where: {
+      id: petId,
+    },
+    include: {
+      user: {
+        select: {
+          email: true,
+        },
+      },
+    },
+  });
+  if (!result) throw new ApiError(404, "Pet not found");
+  return result;
+};
+
 export const PetService = {
   createPetIntoDB,
   getAllPetsFromDB,
+  getPetByIdFromDB,
 };
