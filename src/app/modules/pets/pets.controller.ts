@@ -35,8 +35,10 @@ const getPetById = catchAsync(async (req, res) => {
 
 const updatePet = catchAsync(async (req, res) => {
   const { id } = req.params;
+  const userId = req.user.id;
+  // console.log(userId, "[1;31muserId in pets.controller.ts at line 39[0m");
 
-  const result = await PetService.updatePetIntoDB(req.body, id);
+  const result = await PetService.updatePetIntoDB(req.body, id, userId);
   sendResponse(res, {
     success: true,
     statusCode: 200,

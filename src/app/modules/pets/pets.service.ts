@@ -78,15 +78,15 @@ const getPetByIdFromDB = async (petId: string) => {
   return result;
 };
 
-const updatePetIntoDB = async (payload: any, petId: string) => {
+const updatePetIntoDB = async (payload: any, petId: string, userId: string) => {
   const existingPet = await prisma.pet.findUnique({
     where: {
       id: petId,
     },
   });
   if (!existingPet) throw new ApiError(404, "Pet not found");
-const match= ;
-
+  if (existingPet.userId !== userId)
+    throw new ApiError(401, "You are not authorized to update this pet");
   const result = await prisma.pet.update({
     where: {
       id: petId,

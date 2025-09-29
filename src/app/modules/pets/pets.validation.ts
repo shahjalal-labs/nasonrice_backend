@@ -16,7 +16,7 @@ const updatePetValidationSchema = z
     petAge: z.string().optional(),
     weight: z.string().optional(),
   })
-  .strict();
+  // .strict();
 export const PetValidationSchema = {
   createPetValidationSchema,
   updatePetValidationSchema,

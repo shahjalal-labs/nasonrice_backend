@@ -45,3 +45,12 @@ Content-Type: application/json
   "sellerId": "68ca50ed1768bf9be41c45db"
 }
 
+
+PATCH {{baseUrl}}/pets/68d3c97366697eb785bd145f
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
+
+Content-Type: application/json
+
+{
+  "Name": "Whiskers updated"
+}
