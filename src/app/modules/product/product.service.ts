@@ -158,6 +158,7 @@ const getProductByIdFromDB = async (productId: string) => {
       },
     },
   });
+  if (!result) throw new ApiError(httpStatus.NOT_FOUND, "Product not found.");
   return result;
 };
 //w: (end) ╰──────────── prduct details/getProductById   ────────────╯

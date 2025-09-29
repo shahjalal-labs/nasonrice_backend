@@ -23,7 +23,7 @@ router.patch(
   validateRequest(ProductValidation.updateProductValidationSchema),
   ProductController.updateProduct,
 );
+router.get("/", auth(), ProductController.getAllProducts);
 router.get("/:id", auth(), ProductController.getProductById);
 router.delete("/:id", auth(), ProductController.deleteProduct);
-router.get("/", auth(), ProductController.getAllProducts);
 export const ProductRoute = router;
