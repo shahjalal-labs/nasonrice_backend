@@ -3,6 +3,7 @@ import catchAsync from "../../../shared/catchAsync";
 import { authService } from "./auth.service";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
+import { uploadInSpace } from "../../../helpers/uploadInSpace";
 
 //login user
 const loginUser = catchAsync(async (req, res) => {
@@ -100,6 +101,11 @@ const myProfile = catchAsync(async (req, res) => {
 const updateProfile = catchAsync(async (req, res) => {
   const { id } = req.user;
   const file = req.file as Express.Multer.File;
+  let profileImage;
+  if (file) {
+    profileImage = await uploadInSpace(file, "users/profileImage");
+  }
+
   await authService.updateProfileIntoDB(id, req.body, file);
 
   sendResponse(res, {

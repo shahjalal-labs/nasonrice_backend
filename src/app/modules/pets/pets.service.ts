@@ -78,10 +78,18 @@ const getPetByIdFromDB = async (petId: string) => {
   return result;
 };
 
-const updatePetIntoDB = async (payload: any,  req: Request) => {
+const updatePetIntoDB = async (payload: any, req: Request) => {
   const { id: petId } = req.params;
 
   const userId = req.user.id;
+
+  // const file = req.file;
+  const file = req.file as Express.Multer.File;
+  console.log(file, "[1;31mfile in pets.service.ts at line 88[0m");
+  let petImage;
+  if (file) {
+    petImage = await uploadInSpace(file, "pet/petImage");
+  }
 
   const existingPet = await prisma.pet.findUnique({
     where: {
@@ -97,6 +105,7 @@ const updatePetIntoDB = async (payload: any,  req: Request) => {
     },
     data: {
       ...payload,
+      ...(petImage ? { petImage } : {}),
     },
   });
   return result;
