@@ -461,6 +461,6 @@ export const paymentServices = {
   // myWalletBalance,
   // withdrawBalance,
   // myPaymentActivity,
-  // // addMoney,
-  // myBalance,
+  addMoney,
+  myBalance,
 };

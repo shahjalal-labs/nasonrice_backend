@@ -73,6 +73,19 @@ const myPaymentActivity = catchAsync(async (req, res) => {
   });
 });
 
+
+
+export const paymentControllers = {
+  createOnboarding,
+  createPlan,
+  buySubscription,
+  myWalletBalance,
+  withdrawBalance,
+  myPaymentActivity,
+  addMoney,
+  myBalance,
+}; */
+
 const addMoney = catchAsync(async (req, res) => {
   const userId = req.user.id;
   await paymentServices.addMoney(req.body, userId);
@@ -98,15 +111,6 @@ const myBalance = catchAsync(async (req, res) => {
 
 export const paymentControllers = {
   createOnboarding,
-  createPlan,
-  buySubscription,
-  myWalletBalance,
-  withdrawBalance,
-  myPaymentActivity,
   addMoney,
   myBalance,
-}; */
-
-export const paymentControllers = {
-  createOnboarding,
 };

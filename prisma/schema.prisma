@@ -20,7 +20,8 @@ model User {
   profileImage       String?
   role               UserRole          @default(User)
   status             UserStatus        @default(Active)
-  balance            Float             @default(0)
+  balance            Float            @default(0)
+  totalPay           Float             @default(0)
   accountId          String?
   addMoneyCustomerId String?
   createdAt          DateTime          @default(now())
