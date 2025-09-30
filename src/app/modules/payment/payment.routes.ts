@@ -1,6 +1,8 @@
 import express from "express";
 import auth from "../../middlewares/auth";
 import { paymentControllers } from "./payment.controller";
+import validateRequest from "../../middlewares/validateRequest";
+import { PaymentValidation } from "./payment.validation";
 
 const router = express.Router();
 
@@ -22,6 +24,11 @@ router.post("/add-money", auth(), paymentControllers.addMoney);
 router.get("/my-balance", auth(), paymentControllers.myBalance);
  */
 
-router.post("/add-money", auth(), paymentControllers.addMoney);
+router.post(
+  "/add-money",
+  auth(),
+  validateRequest(PaymentValidation.addmoneyValidationSchema),
+  paymentControllers.addMoney,
+);
 
 export const paymentRoutes = router;
