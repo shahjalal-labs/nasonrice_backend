@@ -400,13 +400,6 @@ const addMoney = async (
       invoice_settings: { default_payment_method: payload.paymentMethodId },
     });
   }
-  await stripe.paymentMethods.attach(payload.paymentMethodId, {
-    customer: addMoneyCustomerId,
-  });
-  await stripe.customers.update(addMoneyCustomerId, {
-    invoice_settings: { default_payment_method: payload.paymentMethodId },
-  });
-
   const paymentIntent = await stripe.paymentIntents.create({
     amount: payload.amount * 100,
     currency: "usd",
@@ -421,16 +414,6 @@ const addMoney = async (
   });
 
   if (paymentIntent.status === "succeeded") {
-    const result = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        balance: {
-          increment: payload.amount,
-        },
-      },
-    });
-
-    console.log(result, "[1;31mresult in payment.service.ts at line 431[0m");
     await prisma.paymentActivity.create({
       data: {
         amount: payload.amount,
@@ -439,6 +422,7 @@ const addMoney = async (
       },
     });
   }
+
   return;
 };
 
@@ -449,7 +433,7 @@ const myBalance = async (userId: string) => {
       id: true,
       firstName: true,
       lastName: true,
-      balance: true,
+      // balance: true,
       totalPay: true,
     },
   });
