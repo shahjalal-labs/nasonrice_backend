@@ -26,6 +26,7 @@ model User {
   Pet          Pet[]
   Product      Product[]
   Booking      Booking[]
+  PaymentActivity PaymentActivity[]
 
   @@map("users")
 }
@@ -94,6 +95,18 @@ model Booking {
   paymentId     String?
 
   @@map("bookings")
+}
+
+model PaymentActivity {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  amount    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("payment_activities")
 }
 
 // -----//-----//-------END BOOKING MODEL- -----//-----//-------

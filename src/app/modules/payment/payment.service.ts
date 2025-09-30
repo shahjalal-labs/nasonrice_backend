@@ -365,7 +365,7 @@ const withdrawBalance = async (userId: string, amount: number) => {
   };
 }; */
 
-/* const addMoney = async (
+const addMoney = async (
   payload: {
     amount: number;
     paymentMethodId: string;
@@ -452,7 +452,7 @@ const myBalance = async (userId: string) => {
   });
 
   return userInfo;
-}; */
+};
 
 export const paymentServices = {
   createOnboarding,
