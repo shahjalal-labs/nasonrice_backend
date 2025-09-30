@@ -382,7 +382,7 @@ const addMoney = async (
 
   if (addMoneyCustomerId === null) {
     const customer = await stripe.customers.create({
-      name: user.username,
+      name: user.firstName + " " + user?.lastName,
       email: user.email,
     });
     addMoneyCustomerId = customer.id;
@@ -413,7 +413,7 @@ const addMoney = async (
     payment_method: payload.paymentMethodId,
     customer: addMoneyCustomerId,
     confirm: true,
-    description: `Add money to platform account. user:${user.username}`,
+    description: `Add money to platform account. user:${user.firstName + " " + user?.lastName}`,
     automatic_payment_methods: {
       enabled: true,
       allow_redirects: "never",
