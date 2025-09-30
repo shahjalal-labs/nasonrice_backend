@@ -14,7 +14,7 @@ const createOnboarding = catchAsync(async (req, res) => {
   });
 });
 
-const createPlan = catchAsync(async (req, res) => {
+/* const createPlan = catchAsync(async (req, res) => {
   const userId = req.user.id;
   const result = await paymentServices.createPlan(userId, req.body);
 
@@ -105,4 +105,8 @@ export const paymentControllers = {
   myPaymentActivity,
   addMoney,
   myBalance,
+}; */
+
+export const paymentControllers = {
+  createOnboarding,
 };

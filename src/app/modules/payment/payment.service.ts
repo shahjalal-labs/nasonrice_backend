@@ -13,7 +13,8 @@ const createOnboarding = async (userId: string) => {
     select: {
       id: true,
       email: true,
-      username: true,
+      firstName: true,
+      lastName: true,
       accountId: true,
     },
   });
@@ -59,7 +60,7 @@ const createOnboarding = async (userId: string) => {
 
   // Prepare email content
   const html = await onboardingHtml({
-    fullName: userInfo.username,
+    fullName: userInfo.firstName + " " + userInfo?.lastName,
     accountLink: accountLink.url,
   });
 
@@ -69,7 +70,7 @@ const createOnboarding = async (userId: string) => {
   return { accountId, accountLink };
 };
 
-const createPlan = async (
+/* const createPlan = async (
   userId: string,
   payload: {
     planName: string;
@@ -146,9 +147,9 @@ const createPlan = async (
   });
 
   return result;
-};
+}; */
 
-const buySubscription = async (userId: string, payload: Subscription) => {
+/* const buySubscription = async (userId: string, payload: Subscription) => {
   const { paymentMethodId, priceId } = payload;
   const plan = await prisma.plan.findFirst({
     where: {
@@ -244,7 +245,7 @@ const buySubscription = async (userId: string, payload: Subscription) => {
   });
 
   return createdSubscription;
-};
+}; */
 
 const myWalletBalance = async (userId: string) => {
   const userInfo = await prisma.user.findUnique({
@@ -270,7 +271,7 @@ const myWalletBalance = async (userId: string) => {
     { stripeAccount: userInfo.accountId as string },
   );
   const pastTransactionsTotal = transactionsList.data.reduce(
-    (acc, txn) => acc + txn.amount,
+    (acc: any, txn: any) => acc + txn.amount,
     0,
   );
   const lastTransaction = transactionsList.data[0];
@@ -317,18 +318,18 @@ const withdrawBalance = async (userId: string, amount: number) => {
     },
     { stripeAccount: userInfo.accountId as string },
   );
-  await prisma.paymentActivity.create({
+  /*   await prisma.paymentActivity.create({
     data: {
       userId,
       amount,
       type: "Withdraw E-Wallet",
     },
   });
-
+ */
   return payout;
 };
 
-const myPaymentActivity = async (req: Request) => {
+/* const myPaymentActivity = async (req: Request) => {
   const userId = req.user.id;
   const { page, limit, take, skip } = paginationHelper(req.query as any);
   const user = await prisma.user.findUnique({
@@ -362,9 +363,9 @@ const myPaymentActivity = async (req: Request) => {
     currentPage: page,
     activities,
   };
-};
+}; */
 
-const addMoney = async (
+/* const addMoney = async (
   payload: {
     amount: number;
     paymentMethodId: string;
@@ -451,15 +452,15 @@ const myBalance = async (userId: string) => {
   });
 
   return userInfo;
-};
+}; */
 
 export const paymentServices = {
   createOnboarding,
-  createPlan,
-  buySubscription,
-  myWalletBalance,
-  withdrawBalance,
-  myPaymentActivity,
-  addMoney,
-  myBalance,
+  // createPlan,
+  // buySubscription,
+  // myWalletBalance,
+  // withdrawBalance,
+  // myPaymentActivity,
+  // // addMoney,
+  // myBalance,
 };
