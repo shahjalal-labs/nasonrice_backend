@@ -20,6 +20,7 @@ model User {
   profileImage String?
   role         UserRole   @default(User)
   status       UserStatus @default(Active)
+  accountId    String?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   Pet          Pet[]

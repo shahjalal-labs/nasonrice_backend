@@ -60,7 +60,7 @@ Content-Type: application/json
 
 {
   "email": "shahjalal.backend@gmail.com",
-  "password": "Aa@123456",
+  "password": "Test@123",
   "fcmToken": "token"
 }
 
