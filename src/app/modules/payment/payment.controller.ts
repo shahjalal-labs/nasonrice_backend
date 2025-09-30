@@ -93,7 +93,7 @@ const addMoney = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "Add money has been successfully",
+    message: `${req.body.amount / 100} USD has been added successfully.`,
   });
 });
 

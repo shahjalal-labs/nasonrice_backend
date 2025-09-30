@@ -24,6 +24,7 @@ router.post("/add-money", auth(), paymentControllers.addMoney);
 router.get("/my-balance", auth(), paymentControllers.myBalance);
  */
 
+router.get("/my-balance", auth(), paymentControllers.myBalance);
 router.post(
   "/add-money",
   auth(),

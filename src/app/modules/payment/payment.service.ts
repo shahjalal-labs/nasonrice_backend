@@ -421,7 +421,7 @@ const addMoney = async (
   });
 
   if (paymentIntent.status === "succeeded") {
-    await prisma.user.update({
+    const result = await prisma.user.update({
       where: { id: userId },
       data: {
         balance: {
@@ -430,6 +430,7 @@ const addMoney = async (
       },
     });
 
+    console.log(result, "[1;31mresult in payment.service.ts at line 431[0m");
     await prisma.paymentActivity.create({
       data: {
         amount: payload.amount,
@@ -446,6 +447,8 @@ const myBalance = async (userId: string) => {
     where: { id: userId },
     select: {
       id: true,
+      firstName: true,
+      lastName: true,
       balance: true,
       totalPay: true,
     },

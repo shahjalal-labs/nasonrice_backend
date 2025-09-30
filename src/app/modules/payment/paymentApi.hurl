@@ -23,6 +23,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 
 Content-Type: application/json
 {
-  "amount": 100,
-  "paymentMethodId": "pm_1I1x8u2eZvKYlo2C1d4x4w4B"
+  "amount": 300,
+  "paymentMethodId": "pm_1SCxRBFQDM8OhwJHOgCS8Ve7"
 }
+
+
+
+
+# my balance
+
+
+GET {{baseUrl}}/payments/my-balance
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTIwOTI2OCwiZXhwIjoxNzYwNTA1MjY4fQ.SrCuFtcV1Bb4LyUuum-cS4v-OcAI9z_7V3M6xIc9EYc
