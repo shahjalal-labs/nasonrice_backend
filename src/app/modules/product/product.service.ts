@@ -59,6 +59,9 @@ const createProductIntoDB = async (
 
 const getAllProductsFromDB = async () => {
   const result = await prisma.product.findMany({
+    include: {
+      user: true,
+    },
     omit: {
       createdAt: true,
       updatedAt: true,

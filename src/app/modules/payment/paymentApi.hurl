@@ -1,5 +1,13 @@
 POST {{baseUrl}}/payments/onboarding/create-subscription
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIxODI4ZWZjYTgyMzM5OTBiMTNiNyIsImVtYWlsIjoic2hhaGphbGFsLmJhY2tlbmRAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU5MjA2NzMzLCJleHAiOjE3NjA1MDI3MzN9.yz0OCbaQtuFqe5dxU-rKGlopkM5lXfLRZCXwMOAWfg0 
 
-Content-Type: application/json
+
+
+
+
+# mir.developer.hasan@gmail.com onboarding
+
+POST {{baseUrl}}/payments/onboarding/create-subscription
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIxODI4ZWZjYTgyMzM5OTBiMTNiNyIsImVtYWlsIjoic2hhaGphbGFsLmJhY2tlbmRAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU5MjA2NzMzLCJleHAiOjE3NjA1MDI3MzN9.yz0OCbaQtuFqe5dxU-rKGlopkM5lXfLRZCXwMOAWfg0 
+
 
