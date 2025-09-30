@@ -121,11 +121,16 @@ const changePassword = catchAsync(async (req, res) => {
   const currentPassword = req.body?.currentPassword;
   const newPassword = req.body?.newPassword;
 
-  await authService.changePasswordIntoDB(userId, currentPassword, newPassword);
+  const result = await authService.changePasswordIntoDB(
+    userId,
+    currentPassword,
+    newPassword,
+  );
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: "Password changed successfully",
+    data: result,
   });
 });
 export const authController = {

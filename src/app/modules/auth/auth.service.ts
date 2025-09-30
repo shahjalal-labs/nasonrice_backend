@@ -295,7 +295,7 @@ const changePasswordIntoDB = async (
     newPassword,
     Number(config.jwt.gen_salt),
   );
-  await prisma.user.update({
+  const result = await prisma.user.update({
     where: {
       id: userId,
     },
@@ -303,7 +303,7 @@ const changePasswordIntoDB = async (
       password: hashedPassword,
     },
   });
-  return;
+  return result;
 };
 
 export const authService = {
