@@ -22,6 +22,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 
 
 Content-Type: application/json
+
 {
   "amount": 300,
   "paymentMethodId": "pm_1SCxRBFQDM8OhwJHOgCS8Ve7"
