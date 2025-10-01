@@ -367,8 +367,9 @@ const withdrawBalance = async (userId: string, amount: number) => {
 
 const addMoney = async (
   payload: {
-    amount: number;
     paymentMethodId: string;
+    productId: string;
+    quantity: any;
   },
   userId: string,
 ) => {
@@ -378,6 +379,15 @@ const addMoney = async (
   if (!user) {
     throw new ApiError(404, "user not found");
   }
+
+  const product = await prisma.product.findUnique({
+    where: {
+      id: payload.productId,
+    },
+  });
+
+  const amount = product.price * Number(payload.quantity);
+
   let addMoneyCustomerId = user.addMoneyCustomerId;
 
   if (addMoneyCustomerId === null) {
@@ -402,7 +412,7 @@ const addMoney = async (
   }
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: payload.amount * 100,
+    amount: amount * 100,
     currency: "usd",
     payment_method: payload.paymentMethodId,
     customer: addMoneyCustomerId,

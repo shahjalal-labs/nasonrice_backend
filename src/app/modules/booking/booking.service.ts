@@ -95,6 +95,10 @@ const createBookingIntoDB = async (payload: Booking, userId: string) => {
 
 const getAllBookingsFromDB = async () => {
   const result = await prisma.booking.findMany({
+    omit: {
+      createdAt: true,
+      updatedAt: true,
+    },
     include: {
       user: {
         select: {
