@@ -13,8 +13,8 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjM
 Content-Type: application/json
 
 {
-  "productId": "68d61c71cfc03eee791f544d",
-  "quantity": 2,
+  "productId": "68d672a8cd68b13ae28b2ee9",
+  "quantity": 30,
   "paymentId": "68dcbcbf334ed6097a23daac"
 }
 

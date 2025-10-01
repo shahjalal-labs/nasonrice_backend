@@ -5,7 +5,7 @@ import { z } from "zod";
 const createBookingValidationSchema = z.object({
   productId: z.string(),
   // userId: z.string(),
-  qunatity: z.number().positive(),
+  quantity: z.number().positive(),
   paymentId: z.string(),
 });
 

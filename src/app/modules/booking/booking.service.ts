@@ -4,6 +4,21 @@ import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 
 const createBookingIntoDB = async (payload: Booking) => {
+  const product = await prisma.product.findUnique({
+    where: {
+      id: payload.productId,
+    },
+  });
+
+  if (!product) throw new ApiError(404, "Product not found");
+
+  if (product.inStock < payload.quantity) {
+    throw new ApiError(
+      400,
+      `Product is out of stock. Only ${product.inStock} item(s) available.`,
+    );
+  }
+
   const paid = await prisma.paymentActivity.findUnique({
     where: {
       id: payload.paymentId as string,
@@ -17,6 +32,14 @@ const createBookingIntoDB = async (payload: Booking) => {
       ...payload,
     },
   });
+  if (result) {
+    await prisma.product.update({
+      where: { id: payload.productId },
+      data: {
+        inStock: 
+      },
+    });
+  }
   return result;
 };
 
