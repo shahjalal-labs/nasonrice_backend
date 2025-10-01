@@ -400,6 +400,7 @@ const addMoney = async (
       invoice_settings: { default_payment_method: payload.paymentMethodId },
     });
   }
+
   const paymentIntent = await stripe.paymentIntents.create({
     amount: payload.amount * 100,
     currency: "usd",
