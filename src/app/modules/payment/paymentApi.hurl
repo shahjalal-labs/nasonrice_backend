@@ -24,7 +24,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 Content-Type: application/json
 
 {
-  "amount": 300,
+  "amount": 49,
+  "productId": "68d61b29cfc03eee791f544c",
   "paymentMethodId": "pm_1SCxRBFQDM8OhwJHOgCS8Ve7"
 }
 

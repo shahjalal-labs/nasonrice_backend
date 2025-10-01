@@ -415,16 +415,24 @@ const addMoney = async (
   });
 
   if (paymentIntent.status === "succeeded") {
+    console.log(
+      paymentIntent,
+      "[1;31mpaymentIntent in payment.service.ts at line 418[0m",
+    );
+
     await prisma.paymentActivity.create({
       data: {
         amount: payload.amount,
         type: "Add money successfull",
         userId: userId,
+        txId: paymentIntent.id,
       },
     });
   }
 
-  return;
+  return {
+    txId: paymentIntent.id,
+  };
 };
 
 const myBalance = async (userId: string) => {

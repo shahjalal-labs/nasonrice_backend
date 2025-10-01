@@ -88,12 +88,13 @@ export const paymentControllers = {
 
 const addMoney = catchAsync(async (req, res) => {
   const userId = req.user.id;
-  await paymentServices.addMoney(req.body, userId);
+  const txId = await paymentServices.addMoney(req.body, userId);
 
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: `${req.body.amount / 100} USD has been added successfully.`,
+    message: `${req.body.amount} USD has been added successfully.`,
+    data: txId,
   });
 });
 

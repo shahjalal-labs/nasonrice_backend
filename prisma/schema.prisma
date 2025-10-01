@@ -105,6 +105,8 @@ model PaymentActivity {
   user      User     @relation(fields: [userId], references: [id])
   type      String
   amount    Float
+  txId      String
+  productId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
