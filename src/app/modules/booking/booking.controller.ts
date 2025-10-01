@@ -4,7 +4,10 @@ import sendResponse from "../../../shared/sendResponse";
 import { BookingService } from "./booking.service";
 
 const createBooking = catchAsync(async (req, res) => {
-  const result = await BookingService.createBookingIntoDB(req.body);
+  const { id: userId } = req.user;
+
+  const result = await BookingService.createBookingIntoDB(req.body, userId);
+
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

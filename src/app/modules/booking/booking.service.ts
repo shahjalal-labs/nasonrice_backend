@@ -45,7 +45,7 @@ import ApiError from "../../../errors/ApiErrors";
   return result;
 }; */
 
-const createBookingIntoDB = async (payload: Booking) => {
+const createBookingIntoDB = async (payload: Booking, userId: string) => {
   return await prisma.$transaction(async (tx) => {
     const product = await tx.product.findUnique({
       where: {
@@ -64,7 +64,7 @@ const createBookingIntoDB = async (payload: Booking) => {
 
     const paid = await tx.paymentActivity.findUnique({
       where: {
-        id: payload.paymentId as string,
+        id: payload.paymentId,
       },
     });
 
@@ -73,6 +73,8 @@ const createBookingIntoDB = async (payload: Booking) => {
     const result = await tx.booking.create({
       data: {
         ...payload,
+        totalPrice: product.price * payload.quantity,
+        userId: userId,
       },
     });
 
@@ -92,7 +94,23 @@ const createBookingIntoDB = async (payload: Booking) => {
 };
 
 const getAllBookingsFromDB = async () => {
-  const result = await prisma.booking.findMany();
+  const result = await prisma.booking.findMany({
+    include: {
+      user: {
+        select: {
+          firstName: true,
+          lastName: true,
+          email: true,
+        },
+      },
+      product: {
+        select: {
+          name: true,
+          price: true,
+        },
+      },
+    },
+  });
   return result;
 };
 export const BookingService = {
