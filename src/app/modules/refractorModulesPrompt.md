@@ -1,32 +1,3 @@
-You are a **senior full-stack developer**.
-
-## 📌 Task
-
-You are given a real-world code module located at:
-
-```
-/home/sj/web/flo_backend/src/app/modules
-```
-
-Refactor the entire codebase **without modifying any UI or changing behavior**. Instead, improve it using:
-
-- ✅ Clear separation of concerns
-- ✅ Consistent, semantic naming conventions
-- ✅ Modular architecture (hooks, services, utils, components)
-- ✅ Scalable file/folder structure
-- ✅ Industry-standard project layout and architecture
-- ✅ Readable, testable, production-grade code
-- ✅ 100% behavior and API compatibility
-
-👉 Output the refactored code to a new folder: `modules_refactored`
-
-Also return a `.sh` script that will:
-- Create that folder
-- Write all refactored files
-- Run `git add` and `git commit` with message: `refactor: added improved modules version`
-
----
-
 ## 🌲 Full Project Structure (cwd)
 
 ```bash
@@ -185,6 +156,7 @@ Also return a `.sh` script that will:
 ## 📄 Module Files & Contents
 
 ### `auth/auth.service.ts`
+
 ```ts
 //w: (start)╭──────────── create new user with otp verification ────────────╮
 
@@ -508,6 +480,7 @@ export const authService = {
 ```
 
 ### `auth/auth.routes.ts`
+
 ```ts
 import express from "express";
 import { authController } from "./auth.controller";
@@ -570,6 +543,7 @@ export const authRoute = router;
 ```
 
 ### `auth/auth.validation.ts`
+
 ```ts
 import { z } from "zod";
 
@@ -637,6 +611,7 @@ export const authValidation = {
 ```
 
 ### `auth/authApi.hurl`
+
 ```hurl
 #------//----------// LOGIN EXISTING USER ------//----------//
 
@@ -761,7 +736,7 @@ Content-Type: application/json
 
 PATCH {{baseUrl}}/auth/profile
 
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU
 
 Content-Type: application/json
 
@@ -799,6 +774,7 @@ Content-Type: application/json
 ```
 
 ### `auth/auth.controller.ts`
+
 ```ts
 import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
@@ -949,6 +925,7 @@ export const authController = {
 ```
 
 ### `payment/payment.validation.ts`
+
 ```ts
 import { z } from "zod";
 
@@ -963,6 +940,7 @@ export const PaymentValidation = {
 ```
 
 ### `payment/payment.routes.ts`
+
 ```ts
 import express from "express";
 import auth from "../../middlewares/auth";
@@ -1002,11 +980,12 @@ export const paymentRoutes = router;
 ```
 
 ### `payment/paymentApi.hurl`
+
 ```hurl
 # shahjalal.backend@gmail.com onboarding
 
 POST {{baseUrl}}/payments/onboarding/create-subscription
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIxODI4ZWZjYTgyMzM5OTBiMTNiNyIsImVtYWlsIjoic2hhaGphbGFsLmJhY2tlbmRAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU5MjA2NzMzLCJleHAiOjE3NjA1MDI3MzN9.yz0OCbaQtuFqe5dxU-rKGlopkM5lXfLRZCXwMOAWfg0 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIxODI4ZWZjYTgyMzM5OTBiMTNiNyIsImVtYWlsIjoic2hhaGphbGFsLmJhY2tlbmRAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU5MjA2NzMzLCJleHAiOjE3NjA1MDI3MzN9.yz0OCbaQtuFqe5dxU-rKGlopkM5lXfLRZCXwMOAWfg0
 
 
 
@@ -1015,7 +994,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIxODI4ZWZjYTgy
 # mir.developer.hasan@gmail.com onboarding
 
 POST {{baseUrl}}/payments/onboarding/create-subscription
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTIwOTI2OCwiZXhwIjoxNzYwNTA1MjY4fQ.SrCuFtcV1Bb4LyUuum-cS4v-OcAI9z_7V3M6xIc9EYc 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTIwOTI2OCwiZXhwIjoxNzYwNTA1MjY4fQ.SrCuFtcV1Bb4LyUuum-cS4v-OcAI9z_7V3M6xIc9EYc
 
 
 
@@ -1044,6 +1023,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 ```
 
 ### `payment/payment.controller.ts`
+
 ```ts
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
@@ -1164,6 +1144,7 @@ export const paymentControllers = {
 ```
 
 ### `payment/payment.service.ts`
+
 ```ts
 import { Subscription } from "@prisma/client";
 import stripe from "../../../config/stripe";
@@ -1622,6 +1603,7 @@ export const paymentServices = {
 ```
 
 ### `product/product.service.ts`
+
 ```ts
 import { Product } from "@prisma/client";
 import prisma from "../../../shared/prisma";
@@ -1805,6 +1787,7 @@ export const ProductService = {
 ```
 
 ### `product/product.controller.ts`
+
 ```ts
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
@@ -1899,6 +1882,7 @@ export const ProductController = {
 ```
 
 ### `product/product.validation.ts`
+
 ```ts
 //
 import { z } from "zod";
@@ -1947,6 +1931,7 @@ export const ProductValidation = {
 ```
 
 ### `product/productApi.hurl`
+
 ```hurl
 # ============================================================
 #(start) =========                  ===========
@@ -2064,6 +2049,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 ```
 
 ### `product/product.route.ts`
+
 ```ts
 //
 import express from "express";
@@ -2097,6 +2083,7 @@ export const ProductRoute = router;
 ```
 
 ### `user/user.services.ts`
+
 ```ts
 //w: ╭──────────── Block Start ────────────╮
 
@@ -2365,6 +2352,7 @@ export const userService = {
 ```
 
 ### `user/user.controller.ts`
+
 ```ts
 //
 import { Request, Response } from "express";
@@ -2462,6 +2450,7 @@ export const UserControllers = {
 ```
 
 ### `user/user.route.ts`
+
 ```ts
 import express from "express";
 import { UserControllers } from "./user.controller";
@@ -2514,6 +2503,7 @@ export const userRoutes = router;
 ```
 
 ### `user/user.validation.ts`
+
 ```ts
 //
 import { z } from "zod";
@@ -2586,6 +2576,7 @@ export const userValidation = {
 ```
 
 ### `user/userApi.hurl`
+
 ```hurl
 # (START) ==========   (START) ==========
 
@@ -2609,7 +2600,7 @@ Content-Type: application/json
  "firstName": "Hasan",
   "lastName": "Bin Ali",
   "email": "hasan.developer@gmail.com",
-  "password": "Test@123" 
+  "password": "Test@123"
 }
 
 # (END) ========== CREATE USER WITH OTP EMAIL VERIFICATION  (END)   ==========
@@ -2673,6 +2664,7 @@ Content-Type: application/json
 ```
 
 ### `booking/booking.route.ts`
+
 ```ts
 //
 import express from "express";
@@ -2693,6 +2685,7 @@ export const BookingRoute = router;
 ```
 
 ### `booking/booking.service.ts`
+
 ```ts
 //
 import { Booking } from "@prisma/client";
@@ -2713,6 +2706,7 @@ export const BookingService = {
 ```
 
 ### `booking/booking.controller.ts`
+
 ```ts
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
@@ -2735,6 +2729,7 @@ export const BookingController = {
 ```
 
 ### `booking/booking.validation.ts`
+
 ```ts
 //
 
@@ -2753,6 +2748,7 @@ export const BookingValidation = {
 ```
 
 ### `pets/pets.service.ts`
+
 ```ts
 //
 import { Pet } from "@prisma/client";
@@ -2876,6 +2872,7 @@ export const PetService = {
 ```
 
 ### `pets/pets.controller.ts`
+
 ```ts
 import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
@@ -2913,7 +2910,6 @@ const getPetById = catchAsync(async (req, res) => {
 });
 
 const updatePet = catchAsync(async (req, res) => {
-
   const result = await PetService.updatePetIntoDB(req.body, req);
 
   sendResponse(res, {
@@ -2932,6 +2928,7 @@ export const PetController = {
 ```
 
 ### `pets/pets.route.ts`
+
 ```ts
 import express from "express";
 import { PetController } from "./pets.controller";
@@ -2965,6 +2962,7 @@ export const PetRoute = router;
 ```
 
 ### `pets/petApi.hurl`
+
 ```hurl
 GET {{baseUrl}}/pets
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
@@ -3025,6 +3023,7 @@ Content-Type: application/json
 ```
 
 ### `pets/pets.validation.ts`
+
 ```ts
 //
 import { ObjectId } from "mongodb";
