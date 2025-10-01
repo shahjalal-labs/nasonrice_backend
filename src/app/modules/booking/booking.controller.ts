@@ -13,6 +13,16 @@ const createBooking = catchAsync(async (req, res) => {
   });
 });
 
+const getAllBookings = catchAsync(async (req, res) => {
+  const result = await BookingService.getAllBookingsFromDB();
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All Bookings fetched successfully",
+    data: result,
+  });
+});
 export const BookingController = {
   createBooking,
+  getAllBookings,
 };
