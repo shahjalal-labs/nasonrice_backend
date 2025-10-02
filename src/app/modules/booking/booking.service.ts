@@ -3,6 +3,7 @@ import { Booking } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import { getOrCreateAddMoneyCustomer } from "../payment/getOrCreateStripeCustomer";
+import { processAddMoneyPayment } from "../payment/processAddMoneyPayment";
 
 /* const createBookingIntoDB = async (payload: Booking) => {
   const product = await prisma.product.findUnique({
@@ -62,28 +63,41 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
         `Product is out of stock. Only ${product.inStock} item(s) available.`,
       );
     }
-    getOrCreateAddMoneyCustomer(userId, payload.paymentMethodId);
-
-    const result = await tx.booking.create({
-      data: {
-        ...payload,
-        totalPrice: product.price * payload.quantity,
-        userId: userId,
-      },
+    const customerId = await getOrCreateAddMoneyCustomer(
+      userId,
+      payload.paymentMethodId,
+    );
+    const paymentIntent = await processAddMoneyPayment({
+      amount: product.price * payload.quantity,
+      userId,
+      customerId,
+      paymentMethodId: payload.paymentMethodId,
     });
 
-    if (result) {
-      await tx.product.update({
-        where: { id: payload.productId },
+    if (paymentIntent.status === "succeeded") {
+      const result = await tx.booking.create({
         data: {
-          inStock: {
-            decrement: payload.quantity,
-          },
+          ...payload,
+          totalPrice: product.price * payload.quantity,
+          userId: userId,
         },
       });
-    }
 
-    return result;
+      if (result) {
+        await tx.product.update({
+          where: { id: payload.productId },
+          data: {
+            inStock: {
+              decrement: payload.quantity,
+            },
+          },
+        });
+      }
+
+      return result;
+    } else {
+      throw new ApiError(500, "Failed to create booking");
+    }
   });
 };
 
