@@ -137,6 +137,7 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
     const booking = await tx.booking.create({
       data: {
         ...payload,
+        // paymentId: "paid",
         totalPrice: product.price * payload.quantity,
         userId,
       },
