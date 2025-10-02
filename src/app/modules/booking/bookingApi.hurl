@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "productId": "68d75c02eb7e8c7b524a0f43",
-  "quantity": 3,
-  "paymentMethodId":"pm_1SDjhq9nrMVeASAlJweRlY4x"
+  "quantity": 2,
+  "paymentMethodId":"pm_1SDjpi9nrMVeASAlkl0Vz4Og"
 }
 

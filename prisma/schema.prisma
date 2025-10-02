@@ -95,7 +95,7 @@ model Booking {
   updatedAt          DateTime @updatedAt
   // paymentStatus PaymentStatus @default(Unpaid)
   paymentId          String?
-  addMoneyCustomerId String?
+  paymentMethodId    String?
   // Product     Product  @relation(fields: [productId], references: [id])
   product            Product  @relation(fields: [productId], references: [id])
 
