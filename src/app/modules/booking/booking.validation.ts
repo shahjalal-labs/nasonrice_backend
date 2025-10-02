@@ -6,7 +6,7 @@ const createBookingValidationSchema = z.object({
   productId: z.string(),
   // userId: z.string(),
   quantity: z.number().positive(),
-  paymentId: z.string(),
+  paymentMethodId: z.string(),
 });
 
 export const BookingValidation = {

@@ -47,7 +47,7 @@ import { processAddMoneyPayment } from "../payment/processAddMoneyPayment";
   return result;
 }; */
 
-const createBookingIntoDB = async (payload: any, userId: string) => {
+/* const createBookingIntoDB = async (payload: any, userId: string) => {
   return await prisma.$transaction(async (tx) => {
     const product = await tx.product.findUnique({
       where: {
@@ -98,6 +98,58 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
     } else {
       throw new ApiError(500, "Failed to create booking");
     }
+  });
+}; */
+
+const createBookingIntoDB = async (payload: any, userId: string) => {
+  // 1️⃣ Fetch product outside transaction
+  const product = await prisma.product.findUnique({
+    where: { id: payload.productId },
+  });
+  if (!product) throw new ApiError(404, "Product not found");
+
+  if (product.inStock < payload.quantity) {
+    throw new ApiError(
+      400,
+      `Product is out of stock. Only ${product.inStock} item(s) available.`,
+    );
+  }
+
+  // 2️⃣ Handle Stripe outside transaction
+  const customerId = await getOrCreateAddMoneyCustomer(
+    userId,
+    payload.paymentMethodId,
+  );
+
+  const paymentIntent = await processAddMoneyPayment({
+    amount: product.price * payload.quantity,
+    userId,
+    customerId,
+    paymentMethodId: payload.paymentMethodId,
+  });
+
+  if (paymentIntent.status !== "succeeded") {
+    throw new ApiError(500, "Payment failed or requires action");
+  }
+
+  // 3️⃣ Run DB updates inside transaction
+  return await prisma.$transaction(async (tx) => {
+    const booking = await tx.booking.create({
+      data: {
+        ...payload,
+        totalPrice: product.price * payload.quantity,
+        userId,
+      },
+    });
+
+    await tx.product.update({
+      where: { id: payload.productId },
+      data: {
+        inStock: { decrement: payload.quantity },
+      },
+    });
+
+    return booking;
   });
 };
 
