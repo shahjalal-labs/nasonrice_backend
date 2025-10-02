@@ -2,6 +2,7 @@
 import { Booking } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
+import { getOrCreateAddMoneyCustomer } from "../payment/getOrCreateStripeCustomer";
 
 /* const createBookingIntoDB = async (payload: Booking) => {
   const product = await prisma.product.findUnique({
@@ -45,7 +46,7 @@ import ApiError from "../../../errors/ApiErrors";
   return result;
 }; */
 
-const createBookingIntoDB = async (payload: Booking, userId: string) => {
+const createBookingIntoDB = async (payload: any, userId: string) => {
   return await prisma.$transaction(async (tx) => {
     const product = await tx.product.findUnique({
       where: {
@@ -61,14 +62,7 @@ const createBookingIntoDB = async (payload: Booking, userId: string) => {
         `Product is out of stock. Only ${product.inStock} item(s) available.`,
       );
     }
-
-    const paid = await tx.paymentActivity.findUnique({
-      where: {
-        id: payload.paymentId,
-      },
-    });
-
-    if (!paid) throw new ApiError(404, "Pay first for booking.");
+    getOrCreateAddMoneyCustomer(userId, payload.paymentMethodId);
 
     const result = await tx.booking.create({
       data: {
