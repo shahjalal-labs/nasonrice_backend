@@ -1,11 +1,10 @@
-import { Subscription } from "@prisma/client";
+// import { Subscription } from "@prisma/client";
 import stripe from "../../../config/stripe";
 import ApiError from "../../../errors/ApiErrors";
 import { onboardingHtml } from "../../../helpers/onboardingHtml";
 import sendEmail from "../../../helpers/sendEmail";
 import prisma from "../../../shared/prisma";
 import { paginationHelper } from "../../../shared/pagination";
-import { Request } from "express";
 
 const createOnboarding = async (userId: string) => {
   const userInfo = await prisma.user.findUnique({
@@ -432,7 +431,7 @@ const addMoney = async (
 
     await prisma.paymentActivity.create({
       data: {
-        amount: payload.amount,
+        amount: amount,
         type: "Add money successfull",
         userId: userId,
         txId: paymentIntent.id,
