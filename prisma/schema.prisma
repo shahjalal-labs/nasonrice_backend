@@ -82,6 +82,15 @@ model Review {
   productId String?  @db.ObjectId
 }
 
+model FlightBooking {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  from String
+  to String
+  journeyDate String
+  returnDate String
+  flightStatus  FlightStatus @default(Oneway)
+}
+
 model Booking {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   productId   String   @db.ObjectId
@@ -143,4 +152,11 @@ enum ProductCategory {
 enum PaymentStatus {
   Unpaid
   Paid
+}
+
+
+enum FlightStatus {
+Oneway
+Roundway
+Multicity
 }

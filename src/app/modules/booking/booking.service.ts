@@ -3,9 +3,8 @@ import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import { getOrCreateAddMoneyCustomer } from "../payment/getOrCreateStripeCustomer";
 import { processAddMoneyPayment } from "../payment/processAddMoneyPayment";
-import { Booking } from "@prisma/client";
 
-const createBookingIntoDB = async (payload: Booking, userId: string) => {
+const createBookingIntoDB = async (payload: any, userId: string) => {
   // 1️⃣ Fetch product outside transaction
   const product = await prisma.product.findUnique({
     where: { id: payload.productId },
@@ -22,14 +21,14 @@ const createBookingIntoDB = async (payload: Booking, userId: string) => {
   // 2️⃣ Handle Stripe outside transaction
   const customerId = await getOrCreateAddMoneyCustomer(
     userId,
-    payload.paymentMethodId as string,
+    payload.paymentMethodId,
   );
 
   const { paymentIntent, paymentId } = await processAddMoneyPayment({
     amount: product.price * payload.quantity,
     userId,
     customerId,
-    paymentMethodId: payload.paymentMethodId as string,
+    paymentMethodId: payload.paymentMethodId,
   });
 
   if (paymentIntent.status !== "succeeded") {
