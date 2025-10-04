@@ -39,12 +39,15 @@ const getAllAirportss2 = catchAsync(async (req, res) => {
 });
 
 const getAllAirportss = catchAsync(async (req, res) => {
+  const rawSearch = req.query.search;
+  console.log("Raw search:", rawSearch, typeof rawSearch);
+
   const search =
-    typeof req.query.search === "string" && req.query.search.trim() !== ""
-      ? req.query.search.trim()
+    typeof rawSearch === "string" && rawSearch.trim() !== ""
+      ? rawSearch.trim()
       : null;
 
-  console.log(search, "search in airports.controller.ts");
+  console.log("Processed search:", search);
 
   const result = await airportsServices.getAllAirportsFromDB(search);
 
