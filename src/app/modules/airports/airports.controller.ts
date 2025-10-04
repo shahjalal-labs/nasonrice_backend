@@ -25,10 +25,28 @@ const createAirports = catchAsync(async (req, res) => {
 });
  */
 
-const getAllAirportss = catchAsync(async (req, res) => {
+const getAllAirportss2 = catchAsync(async (req, res) => {
   const search = req.query.search;
   console.log(search, "[1;31msearch in airports.controller.ts at line 30[0m");
   const result = await airportsServices.getAllAirportsFromDB("rang");
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "All airports have been retrieved successfully",
+    data: result,
+  });
+});
+
+const getAllAirportss = catchAsync(async (req, res) => {
+  const search =
+    typeof req.query.search === "string" && req.query.search.trim() !== ""
+      ? req.query.search.trim()
+      : null;
+
+  console.log(search, "search in airports.controller.ts");
+
+  const result = await airportsServices.getAllAirportsFromDB(search);
 
   sendResponse(res, {
     success: true,
