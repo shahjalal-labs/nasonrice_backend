@@ -1,36 +1,36 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const createAirports = async (data: any) => {
+const createAirportsIntoDB = async (data: any) => {
   await prisma.airports.create({ data });
-  return
+  return;
 };
 
-const getAllAirportss = async () => {
+const getAllAirportsFromDB = async () => {
   const results = await prisma.airports.findMany();
-  return results
+  return results;
 };
 
-const getAirportsById = async (id: string) => {
+const getAirportsByIdFromDB = async (id: string) => {
   const result = await prisma.airports.findUnique({ where: { id } });
-  return result
+  return result;
 };
 
-const updateAirports = async (id: string, data: any) => {
+const updateAirportsIntoDB = async (id: string, data: any) => {
   await prisma.airports.update({ where: { id }, data });
-  return
+  return;
 };
 
-const deleteAirports = async (id: string) => {
+const deleteAirportsFromDB = async (id: string) => {
   await prisma.airports.delete({ where: { id } });
-  return
+  return;
 };
 
 export const airportsServices = {
-  createAirports,
-  getAllAirportss,
-  getAirportsById,
-  updateAirports,
-  deleteAirports,
-}
+  createAirportsIntoDB,
+  getAllAirportsFromDB,
+  getAirportsByIdFromDB,
+  updateAirportsIntoDB,
+  deleteAirportsFromDB,
+};
   

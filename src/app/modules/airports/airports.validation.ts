@@ -6,6 +6,6 @@ export const createAirportsSchema = z.object({
 });
 
 export const AirportsSchemaValidation = {
-createAirportsSchema
+  createAirportsSchema
 };
   
