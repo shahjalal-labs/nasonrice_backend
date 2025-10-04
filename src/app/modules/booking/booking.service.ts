@@ -1,11 +1,11 @@
 //
-import { Booking } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import { getOrCreateAddMoneyCustomer } from "../payment/getOrCreateStripeCustomer";
 import { processAddMoneyPayment } from "../payment/processAddMoneyPayment";
+import { Booking } from "@prisma/client";
 
-const createBookingIntoDB = async (payload: any, userId: string) => {
+const createBookingIntoDB = async (payload: Booking, userId: string) => {
   // 1️⃣ Fetch product outside transaction
   const product = await prisma.product.findUnique({
     where: { id: payload.productId },
@@ -22,14 +22,14 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
   // 2️⃣ Handle Stripe outside transaction
   const customerId = await getOrCreateAddMoneyCustomer(
     userId,
-    payload.paymentMethodId,
+    payload.paymentMethodId as string,
   );
 
   const { paymentIntent, paymentId } = await processAddMoneyPayment({
     amount: product.price * payload.quantity,
     userId,
     customerId,
-    paymentMethodId: payload.paymentMethodId,
+    paymentMethodId: payload.paymentMethodId as string,
   });
 
   if (paymentIntent.status !== "succeeded") {
@@ -85,6 +85,7 @@ const getAllBookingsFromDB = async () => {
   });
   return result;
 };
+
 export const BookingService = {
   createBookingIntoDB,
   getAllBookingsFromDB,

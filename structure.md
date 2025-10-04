@@ -9,9 +9,13 @@
 ├── newfile.md
 ├── package.json
 ├── package-lock.json
+├── pr
+│   └── basic
+│       └── promise.js
 ├── prisma
 │   └── schema.prisma
 ├── README.md
+├── routine.md
 ├── src
 │   ├── app
 │   │   ├── interfaces
@@ -39,11 +43,13 @@
 │   │   │   │   ├── booking.service.ts
 │   │   │   │   └── booking.validation.ts
 │   │   │   ├── payment
+│   │   │   │   ├── getOrCreateStripeCustomer.ts
 │   │   │   │   ├── paymentApi.hurl
 │   │   │   │   ├── payment.controller.ts
 │   │   │   │   ├── payment.routes.ts
 │   │   │   │   ├── payment.service.ts
-│   │   │   │   └── payment.validation.ts
+│   │   │   │   ├── payment.validation.ts
+│   │   │   │   └── processAddMoneyPayment.ts
 │   │   │   ├── pets
 │   │   │   │   ├── petApi.hurl
 │   │   │   │   ├── pets.controller.ts
@@ -68,6 +74,8 @@
 │   ├── config
 │   │   ├── index.ts
 │   │   └── stripe.ts
+│   ├── docs
+│   │   └── requirement.md
 │   ├── errors
 │   │   ├── ApiErrors.ts
 │   │   ├── handleClientError.ts
@@ -106,6 +114,6 @@
 ├── vercel.json
 └── vps_deploy.md
 
-21 directories, 83 files
+24 directories, 88 files
 
 ```
