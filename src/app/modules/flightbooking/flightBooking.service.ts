@@ -1,7 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+//
+import { FlightBooking, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const createFlightBookingIntoDB = async (data: any) => {
+const createFlightBookingIntoDB = async (data: FlightBooking) => {
   await prisma.flightBooking.create({ data });
   return;
 };
@@ -33,4 +34,4 @@ export const flightBookingServices = {
   updateFlightBookingIntoDB,
   deleteFlightBookingFromDB,
 };
-  
+
