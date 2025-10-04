@@ -11,6 +11,10 @@ const createAirportsIntoDB = async (data: any) => {
 const getAllAirportsFromDB = async (search: string | null) => {
   const results = await prisma.airport.findMany({
     where: airportSearchFilter(search),
+    select: {
+      city: true,
+      airport: true,
+    },
     // orderBy: { airport: "asc" },
   });
   return results;

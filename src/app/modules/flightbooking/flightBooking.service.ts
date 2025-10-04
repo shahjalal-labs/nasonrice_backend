@@ -1,4 +1,3 @@
-//
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -7,7 +6,7 @@ const createFlightBookingIntoDB = async (data: any) => {
   return;
 };
 
-const getAllFlightBookingsFromDB = async () => {
+const getAllFlightBookingFromDB = async () => {
   const results = await prisma.flightBooking.findMany();
   return results;
 };
@@ -29,8 +28,9 @@ const deleteFlightBookingFromDB = async (id: string) => {
 
 export const flightBookingServices = {
   createFlightBookingIntoDB,
-  getAllFlightBookingsFromDB,
+  getAllFlightBookingFromDB,
   getFlightBookingByIdFromDB,
   updateFlightBookingIntoDB,
   deleteFlightBookingFromDB,
 };
+  

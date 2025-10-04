@@ -6,6 +6,6 @@ export const createFlightBookingSchema = z.object({
 });
 
 export const FlightBookingSchemaValidation = {
-createFlightBookingSchema
+  createFlightBookingSchema
 };
   
