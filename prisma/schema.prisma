@@ -129,12 +129,14 @@ model PaymentActivity {
 }
 
 model Airport {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   city        String
-  airport     String
+  airport     String?
   code        String
   country     String
   countryCode String
+
+  @@map("airports")
 }
 
 // -----//-----//-------END BOOKING MODEL- -----//-----//-------

@@ -11,12 +11,39 @@ const createAirports = catchAsync(async (req, res) => {
   });
 });
 
-const getAllAirportss = catchAsync(async (req, res) => {
-  const result = await airportsServices.getAllAirportsFromDB("new york");
+/* const getAllAirportss = catchAsync(async (req, res) => {
+  let search;
+  search = req.query?.search;
+
+  const result = await airportsServices.getAllAirportsFromDB(search);
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: "All airportss have been retrieved successfully",
+    data: result,
+  });
+});
+ */
+
+const getAllAirportss = catchAsync(async (req, res) => {
+  let search: string | null = null;
+
+  const querySearch = req.query?.search;
+
+  if (typeof querySearch === "string") {
+    search = querySearch;
+  } else if (Array.isArray(querySearch) && typeof querySearch[0] === "string") {
+    search = querySearch[0];
+  } else {
+    search = null;
+  }
+
+  const result = await airportsServices.getAllAirportsFromDB(search);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "All airports have been retrieved successfully",
     data: result,
   });
 });

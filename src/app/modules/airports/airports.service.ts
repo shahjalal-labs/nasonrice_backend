@@ -24,7 +24,7 @@ const getAirportsByIdFromDB = async (id: string) => {
 }; */
 const getAllAirportsFromDB = async (search: string | null) => {
   const results = await prisma.airport.findMany({
-    where: airportSearchFilter(search),
+    where: airportSearchFilter(search || ""),
     orderBy: { airport: "asc" },
 
     take: 20,
