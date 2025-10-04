@@ -130,11 +130,11 @@ model PaymentActivity {
 
 model Airport {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  city        String
+  city        String?
   airport     String?
-  code        String
+  code        String?
   country     String?
-  countryCode String
+  countryCode String?
 
   @@map("airports")
 }

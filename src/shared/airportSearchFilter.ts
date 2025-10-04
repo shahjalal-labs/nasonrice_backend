@@ -1,20 +1,13 @@
 //
-
-import { Prisma } from "@prisma/client";
-
-export const airportSearchFilter = (
-  search?: string | null,
-): Prisma.AirportWhereInput | undefined => {
-  if (!search?.trim()) return undefined;
-
-  const q = search.trim();
+export const airportSearchFilter = (search: string | null) => {
+  if (!search) return undefined;
 
   return {
     OR: [
-      { airport: { contains: q, mode: Prisma.QueryMode.insensitive } },
-      { city: { contains: q, mode: Prisma.QueryMode.insensitive } },
-      { code: { contains: q, mode: Prisma.QueryMode.insensitive } },
-      { country: { contains: q, mode: Prisma.QueryMode.insensitive } },
+      { name: { contains: search, mode: "insensitive" } },
+      { city: { contains: search, mode: "insensitive" } },
+      { code: { contains: search, mode: "insensitive" } },
+      { country: { contains: search, mode: "insensitive" } },
     ],
   };
 };

@@ -26,22 +26,7 @@ const createAirports = catchAsync(async (req, res) => {
  */
 
 const getAllAirportss = catchAsync(async (req, res) => {
-  let search: string | null = null;
-
-  const querySearch = req.query?.search;
-
-  if (typeof querySearch === "string") {
-    search = querySearch;
-  } else if (Array.isArray(querySearch) && typeof querySearch[0] === "string") {
-    search = querySearch[0];
-  } else {
-    search = null;
-  }
-
-  let result;
-  result = await airportsServices.getAllAirportsFromDB(search);
-
-  // result = result?.filter((airport) => airport.airport !== null);
+  const result = await airportsServices.getAllAirportsFromDB();
 
   sendResponse(res, {
     success: true,
