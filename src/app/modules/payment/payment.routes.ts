@@ -5,6 +5,10 @@ import { PaymentControllers } from "./payment.controller";
 const router = express.Router();
 
 router.post("/onboarding/create-subscription", auth());
-router.get("/payment-details", auth(), PaymentControllers.getPaymentDetails);
+router.get(
+  "/payment-details/:id",
+  auth(),
+  PaymentControllers.getPaymentDetails,
+);
 
 export const paymentRoutes = router;
