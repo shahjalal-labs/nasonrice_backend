@@ -98,7 +98,7 @@ const myBalance = async (userId: string) => {
 };
 
 export const paymentServices = {
-  createOnboarding,
+  // createOnboarding,
   // createPlan,
   // buySubscription,
   // myWalletBalance,
