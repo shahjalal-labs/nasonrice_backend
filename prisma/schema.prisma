@@ -83,13 +83,14 @@ model Review {
 }
 
 model FlightBooking {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  from String
-  to String
-  journeyDate DateTime
-  returnDate DateTime?
-  flightStatus  FlightStatus @default(Oneway)
-  flightGoer  String
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  from         String
+  to           String
+  journeyDate  DateTime
+  returnDate   DateTime?
+  flightStatus FlightStatus @default(Oneway)
+  flightGoer   String
+
   @@map("flightBooking")
 }
 
@@ -127,6 +128,15 @@ model PaymentActivity {
   @@map("payment_activities")
 }
 
+model Airport {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  city        String
+  airport     String
+  code        String
+  country     String
+  countryCode String
+}
+
 // -----//-----//-------END BOOKING MODEL- -----//-----//-------
 enum UserStatus {
   Active
@@ -156,9 +166,8 @@ enum PaymentStatus {
   Paid
 }
 
-
 enum FlightStatus {
-Oneway
-Roundway
-Multicity
+  Oneway
+  Roundway
+  Multicity
 }
