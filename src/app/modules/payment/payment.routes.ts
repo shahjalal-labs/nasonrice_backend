@@ -25,11 +25,5 @@ router.get("/my-balance", auth(), paymentControllers.myBalance);
  */
 
 router.get("/my-balance", auth(), paymentControllers.myBalance);
-router.post(
-  "/add-money",
-  auth(),
-  validateRequest(PaymentValidation.addmoneyValidationSchema),
-  paymentControllers.addMoney,
-);
 
 export const paymentRoutes = router;

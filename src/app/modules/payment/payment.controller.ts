@@ -86,18 +86,6 @@ export const paymentControllers = {
   myBalance,
 }; */
 
-const addMoney = catchAsync(async (req, res) => {
-  const userId = req.user.id;
-  const txId = await paymentServices.addMoney(req.body, userId);
-
-  sendResponse(res, {
-    success: true,
-    statusCode: 200,
-    message: `${req.body.amount} USD has been added successfully.`,
-    data: txId,
-  });
-});
-
 const myBalance = catchAsync(async (req, res) => {
   const userId = req.user.id;
   const result = await paymentServices.myBalance(userId);
@@ -112,6 +100,5 @@ const myBalance = catchAsync(async (req, res) => {
 
 export const paymentControllers = {
   createOnboarding,
-  addMoney,
   myBalance,
 };
