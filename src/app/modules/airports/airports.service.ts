@@ -1,5 +1,6 @@
 //
 import { PrismaClient } from "@prisma/client";
+import { airportSearchFilter } from "../../../shared/airportSearchFilter";
 const prisma = new PrismaClient();
 
 const createAirportsIntoDB = async (data: any) => {
@@ -10,6 +11,7 @@ const createAirportsIntoDB = async (data: any) => {
 const getAllAirportsFromDB = async (search: string | null) => {
   const results = await prisma.airport.findMany({
     where: airportSearchFilter(search),
+    // orderBy: { airport: "asc" },
   });
   return results;
 };

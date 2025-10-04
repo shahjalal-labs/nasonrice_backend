@@ -26,7 +26,9 @@ const createAirports = catchAsync(async (req, res) => {
  */
 
 const getAllAirportss = catchAsync(async (req, res) => {
-  const result = await airportsServices.getAllAirportsFromDB();
+  const search = req.query.search;
+  console.log(search, "[1;31msearch in airports.controller.ts at line 30[0m");
+  const result = await airportsServices.getAllAirportsFromDB("rang");
 
   sendResponse(res, {
     success: true,
@@ -71,4 +73,3 @@ export const airportsControllers = {
   updateAirports,
   deleteAirports,
 };
-
