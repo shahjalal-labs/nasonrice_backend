@@ -1,18 +1,18 @@
-import {airportsServices} from './airports.service';
-import sendResponse from '../../../shared/sendResponse';
+import { airportsServices } from "./airports.service";
+import sendResponse from "../../../shared/sendResponse";
 import catchAsync from "../../../shared/catchAsync";
 
-const createAirports = catchAsync (async (req, res) => {
+const createAirports = catchAsync(async (req, res) => {
   await airportsServices.createAirportsIntoDB(req.body);
   sendResponse(res, {
     success: true,
     statusCode: 201,
-    message: "The airports has been created successfully"
+    message: "The airports has been created successfully",
   });
 });
 
 const getAllAirportss = catchAsync(async (req, res) => {
-  const result = await airportsServices.getAllAirportsFromDB();
+  const result = await airportsServices.getAllAirportsFromDB("new york");
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -36,7 +36,7 @@ const updateAirports = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "airports has been updated successfully"
+    message: "airports has been updated successfully",
   });
 });
 
@@ -56,4 +56,4 @@ export const airportsControllers = {
   updateAirports,
   deleteAirports,
 };
-  
+
