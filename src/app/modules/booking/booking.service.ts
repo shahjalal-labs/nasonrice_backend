@@ -121,7 +121,7 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
     payload.paymentMethodId,
   );
 
-  const paymentIntent = await processAddMoneyPayment({
+  const { paymentIntent, paymentId } = await processAddMoneyPayment({
     amount: product.price * payload.quantity,
     userId,
     customerId,
@@ -136,8 +136,11 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
   return await prisma.$transaction(async (tx) => {
     const booking = await tx.booking.create({
       data: {
-        ...payload,
+        // ...payload,
+        productId: payload?.productId as string,
+        quantity: Number(payload?.quantity),
         // paymentId: "paid",
+        paymentId,
         totalPrice: product.price * payload.quantity,
         userId,
       },

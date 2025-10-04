@@ -27,9 +27,10 @@ export const processAddMoneyPayment = async (params: {
     },
   });
 
+  let paymentId = null;
   // ✅ If payment succeeded, log it in DB
   if (paymentIntent.status === "succeeded") {
-    await prisma.paymentActivity.create({
+    const paymentRecord = await prisma.paymentActivity.create({
       data: {
         amount: params.amount,
         type: "Add money successful",
@@ -37,9 +38,13 @@ export const processAddMoneyPayment = async (params: {
         txId: paymentIntent.id,
       },
     });
+    paymentId = paymentRecord.id;
   } else {
     throw new ApiError(400, "Payment failed");
   }
 
-  return paymentIntent;
+  return {
+    paymentIntent,
+    paymentId,
+  };
 };

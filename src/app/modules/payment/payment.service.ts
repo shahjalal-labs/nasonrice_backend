@@ -23,7 +23,7 @@ const addMoney = async (
     },
   });
 
-  const amount = product.price * Number(payload.quantity);
+  const amount = 500;
 
   let addMoneyCustomerId = user.addMoneyCustomerId;
 

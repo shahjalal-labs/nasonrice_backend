@@ -4,13 +4,13 @@ import { paymentServices } from "./payment.service";
 
 const createOnboarding = catchAsync(async (req, res) => {
   const userId = req.user.id;
-  const result = await paymentServices.createOnboarding(userId);
+  // const result = await paymentServices.createOnboarding(userId);
 
   sendResponse(res, {
     success: true,
     statusCode: 201,
     message: "success",
-    data: result,
+    // data: result,
   });
 });
 
