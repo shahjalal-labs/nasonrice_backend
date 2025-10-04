@@ -1,28 +1,43 @@
+//
 import { PrismaClient } from "@prisma/client";
+import { airportSearchFilter } from "../../../shared/airportSearchFilter";
 const prisma = new PrismaClient();
 
 const createAirportsIntoDB = async (data: any) => {
-  await prisma.airports.create({ data });
+  await prisma.airport.create({ data });
   return;
 };
 
-const getAllAirportsFromDB = async () => {
-  const results = await prisma.airports.findMany();
-  return results;
-};
-
 const getAirportsByIdFromDB = async (id: string) => {
-  const result = await prisma.airports.findUnique({ where: { id } });
+  const result = await prisma.airport.findUnique({ where: { id } });
   return result;
 };
 
+/* export const getAllAirportsFromDB = async (search: string | null) => {
+  const results = await prisma.airport.findMany({
+    where: airportSearchFilter(search),
+    orderBy: { airport: "asc" },
+    take: 20, // limit results for autocomplete
+  });
+
+  return results;
+}; */
+const getAllAirportsFromDB = async (search: string | null) => {
+  const results = await prisma.airport.findMany({
+    where: airportSearchFilter(search),
+    orderBy: { airport: "asc" },
+
+    take: 20,
+  });
+  return results;
+};
 const updateAirportsIntoDB = async (id: string, data: any) => {
-  await prisma.airports.update({ where: { id }, data });
+  await prisma.airport.update({ where: { id }, data });
   return;
 };
 
 const deleteAirportsFromDB = async (id: string) => {
-  await prisma.airports.delete({ where: { id } });
+  await prisma.airport.delete({ where: { id } });
   return;
 };
 
@@ -33,4 +48,4 @@ export const airportsServices = {
   updateAirportsIntoDB,
   deleteAirportsFromDB,
 };
-  
+
