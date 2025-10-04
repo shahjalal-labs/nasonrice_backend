@@ -1,3 +1,4 @@
+//
 export const searchFilter = (search: string | null) => {
   if (!search) {
     return undefined;
@@ -8,7 +9,7 @@ export const searchFilter = (search: string | null) => {
     searchConditions.push(
       { firstName: { contains: search, mode: "insensitive" } },
       { lastName: { contains: search, mode: "insensitive" } },
-      { email: { contains: search, mode: "insensitive" } }
+      { email: { contains: search, mode: "insensitive" } },
     );
   }
 
