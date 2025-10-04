@@ -133,7 +133,7 @@ model Airport {
   city        String
   airport     String?
   code        String
-  country     String
+  country     String?
   countryCode String
 
   @@map("airports")

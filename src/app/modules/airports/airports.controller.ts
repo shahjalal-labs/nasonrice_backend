@@ -38,7 +38,10 @@ const getAllAirportss = catchAsync(async (req, res) => {
     search = null;
   }
 
-  const result = await airportsServices.getAllAirportsFromDB(search);
+  let result;
+  result = await airportsServices.getAllAirportsFromDB(search);
+
+  // result = result?.filter((airport) => airport.airport !== null);
 
   sendResponse(res, {
     success: true,
