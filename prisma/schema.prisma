@@ -86,9 +86,11 @@ model FlightBooking {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   from String
   to String
-  journeyDate String
-  returnDate String
+  journeyDate DateTime
+  returnDate DateTime?
   flightStatus  FlightStatus @default(Oneway)
+  flightGoer  String
+  @@map("flightBooking")
 }
 
 model Booking {
