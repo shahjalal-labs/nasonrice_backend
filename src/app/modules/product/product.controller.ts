@@ -50,8 +50,7 @@ export const getAllProductsWithSearchFilter = async (
       search: search as string | undefined,
     };
 
-    const products =
-      await ProductService.getAllProductsFromDBwithSearchFilter(filters);
+    const products = await getAllProductsFromDBwithSearchFilter(filters);
 
     res.status(200).json({
       success: true,

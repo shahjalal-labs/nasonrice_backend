@@ -18,6 +18,14 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
     );
   }
 
+  const flight = await prisma.flightBooking.findUnique({
+    where: {
+      id: payload.flightBookingId,
+    },
+  });
+
+  if (!flight) throw new ApiError(404, "Flight not found");
+
   // 2️⃣ Handle Stripe outside transaction
   const customerId = await getOrCreateAddMoneyCustomer(
     userId,
