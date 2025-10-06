@@ -43,6 +43,7 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
         productId: payload?.productId as string,
         quantity: Number(payload?.quantity),
         // paymentId: "paid",
+        flightBookingId: payload.flightBookingId,
         paymentId,
         totalPrice: product.price * payload.quantity,
         userId,
