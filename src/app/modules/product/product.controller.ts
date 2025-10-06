@@ -4,6 +4,7 @@ import sendResponse from "../../../shared/sendResponse";
 import { ProductService } from "./product.service";
 import { Request, Response } from "express";
 import prisma from "../../../shared/prisma";
+import { PetType, ProductCategory } from "@prisma/client";
 
 //w: (start)╭──────────── createProduct  ────────────╮
 const createProduct = catchAsync(async (req, res) => {
@@ -71,45 +72,47 @@ export const getAllProductsWithSearchFilter = async (
 export const getAllProductsFromDBwithSearchFilter = async (filters: any) => {
   const { petType, category, search } = filters;
 
-  // 🧹 Normalize input
+  // Normalize inputs
   const normalize = (val: string | undefined) =>
     val ? val.charAt(0).toUpperCase() + val.slice(1).toLowerCase() : undefined;
 
   const normalizedCategory = normalize(category);
   const normalizedPetType = normalize(petType);
 
-  // ✅ Validate enums manually (so Prisma won't crash)
-  const validCategories = ["Food", "Toy", "Accessories"];
-  const validPetTypes = ["Dog", "Cat", "Bird"];
+  const validCategories: ProductCategory[] = ["Food", "Toy", "Accessories"];
+  const validPetTypes: PetType[] = ["Dog", "Cat", "Bird"];
 
-  const finalCategory = validCategories.includes(normalizedCategory || "")
-    ? normalizedCategory
+  const finalCategory = validCategories.includes(
+    normalizedCategory as ProductCategory,
+  )
+    ? (normalizedCategory as ProductCategory)
     : undefined;
 
-  const finalPetType = validPetTypes.includes(normalizedPetType || "")
-    ? normalizedPetType
+  const finalPetType = validPetTypes.includes(normalizedPetType as PetType)
+    ? (normalizedPetType as PetType)
     : undefined;
+
+  const conditions: any[] = [];
+
+  if (finalPetType) conditions.push({ petType: { has: finalPetType } });
+  if (finalCategory) conditions.push({ category: finalCategory });
+  if (search) {
+    conditions.push({
+      OR: [
+        { name: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
+      ],
+    });
+  }
 
   const result = await prisma.product.findMany({
-    where: {
-      AND: [
-        finalPetType ? { petType: { has: finalPetType } } : {},
-        finalCategory ? { category: finalCategory } : {},
-        search
-          ? {
-              OR: [
-                { name: { contains: search, mode: "insensitive" } },
-                { description: { contains: search, mode: "insensitive" } },
-              ],
-            }
-          : {},
-      ],
-    },
+    where: conditions.length ? { AND: conditions } : {},
     orderBy: { createdAt: "desc" },
   });
 
   return result;
 };
+
 //w: (end) ╰──────────── getAllProducts  ────────────╯
 //
 //w: (start)╭──────────── updateProduct   ────────────╮
