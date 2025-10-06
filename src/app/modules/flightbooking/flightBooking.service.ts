@@ -27,6 +27,7 @@ const deleteFlightBookingFromDB = async (id: string) => {
   return;
 };
 
+const priceDeterminant = async (from: string, to: string) => {};
 export const flightBookingServices = {
   createFlightBookingIntoDB,
   getAllFlightBookingFromDB,
@@ -34,4 +35,3 @@ export const flightBookingServices = {
   updateFlightBookingIntoDB,
   deleteFlightBookingFromDB,
 };
-

@@ -90,6 +90,7 @@ model FlightBooking {
   returnDate   DateTime?
   flightStatus FlightStatus @default(Oneway)
   flightGoer   String
+  price        Float
 
   @@map("flightBooking")
 }
