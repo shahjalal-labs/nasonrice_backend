@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { ProductService } from "./product.service";
+import { Request, Response } from "express";
 
 //w: (start)╭──────────── createProduct  ────────────╮
 const createProduct = catchAsync(async (req, res) => {
@@ -33,6 +34,38 @@ const getAllProducts = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+export const getAllProductsWithSearchFilter = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { petType, category, search } = req.query;
+
+    const filters = {
+      petType: petType as "Dog" | "Cat" | "Bird" | undefined,
+      category: category as "Food" | "Toy" | "Accessories" | undefined,
+      search: search as string | undefined,
+    };
+
+    const products =
+      await ProductService.getAllProductsFromDBwithSearchFilter(filters);
+
+    res.status(200).json({
+      success: true,
+      message: "Products fetched successfully",
+      count: products.length,
+      data: products,
+    });
+  } catch (error: any) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch products",
+      error: error.message,
+    });
+  }
+};
 //w: (end) ╰──────────── getAllProducts  ────────────╯
 //
 //w: (start)╭──────────── updateProduct   ────────────╮

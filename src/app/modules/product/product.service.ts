@@ -166,6 +166,38 @@ const getProductByIdFromDB = async (productId: string) => {
 };
 //w: (end) ╰──────────── prduct details/getProductById   ────────────╯
 
+interface ProductFilterOptions {
+  petType?: "Dog" | "Cat" | "Bird";
+  category?: "Food" | "Toy" | "Accessories";
+  search?: string;
+}
+
+const getAllProductsFromDBwithSearchFilter = async (
+  filters: ProductFilterOptions,
+) => {
+  const { petType, category, search } = filters;
+
+  const result = await prisma.product.findMany({
+    where: {
+      AND: [
+        petType ? { petType: { has: petType } } : {},
+        category ? { category } : {},
+        search
+          ? {
+              OR: [
+                { name: { contains: search, mode: "insensitive" } },
+                { description: { contains: search, mode: "insensitive" } },
+              ],
+            }
+          : {},
+      ],
+    },
+    orderBy: { createdAt: "desc" }, // optional sorting
+  });
+
+  return result;
+};
+
 //w: (start)╭──────────── prduct details/getProductById  ────────────╮
 
 //w: (end) ╰──────────── prduct details/getProductById   ────────────╯
@@ -176,4 +208,5 @@ export const ProductService = {
   deleteProductFromDB,
   updateProductIntoDB,
   getProductByIdFromDB,
+  getAllProductsFromDBwithSearchFilter,
 };
