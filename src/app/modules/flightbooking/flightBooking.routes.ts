@@ -7,7 +7,7 @@ import { FlightBookingSchemaValidation } from "./flightBooking.validation";
 const router = express.Router();
 
 router.post(
-  "/",
+  "/create",
   auth(),
   validateRequest(FlightBookingSchemaValidation.createFlightBookingSchema),
   flightBookingControllers.createFlightBooking,
@@ -18,4 +18,3 @@ router.patch("/:id", flightBookingControllers.updateFlightBooking);
 router.delete("/:id", flightBookingControllers.deleteFlightBooking);
 
 export const flightBookingRoutes = router;
-
