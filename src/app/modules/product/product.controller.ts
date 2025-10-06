@@ -3,6 +3,7 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { ProductService } from "./product.service";
 import { Request, Response } from "express";
+import prisma from "../../../shared/prisma";
 
 //w: (start)╭──────────── createProduct  ────────────╮
 const createProduct = catchAsync(async (req, res) => {
@@ -65,6 +66,49 @@ export const getAllProductsWithSearchFilter = async (
       error: error.message,
     });
   }
+};
+
+export const getAllProductsFromDBwithSearchFilter = async (filters: any) => {
+  const { petType, category, search } = filters;
+
+  // 🧹 Normalize input
+  const normalize = (val: string | undefined) =>
+    val ? val.charAt(0).toUpperCase() + val.slice(1).toLowerCase() : undefined;
+
+  const normalizedCategory = normalize(category);
+  const normalizedPetType = normalize(petType);
+
+  // ✅ Validate enums manually (so Prisma won't crash)
+  const validCategories = ["Food", "Toy", "Accessories"];
+  const validPetTypes = ["Dog", "Cat", "Bird"];
+
+  const finalCategory = validCategories.includes(normalizedCategory || "")
+    ? normalizedCategory
+    : undefined;
+
+  const finalPetType = validPetTypes.includes(normalizedPetType || "")
+    ? normalizedPetType
+    : undefined;
+
+  const result = await prisma.product.findMany({
+    where: {
+      AND: [
+        finalPetType ? { petType: { has: finalPetType } } : {},
+        finalCategory ? { category: finalCategory } : {},
+        search
+          ? {
+              OR: [
+                { name: { contains: search, mode: "insensitive" } },
+                { description: { contains: search, mode: "insensitive" } },
+              ],
+            }
+          : {},
+      ],
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return result;
 };
 //w: (end) ╰──────────── getAllProducts  ────────────╯
 //
