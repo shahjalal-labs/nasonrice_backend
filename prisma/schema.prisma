@@ -9,26 +9,27 @@ generator client {
 
 //-----//-----//-------START USER MODEL- -----//-----//-------
 model User {
-  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
-  firstName          String
-  lastName           String?
-  phoneNumber        String?
-  email              String            @unique
-  password           String
-  nationality        String?
-  fcmToken           String?
-  profileImage       String?
-  role               UserRole          @default(User)
-  status             UserStatus        @default(Active)
-  totalPay           Float             @default(0)
-  accountId          String?
-  addMoneyCustomerId String?
-  createdAt          DateTime          @default(now())
-  updatedAt          DateTime          @updatedAt
-  Pet                Pet[]
-  Product            Product[]
-  Booking            Booking[]
-  PaymentActivity    PaymentActivity[]
+  id                    String            @id @default(auto()) @map("_id") @db.ObjectId
+  firstName             String
+  lastName              String?
+  phoneNumber           String?
+  email                 String            @unique
+  password              String
+  nationality           String?
+  fcmToken              String?
+  profileImage          String?
+  role                  UserRole          @default(User)
+  status                UserStatus        @default(Active)
+  totalPay              Float             @default(0)
+  accountId             String?
+  addMoneyCustomerId    String?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  Pet                   Pet[]
+  Product               Product[]
+  ProductBookingBooking ProductBooking[]
+  PaymentActivity       PaymentActivity[]
+  FlightBooking         FlightBooking[]
 
   @@map("users")
 }
@@ -51,27 +52,27 @@ model Pet {
 // -----//-----//-------END USER MODEL- -----//-----//-------
 
 model Product {
-  id           String          @id @default(auto()) @map("_id") @db.ObjectId
-  name         String          @unique
-  price        Float
-  inStock      Int
-  description  String
-  images       String[] // multiple product images 
-  rating       Float?          @default(0) // average rating
-  reviews      Review[]
-  totalReviews Int             @default(0)
-  petType      PetType[]
-  weight       String
-  colorOptions String[]
-  suitableFor  String[]
-  category     ProductCategory
-  fastShipping String          @default("2-5 business days")
-  easyReturns  String          @default("30 Day money back guarantee")
-  userId       String          @db.ObjectId
-  user         User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
-  Booking      Booking[]
+  id                    String          @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String          @unique
+  price                 Float
+  inStock               Int
+  description           String
+  images                String[] // multiple product images 
+  rating                Float?          @default(0) // average rating
+  reviews               Review[]
+  totalReviews          Int             @default(0)
+  petType               PetType[]
+  weight                String
+  colorOptions          String[]
+  suitableFor           String[]
+  category              ProductCategory
+  fastShipping          String          @default("2-5 business days")
+  easyReturns           String          @default("30 Day money back guarantee")
+  userId                String          @db.ObjectId
+  user                  User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  ProductBookingBooking ProductBooking[]
 
   @@map("products")
 }
@@ -84,6 +85,8 @@ model Review {
 
 model FlightBooking {
   id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String       @db.ObjectId
+  user         User         @relation(fields: [userId], references: [id])
   from         String
   to           String
   journeyDate  DateTime
@@ -95,12 +98,13 @@ model FlightBooking {
   @@map("flightBooking")
 }
 
-model Booking {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  productId   String   @db.ObjectId
+model ProductBooking {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  productId String @db.ObjectId
   // product     Product  @relation(fields: [productId], references: [id])
-  userId      String   @db.ObjectId
-  user        User     @relation(fields: [userId], references: [id])
+  userId    String @db.ObjectId
+  user      User   @relation(fields: [userId], references: [id])
+
   bookingDate DateTime @default(now())
   quantity    Int
   totalPrice  Float

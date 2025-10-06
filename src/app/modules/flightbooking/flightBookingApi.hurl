@@ -11,12 +11,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgy
 Content-Type: application/json
 
 {
-  "from": "Koeln Bonn Arpt",
+  "from": "Ascona Arpt",
   "to": "Columbus Metro Ft Benning Arpt",
   "journeyDate": "2025-10-15T10:30:00.000Z",
   "returnDate": "2025-10-20T15:45:00.000Z",
   "flightStatus": "Roundway",
-  "flightGoer": "1 Dog"
+  "flightGoer": "3 Cat"
 }
 
 

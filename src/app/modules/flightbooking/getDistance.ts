@@ -1,6 +1,8 @@
 //
 
 export const getAirportDistance = async (from: string, to: string) => {
+console.log(to, "[1;31mto in getDistance.ts at line 4[0m");
+  console.log(from, "[1;31mfrom in getDistance.ts at line 4[0m");
   const apiKey = "d3d55eea-719e-4568-afa5-89e30cb8cc3a";
   const requestUrl = `https://api.apiverve.com/v1/airportdistance?iata1=${from}&iata2=${to}`;
 
@@ -13,7 +15,7 @@ export const getAirportDistance = async (from: string, to: string) => {
   });
 
   const data = await response.json();
-  // console.log(data.data.distanceKm);
+  console.log(data);
 
   const distance = data?.data?.distanceKm || 100;
 
