@@ -37,7 +37,7 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
 
   // 3️⃣ Run DB updates inside transaction
   return await prisma.$transaction(async (tx) => {
-    const booking = await tx.booking.create({
+    const booking = await tx.productBooking.create({
       data: {
         // ...payload,
         productId: payload?.productId as string,
@@ -61,7 +61,7 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
 };
 
 const getAllBookingsFromDB = async () => {
-  const result = await prisma.booking.findMany({
+  const result = await prisma.productBooking.findMany({
     omit: {
       createdAt: true,
       updatedAt: true,
