@@ -13,12 +13,10 @@ export const getAirportDistance = async (from: string, to: string) => {
   });
 
   const data = await response.json();
-  console.log(data.data.distanceKm);
+  // console.log(data.data.distanceKm);
 
   const distance = data?.data?.distanceKm || 100;
 
   const price = distance * 0.2;
   return price;
 };
-
-getAirportDistance("JFK", "LAX");

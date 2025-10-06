@@ -19,7 +19,7 @@ export const createFlightBookingSchema = z.object({
     .transform((val) => new Date(val)), // Optional: convert to Date
   flightStatus: z.enum(["Oneway", "Roundway", "Multicity"]).default("Oneway"),
   flightGoer: z.string().min(2),
-  price: z.number().positive(),
+  // price: z.number().positive(),
 });
 
 export const FlightBookingSchemaValidation = {

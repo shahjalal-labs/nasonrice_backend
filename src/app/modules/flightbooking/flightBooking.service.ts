@@ -1,10 +1,18 @@
 //
 import { FlightBooking, PrismaClient } from "@prisma/client";
+import { getAirportDistance } from "./getDistance";
 const prisma = new PrismaClient();
 
 const createFlightBookingIntoDB = async (data: FlightBooking) => {
-  await prisma.flightBooking.create({ data });
-  return;
+  const price = await getAirportDistance(data.from, data.to);
+
+  const result = await prisma.flightBooking.create({
+    data: {
+      ...data,
+      price,
+    },
+  });
+  return result;
 };
 
 const getAllFlightBookingFromDB = async () => {
@@ -27,7 +35,6 @@ const deleteFlightBookingFromDB = async (id: string) => {
   return;
 };
 
-const priceDeterminant = async (from: string, to: string) => {};
 export const flightBookingServices = {
   createFlightBookingIntoDB,
   getAllFlightBookingFromDB,

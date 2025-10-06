@@ -1,13 +1,16 @@
-import {flightBookingServices} from './flightBooking.service';
-import sendResponse from '../../../shared/sendResponse';
+import { flightBookingServices } from "./flightBooking.service";
+import sendResponse from "../../../shared/sendResponse";
 import catchAsync from "../../../shared/catchAsync";
 
-const createFlightBooking = catchAsync (async (req, res) => {
-  await flightBookingServices.createFlightBookingIntoDB(req.body);
+const createFlightBooking = catchAsync(async (req, res) => {
+  const result = await flightBookingServices.createFlightBookingIntoDB(
+    req.body,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 201,
-    message: "The flightBooking has been created successfully"
+    message: "The flightBooking has been created successfully",
+    data: result,
   });
 });
 
@@ -22,7 +25,9 @@ const getAllFlightBookings = catchAsync(async (req, res) => {
 });
 
 const getFlightBookingById = catchAsync(async (req, res) => {
-  const result = await flightBookingServices.getFlightBookingByIdFromDB(req.params.id);
+  const result = await flightBookingServices.getFlightBookingByIdFromDB(
+    req.params.id,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -32,11 +37,14 @@ const getFlightBookingById = catchAsync(async (req, res) => {
 });
 
 const updateFlightBooking = catchAsync(async (req, res) => {
-  await flightBookingServices.updateFlightBookingIntoDB(req.params.id, req.body);
+  await flightBookingServices.updateFlightBookingIntoDB(
+    req.params.id,
+    req.body,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "flightBooking has been updated successfully"
+    message: "flightBooking has been updated successfully",
   });
 });
 
@@ -56,4 +64,4 @@ export const flightBookingControllers = {
   updateFlightBooking,
   deleteFlightBooking,
 };
-  
+
