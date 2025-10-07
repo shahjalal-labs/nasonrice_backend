@@ -3,9 +3,13 @@ import sendResponse from "../../../shared/sendResponse";
 import catchAsync from "../../../shared/catchAsync";
 
 const createFlightBooking = catchAsync(async (req, res) => {
+  const { id: userId } = req.user;
+
   const result = await flightBookingServices.createFlightBookingIntoDB(
     req.body,
+    userId,
   );
+
   sendResponse(res, {
     success: true,
     statusCode: 201,
@@ -64,4 +68,3 @@ export const flightBookingControllers = {
   updateFlightBooking,
   deleteFlightBooking,
 };
-

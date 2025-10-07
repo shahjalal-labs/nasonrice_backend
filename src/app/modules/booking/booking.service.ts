@@ -64,7 +64,6 @@ const createBookingIntoDB = async (payload: any, userId: string) => {
         inStock: { decrement: payload.quantity },
       },
     });
-
     return booking;
   });
 };
