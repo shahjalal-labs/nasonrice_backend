@@ -46,6 +46,10 @@ const moduleRoutes = [
     path: "/flightBookings",
     route: flightBookingRoutes,
   },
+  {
+    path: "/flightBookings",
+    route: notificationRoutes,
+  },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
