@@ -4,11 +4,12 @@ import prisma from "../../../shared/prisma";
 
 // Send notification to a single user
 export const sendSingleNotification = async (
-  receiverId: string,
+  {
+receiverId: string,
   content: string,
   senderId?: string,
-  title?: string,
-) => {
+    title?: string,
+  ) => {
   const user = await prisma.user.findUnique({
     where: { id: receiverId },
   });
@@ -116,9 +117,8 @@ const getNotificationsFromDB = async (req: any) => {
     orderBy: { createdAt: "desc" },
   });
 
-  if (notifications.length === 0) {
+  if (!notifications.length)
     throw new ApiError(404, "No notifications found for the user");
-  }
 
   return notifications;
 };
