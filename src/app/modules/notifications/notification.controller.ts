@@ -28,6 +28,7 @@ const getSingleNotificationById = catchAsync(async (req: any, res: any) => {
     data: notification,
   });
 });
+// const sendSingleNotificationController = catchA;
 
 export const notificationController = {
   getNotifications,

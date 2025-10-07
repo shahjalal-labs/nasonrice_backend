@@ -8,6 +8,7 @@ import { paymentRoutes } from "../modules/payment/payment.routes";
 import { BookingRoute } from "../modules/booking/booking.route";
 import { airportsRoutes } from "../modules/airports/airports.routes";
 import { flightBookingRoutes } from "../modules/flightbooking/flightBooking.routes";
+import { notificationsRoute } from "../modules/notifications/notification.route";
 
 const router = express.Router();
 
@@ -47,8 +48,8 @@ const moduleRoutes = [
     route: flightBookingRoutes,
   },
   {
-    path: "/flightBookings",
-    route: notificationRoutes,
+    path: "/notifications",
+    route: notificationsRoute,
   },
 ];
 
