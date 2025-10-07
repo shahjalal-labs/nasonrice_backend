@@ -40,7 +40,8 @@ const getAllFlightBookingFromDB = async () => {
   return results;
 };
 
-const getAllFlightsOfUserFromDB = () => {};
+
+
 
 const getFlightBookingByIdFromDB = async (id: string) => {
   const result = await prisma.flightBooking.findUnique({ where: { id } });

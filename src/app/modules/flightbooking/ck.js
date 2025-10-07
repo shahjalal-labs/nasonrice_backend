@@ -1,16 +1,12 @@
-const funcName = (params) => {
+const getDistance = () => {};
+
+
+const getdistance = (req,res) => {
   // body
 };
 
-const getUserId = (params) => {
-  // body
+
+const getDistance = (req,res) => {
+  
+   const = ;
 };
-
-
-const getAccount = (params) => {
-  // body
-  //
-};
-
-
-
