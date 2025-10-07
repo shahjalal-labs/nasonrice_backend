@@ -13,6 +13,8 @@ router.post(
   validateRequest(FlightBookingSchemaValidation.createFlightBookingSchema),
   flightBookingControllers.createFlightBooking,
 );
+
+router.get("/userflights", auth(), flightBookingControllers.getUserFlights);
 router.get("/", flightBookingControllers.getAllFlightBookings);
 router.get("/flight-price", async (req, res) => {
   const from = req.query.from;

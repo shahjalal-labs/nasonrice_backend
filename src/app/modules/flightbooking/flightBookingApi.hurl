@@ -2,9 +2,11 @@ GET {{baseUrl}}/flightBookings
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
 
 
+# get user flights
 
-GET {{baseUrl}}/flightBookings/:id
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
+GET {{baseUrl}}/flightBookings/userflights
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIxODI4ZWZjYTgyMzM5OTBiMTNiNyIsImVtYWlsIjoic2hhaGphbGFsLmJhY2tlbmRAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU5ODE3Mjk5LCJleHAiOjE3NjExMTMyOTl9.1BCuhNeIHa_j3d9EmeKDerb7JKLHG2V-x5koBqnjnes
+
 
 POST {{baseUrl}}/flightBookings/create
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTgxMzgzOCwiZXhwIjoxNzYxMTA5ODM4fQ.NtXPH0oiZw9_T3iLOZvpiBBRk-Yj16Wi5IZfAGsH4jk
@@ -19,6 +21,12 @@ Content-Type: application/json
   "flightGoer": "3 Cat",
   "paymentMethodId": "pm_1SFTpw9nrMVeASAl3gVvT4qS"
 }
+
+
+GET {{baseUrl}}/flightBookings/:id
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
+
+
 
 
 PATCH {{baseUrl}}/flightBookings/:id

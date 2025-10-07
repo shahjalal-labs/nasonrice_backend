@@ -54,6 +54,8 @@ const getUserFlightsFromDB = async (userId: string) => {
       userId,
     },
   });
+  if (!result.length) throw new ApiError(404, "No flightBookings found");
+
   return result;
 };
 
