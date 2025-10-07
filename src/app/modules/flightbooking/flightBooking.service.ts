@@ -28,6 +28,7 @@ const createFlightBookingIntoDB = async (
   const result = await prisma.flightBooking.create({
     data: {
       ...data,
+      paymentId,
       price,
     },
   });
@@ -38,6 +39,8 @@ const getAllFlightBookingFromDB = async () => {
   const results = await prisma.flightBooking.findMany();
   return results;
 };
+
+const getAllFlightsOfUserFromDB = () => {};
 
 const getFlightBookingByIdFromDB = async (id: string) => {
   const result = await prisma.flightBooking.findUnique({ where: { id } });

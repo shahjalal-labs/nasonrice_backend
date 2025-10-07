@@ -93,6 +93,7 @@ model FlightBooking {
   returnDate       DateTime?
   flightStatus     FlightStatus     @default(Oneway)
   flightGoer       String
+  paymentId        String
   price            Float
   productBookingId String?
   ProductBooking   ProductBooking[]
