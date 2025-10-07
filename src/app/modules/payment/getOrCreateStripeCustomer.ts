@@ -8,8 +8,13 @@ import prisma from "../../../shared/prisma";
 
 export const getOrCreateAddMoneyCustomer = async (
   userId: string,
-  paymentMethodId?: string,
+  paymentMethodId: string,
 ) => {
+  console.log(
+    paymentMethodId,
+    "[1;31mpaymentMethodId in getOrCreateStripeCustomer.ts at line 12[0m",
+  );
+
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
     throw new ApiError(404, "User not found");

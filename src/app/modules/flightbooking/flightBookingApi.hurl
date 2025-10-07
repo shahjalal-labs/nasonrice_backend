@@ -17,7 +17,7 @@ Content-Type: application/json
   "returnDate": "2025-10-20T15:45:00.000Z",
   "flightStatus": "Roundway",
   "flightGoer": "3 Cat",
-  "paymentId": "pm_1H3l2o2eZvKYlo2C1x4c7c4a"
+  "paymentMethodId": "pm_1SFTgP9nrMVeASAlu3C2qq8L"
 }
 
 

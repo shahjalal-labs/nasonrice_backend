@@ -12,7 +12,10 @@ const createFlightBookingIntoDB = async (
 ) => {
   const price = await getAirportDistance(data.from, data.to);
 
-  const customerId = await getOrCreateAddMoneyCustomer(userId);
+  const customerId = await getOrCreateAddMoneyCustomer(
+    userId,
+    data?.paymentMethodId,
+  );
 
   const { paymentIntent, paymentId } = await processAddMoneyPayment({
     amount: data.price,
@@ -26,8 +29,10 @@ const createFlightBookingIntoDB = async (
   }
 
   const result = await prisma.flightBooking.create({
+    remove paymentMethodId data
     data: {
       ...data,
+      userId,
       paymentId,
       price,
     },

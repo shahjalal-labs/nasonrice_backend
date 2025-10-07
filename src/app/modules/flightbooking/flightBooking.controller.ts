@@ -10,6 +10,7 @@ const createFlightBooking = catchAsync(async (req, res) => {
 
   const price = await getAirportDistance(req.body.from, req.body.to);
   req.body.price = price;
+  console.log(`flight data`, req.body);
 
   const result = await flightBookingServices.createFlightBookingIntoDB(
     req.body,
