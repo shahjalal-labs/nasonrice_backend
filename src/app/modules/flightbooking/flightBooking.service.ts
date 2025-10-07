@@ -28,21 +28,17 @@ const createFlightBookingIntoDB = async (
     throw new ApiError(500, "Payment failed or requires action");
   }
 
+  const { paymentMethodId, ...rest } = data;
+
   const result = await prisma.flightBooking.create({
-    remove paymentMethodId data
     data: {
-      ...data,
+      ...rest,
       userId,
       paymentId,
       price,
     },
   });
   return result;
-};
-
-const getAllFlightBookingFromDB = async () => {
-  const results = await prisma.flightBooking.findMany();
-  return results;
 };
 
 const getUserFlightsFromDB = async (userId: string) => {
@@ -59,6 +55,11 @@ const getUserFlightsFromDB = async (userId: string) => {
     },
   });
   return result;
+};
+
+const getAllFlightBookingFromDB = async () => {
+  const results = await prisma.flightBooking.findMany();
+  return results;
 };
 
 const getFlightBookingByIdFromDB = async (id: string) => {
