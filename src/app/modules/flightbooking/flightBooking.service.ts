@@ -40,8 +40,21 @@ const getAllFlightBookingFromDB = async () => {
   return results;
 };
 
+const getUserFlightsFromDB = async (userId: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  if (!user) throw new ApiError(404, "User not found");
 
-
+  const result = await prisma.flightBooking.findMany({
+    where: {
+      userId,
+    },
+  });
+  return result;
+};
 
 const getFlightBookingByIdFromDB = async (id: string) => {
   const result = await prisma.flightBooking.findUnique({ where: { id } });
@@ -64,4 +77,5 @@ export const flightBookingServices = {
   getFlightBookingByIdFromDB,
   updateFlightBookingIntoDB,
   deleteFlightBookingFromDB,
+  getUserFlightsFromDB,
 };

@@ -18,6 +18,17 @@ const createFlightBooking = catchAsync(async (req, res) => {
   });
 });
 
+const getUserFlights = catchAsync(async (req, res) => {
+  const { id: userId } = req.user;
+  const result = await flightBookingServices.getUserFlightsFromDB(userId);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: " FlightBookings of the user have been retrieved successfully",
+    data: result,
+});
+}
+
 const getAllFlightBookings = catchAsync(async (req, res) => {
   const result = await flightBookingServices.getAllFlightBookingFromDB();
   sendResponse(res, {
@@ -68,3 +79,4 @@ export const flightBookingControllers = {
   updateFlightBooking,
   deleteFlightBooking,
 };
+
