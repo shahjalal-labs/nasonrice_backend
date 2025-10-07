@@ -3,13 +3,17 @@ import admin from "../../../helpers/firebase.admin";
 import prisma from "../../../shared/prisma";
 
 // Send notification to a single user
-export const sendSingleNotification = async (
-  {
-receiverId: string,
-  content: string,
-  senderId?: string,
-    title?: string,
-  ) => {
+export const sendSingleNotification = async ({
+  receiverId,
+  content,
+  senderId,
+  title,
+}: {
+  receiverId: string;
+  content: string;
+  senderId?: string;
+  title?: string;
+}) => {
   const user = await prisma.user.findUnique({
     where: { id: receiverId },
   });
