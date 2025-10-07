@@ -1,9 +1,15 @@
+//
 import { flightBookingServices } from "./flightBooking.service";
 import sendResponse from "../../../shared/sendResponse";
 import catchAsync from "../../../shared/catchAsync";
+import { getAirportDistance } from "./getDistance";
+import { FlightBooking } from "@prisma/client";
 
 const createFlightBooking = catchAsync(async (req, res) => {
   const { id: userId } = req.user;
+
+  const price = await getAirportDistance(req.body.from, req.body.to);
+  req.body.price = price;
 
   const result = await flightBookingServices.createFlightBookingIntoDB(
     req.body,
@@ -20,14 +26,15 @@ const createFlightBooking = catchAsync(async (req, res) => {
 
 const getUserFlights = catchAsync(async (req, res) => {
   const { id: userId } = req.user;
+
   const result = await flightBookingServices.getUserFlightsFromDB(userId);
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: " FlightBookings of the user have been retrieved successfully",
+    message: "The flightBooking has been created successfully",
     data: result,
+  });
 });
-}
 
 const getAllFlightBookings = catchAsync(async (req, res) => {
   const result = await flightBookingServices.getAllFlightBookingFromDB();
@@ -75,8 +82,8 @@ const deleteFlightBooking = catchAsync(async (req, res) => {
 export const flightBookingControllers = {
   createFlightBooking,
   getAllFlightBookings,
+  getUserFlights,
   getFlightBookingById,
   updateFlightBooking,
   deleteFlightBooking,
 };
-
