@@ -11,6 +11,28 @@ const createReviewIntoDB = async (data: Review, reviewerId: string) => {
 
   if (!user) throw new ApiError(404, "User not found");
 
+  if (!data.productId || !data.flightBookingId)
+    throw new ApiError(400, "Missing required fields");
+
+  if (data.productId) {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: data.productId,
+      },
+    });
+    if (!product) throw new ApiError(404, "Product not found");
+  }
+
+  if (data.flightBookingId) {
+    const flightBooking = await prisma.flightBooking.findUnique({
+      where: {
+        id: data.flightBookingId,
+      },
+    });
+
+    if (!flightBooking) throw new ApiError(404, "FlightBooking not found");
+  }
+
   await prisma.review.create({ data });
   return;
 };
@@ -42,4 +64,3 @@ export const reviewServices = {
   updateReviewIntoDB,
   deleteReviewFromDB,
 };
-
