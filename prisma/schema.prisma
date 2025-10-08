@@ -30,6 +30,7 @@ model User {
   ProductBookingBooking ProductBooking[]
   PaymentActivity       PaymentActivity[]
   FlightBooking         FlightBooking[]
+  Review                Review[]
 
   @@map("users")
 }
@@ -77,10 +78,24 @@ model Product {
   @@map("products")
 }
 
+
 model Review {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  Product   Product? @relation(fields: [productId], references: [id])
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  reviewerId String @db.ObjectId
+  reviewer   User   @relation(fields: [reviewerId], references: [id])
+
   productId String?  @db.ObjectId
+  product   Product? @relation(fields: [productId], references: [id])
+
+  flightBookingId String?        @db.ObjectId
+  flightBooking   FlightBooking? @relation(fields: [flightBookingId], references: [id])
+
+  rating    Float
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reviews")
 }
 
 model FlightBooking {
@@ -97,6 +112,7 @@ model FlightBooking {
   price            Float
   productBookingId String?
   ProductBooking   ProductBooking[]
+  Review           Review[]
 
   @@map("flightBooking")
 }
