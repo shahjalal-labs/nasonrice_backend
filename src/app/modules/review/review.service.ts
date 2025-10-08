@@ -1,7 +1,16 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Review } from "@prisma/client";
+import ApiError from "../../../errors/ApiErrors";
 const prisma = new PrismaClient();
 
-const createReviewIntoDB = async (data: any) => {
+const createReviewIntoDB = async (data: Review, reviewerId: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: reviewerId,
+    },
+  });
+
+  if (!user) throw new ApiError(404, "User not found");
+
   await prisma.review.create({ data });
   return;
 };
@@ -33,4 +42,4 @@ export const reviewServices = {
   updateReviewIntoDB,
   deleteReviewFromDB,
 };
-  
+
