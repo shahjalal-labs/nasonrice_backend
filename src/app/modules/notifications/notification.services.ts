@@ -123,7 +123,16 @@ const getNotificationsFromDB = async (req: any) => {
 
   if (!notifications.length)
     throw new ApiError(404, "No notifications found for the user");
-  notifications.forEach((notif) => (notif.isRead = true));
+  notifications.forEach((notif) =>
+    prisma.notification.update({
+      where: {
+        receiverId: notif.receiverId,
+      },
+      data: {
+        isRead: true,
+      },
+    }),
+  );
   return notifications;
 };
 
