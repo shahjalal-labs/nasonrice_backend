@@ -23,41 +23,27 @@ const createReviewIntoDB = async (data: Review, reviewerId: string) => {
     if (!product) throw new ApiError(404, "Product not found");
   }
 
-  if (data.flightBookingId) {
-    const flightBooking = await prisma.flightBooking.findUnique({
-      where: {
-        id: data.flightBookingId,
-      },
-    });
-
-    if (!flightBooking) throw new ApiError(404, "FlightBooking not found");
-  }
-
-  await prisma.review.create({
-    data: {
-      ...data,
-      reviewerId,
-    },
-  });
-
-  /* if (data.productId) {
-    const reviews = await prisma.review.findMany({
-      where: { productId: data.productId },
-      select: { rating: true },
-    });
-
-    const totalReviews = reviews.length;
-    const avgRating =
-      reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews;
-
-    await prisma.product.update({
-      where: { id: data.productId },
+  await prisma.$transaction(async (tx) => {
+    await tx.review.create({
       data: {
-        rating: avgRating,
-        totalReviews,
+        ...data,
+        reviewerId,
       },
     });
-  } */
+
+    if (data.productId) {
+      const reviews = await tx.review.findMany({
+        where: {
+          productId: data.productId,
+        },
+        select: {
+          rating: true,
+        },
+      });
+
+      const totalReviews = reviews.length;
+    }
+  });
 
   return;
 };

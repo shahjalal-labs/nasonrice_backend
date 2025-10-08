@@ -11,7 +11,7 @@ Content-Type: application/json
 
 
 {
-  "productId": "650b8f9c3a4e2b1a4c8f9a21",
+  "productId": "68d75c02eb7e8c7b524a0f43",
   "rating": 4.5,
   "comment": "This product exceeded my expectations — quality is excellent and delivery was fast!"
 }
