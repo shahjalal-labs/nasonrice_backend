@@ -40,7 +40,7 @@ const createReviewIntoDB = async (data: Review, reviewerId: string) => {
     },
   });
 
-  if (data.productId) {
+  /* if (data.productId) {
     const reviews = await prisma.review.findMany({
       where: { productId: data.productId },
       select: { rating: true },
@@ -57,7 +57,7 @@ const createReviewIntoDB = async (data: Review, reviewerId: string) => {
         totalReviews,
       },
     });
-  }
+  } */
 
   return;
 };

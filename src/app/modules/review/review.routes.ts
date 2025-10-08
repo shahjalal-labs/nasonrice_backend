@@ -7,7 +7,7 @@ import { ReviewSchemaValidation } from "./review.validation";
 const router = express.Router();
 
 router.post(
-  "/",
+  "/create",
   auth(),
   validateRequest(ReviewSchemaValidation.createReviewSchema),
   reviewControllers.createReview,
@@ -19,4 +19,3 @@ router.patch("/:id", reviewControllers.updateReview);
 router.delete("/:id", reviewControllers.deleteReview);
 
 export const reviewRoutes = router;
-

@@ -9,6 +9,7 @@ import { BookingRoute } from "../modules/booking/booking.route";
 import { airportsRoutes } from "../modules/airports/airports.routes";
 import { flightBookingRoutes } from "../modules/flightbooking/flightBooking.routes";
 import { notificationsRoute } from "../modules/notifications/notification.route";
+import { reviewRoutes } from "../modules/review/review.routes";
 
 const router = express.Router();
 
@@ -50,6 +51,10 @@ const moduleRoutes = [
   {
     path: "/notifications",
     route: notificationsRoute,
+  },
+  {
+    path: "/reviews",
+    route: reviewRoutes,
   },
 ];
 
