@@ -1,13 +1,14 @@
-import {reviewServices} from './review.service';
-import sendResponse from '../../../shared/sendResponse';
+import { reviewServices } from "./review.service";
+import sendResponse from "../../../shared/sendResponse";
 import catchAsync from "../../../shared/catchAsync";
 
-const createReview = catchAsync (async (req, res) => {
-  await reviewServices.createReviewIntoDB(req.body);
+const createReview = catchAsync(async (req, res) => {
+  const { id: reviewerId } = req.user;
+  await reviewServices.createReviewIntoDB(req.body, reviewerId);
   sendResponse(res, {
     success: true,
-    statusCode: 201,
-    message: "The review has been created successfully"
+    statusCode: 200,
+    message: "The review has been created successfully",
   });
 });
 
@@ -36,7 +37,7 @@ const updateReview = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "review has been updated successfully"
+    message: "review has been updated successfully",
   });
 });
 
@@ -56,4 +57,4 @@ export const reviewControllers = {
   updateReview,
   deleteReview,
 };
-  
+

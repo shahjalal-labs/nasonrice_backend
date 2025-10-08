@@ -2,7 +2,6 @@ import * as z from "zod";
 
 export const createReviewSchema = z
   .object({
-    name: z.string(),
     productId: z.string().length(24).optional(),
     flightBookingId: z.string().length(24).optional(),
     rating: z.number().min(1).max(5),
