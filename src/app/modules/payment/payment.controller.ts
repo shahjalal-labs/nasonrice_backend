@@ -22,7 +22,7 @@ const getPaymentDetails = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── getPaymentDetails  ────────────╯
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
+//w: (start)╭──────────── getUserPaymentsHistory  ────────────╮
 const getUserPaymentsHistory = catchAsync(async (req, res) => {
   const { id: userId } = req.user;
 
@@ -36,7 +36,7 @@ const getUserPaymentsHistory = catchAsync(async (req, res) => {
     data: paymentHistory,
   });
 });
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── getUserPaymentsHistory  ────────────╯
 
 export const PaymentControllers = {
   getPaymentDetails,

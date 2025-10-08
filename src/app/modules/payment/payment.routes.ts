@@ -5,6 +5,13 @@ import { PaymentControllers } from "./payment.controller";
 const router = express.Router();
 
 router.post("/onboarding/create-subscription", auth());
+
+router.get(
+  "/users-payment-history/",
+  auth(),
+  PaymentControllers.getUserPaymentsHistory,
+);
+
 router.get(
   "/payment-details/:id",
   auth(),
