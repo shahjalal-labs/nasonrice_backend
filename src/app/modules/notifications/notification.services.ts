@@ -123,7 +123,7 @@ const getNotificationsFromDB = async (req: any) => {
 
   if (!notifications.length)
     throw new ApiError(404, "No notifications found for the user");
-
+  notifications.forEach((notif) => (notif.isRead = true));
   return notifications;
 };
 

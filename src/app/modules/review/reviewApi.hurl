@@ -12,7 +12,7 @@ Content-Type: application/json
 
 {
   "productId": "68d75c02eb7e8c7b524a0f43",
-  "rating": 4.5,
+  "rating": 0.5,
   "comment": "This product exceeded my expectations — quality is excellent and delivery was fast!"
 }
 

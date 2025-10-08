@@ -42,6 +42,18 @@ const createReviewIntoDB = async (data: Review, reviewerId: string) => {
       });
 
       const totalReviews = reviews.length;
+      const avgRating =
+        reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews;
+
+      await tx.product.update({
+        where: {
+          id: data.productId,
+        },
+        data: {
+          rating: avgRating,
+          totalReviews,
+        },
+      });
     }
   });
 
