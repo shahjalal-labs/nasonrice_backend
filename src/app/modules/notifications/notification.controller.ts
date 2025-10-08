@@ -32,8 +32,14 @@ const getSingleNotificationById = catchAsync(async (req: any, res: any) => {
   });
 });
 const sendSingleNotificationController = catchAsync(async (req, res) => {
-  const { id: receiverId } = req.user
-  const result = await sendSingleNotification(receiverId, req.body.content);
+  const { id: receiverId } = req.user;
+
+  const { content, title } = req.body;
+  const result = await sendSingleNotification({
+    receiverId,
+    content,
+    title,
+  });
   sendResponse(res, {
     success: true,
     statusCode: 200,
