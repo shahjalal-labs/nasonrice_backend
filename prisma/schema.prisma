@@ -166,9 +166,14 @@ model Subscriptionplan {
 }
 
 model UserSubscription {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  planId String @db.ObjectId
+  id              String             @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String             @db.ObjectId
+  planId          String             @db.ObjectId
+  status          SubscriptionStatus
+  startDate       DateTime           @default(now())
+  endDate         DateTime?
+  nextBillingDate DateTime?
+  paymentId       String?
 }
 
 model Notification {
@@ -228,4 +233,10 @@ enum FlightStatus {
   Oneway
   Roundway
   Multicity
+}
+
+enum SubscriptionStatus {
+  Active
+  Canceled
+  Expired
 }
