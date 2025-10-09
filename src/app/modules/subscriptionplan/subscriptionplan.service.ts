@@ -32,4 +32,3 @@ export const subscriptionplanServices = {
   updateSubscriptionplanIntoDB,
   deleteSubscriptionplanFromDB,
 };
-

@@ -121,18 +121,24 @@ const getNotificationsFromDB = async (req: any) => {
     orderBy: { createdAt: "desc" },
   });
 
+  const recieverId = req.user.id;
+  console.log(
+    recieverId,
+    "[1;31mrecieverId in notification.services.ts at line 125[0m",
+  );
   if (!notifications.length)
     throw new ApiError(404, "No notifications found for the user");
-  notifications.forEach((notif) =>
-    prisma.notification.update({
-      where: {
-        receiverId: notif.receiverId,
-      },
-      data: {
-        isRead: true,
-      },
-    }),
-  );
+  const result await prisma.notification.updateMany({
+    where: {
+      receiverId: req.user.id,
+      isRead: false,
+    },
+    data: {
+      isRead: true,
+    },
+  });
+  console.log(result, "[1;31mresult in notification.services.ts at line 132[0m");
+
   return notifications;
 };
 

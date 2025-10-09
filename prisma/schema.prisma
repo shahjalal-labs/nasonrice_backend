@@ -152,7 +152,7 @@ model PaymentActivity {
   @@map("payment_activities")
 }
 
-model SubscriptionPlan {
+model Subscriptionplan {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
