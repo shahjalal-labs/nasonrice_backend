@@ -88,7 +88,7 @@ const getAll${capModule}s = catchAsync(async (req, res) => {
     statusCode: 200,
     message: "All ${moduleName}s has been retrived successfully",
     data: result,
-  });
+  })
 })
 
 const get${capModule}ById = catchAsync(async (req, res) => {
@@ -96,7 +96,7 @@ const get${capModule}ById = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "${moduleName} has been retrived successfully",
+    message: "${moduleName} has been retrieved successfully",
     data: result,
   });
 })
