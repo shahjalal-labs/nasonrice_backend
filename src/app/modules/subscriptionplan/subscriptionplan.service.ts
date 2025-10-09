@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../../../shared/prisma";
 
 const createSubscriptionplanIntoDB = async (data: any) => {
   await prisma.subscriptionplan.create({ data });
@@ -33,4 +32,4 @@ export const subscriptionplanServices = {
   updateSubscriptionplanIntoDB,
   deleteSubscriptionplanFromDB,
 };
-  
+

@@ -78,7 +78,6 @@ model Product {
   @@map("products")
 }
 
-
 model Review {
   id         String @id @default(auto()) @map("_id") @db.ObjectId
   reviewerId String @db.ObjectId
@@ -151,6 +150,19 @@ model PaymentActivity {
   updatedAt DateTime @updatedAt
 
   @@map("payment_activities")
+}
+
+model SubscriptionPlan {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  price       Float
+  bestDeal    String?
+  benefits    String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("subscriptionplan")
 }
 
 model Notification {
