@@ -165,6 +165,12 @@ model Subscriptionplan {
   @@map("subscriptionplan")
 }
 
+model UserSubscription {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  planId String @db.ObjectId
+}
+
 model Notification {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   receiverId String?  @db.ObjectId
