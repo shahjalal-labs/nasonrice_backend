@@ -31,7 +31,7 @@ const loginUser = catchAsync(async (req, res) => {
 
 //update user location
 const userLocationUpdateInRedis = catchAsync(async (req, res) => {
-  const { id } = req.user;
+  const { id } = req?.user;
   await authService.userLocationUpdateInRedis(id, req.body);
   sendResponse(res, {
     statusCode: 200,
@@ -133,6 +133,7 @@ const changePassword = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
 export const authController = {
   loginUser,
   // googleLogin,
