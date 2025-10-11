@@ -23,14 +23,14 @@ Content-Type: application/json
   }
 
 
-PATCH {{baseUrl}}/subscriptionplans/68e9c8dccde613d1fdac168b
+PATCH {{baseUrl}}/subscriptionplans/68e9c14fcde613d1fdac1688
 
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDRlNzgyMmE2ZDE4NzUyMTVkNGNmOCIsImVtYWlsIjoiaGFzYW4uZGV2ZWxvcGVyQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzU4NzgzNTAwLCJleHAiOjE3NjAwNzk1MDB9.M8Gu3aAGdqxfcmKfN6WlmdXnBN7Fr3cVKJ4YlMgwKNg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU 
 
 Content-Type: application/json
 
 {
-  "name": "Iron Plan"
+  "price": 0
 }
 
 

@@ -7,7 +7,15 @@ const createSubscriptionplanIntoDB = async (data: any) => {
 };
 
 const getAllSubscriptionplanFromDB = async () => {
-  const results = await prisma.subscriptionplan.findMany();
+  const results = await prisma.subscriptionplan.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    omit: {
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
   return results;
 };
 
