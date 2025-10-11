@@ -29,7 +29,7 @@ Content-Type:application/json
 #
 #------//----------//  Get  logged in user profile------//----------//
 GET {{baseUrl}}/auth/profile
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgyMzM5OTBiMTNiOSIsImVtYWlsIjoibXVob21tb2RzaGFoamFsYWxAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3NTg2MDkzOTQsImV4cCI6MTc1OTkwNTM5NH0.GdsQiDJxAEk_GvAaCgAVonqvmji-QrId6VS4ucw8AHw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc2MDE1Mzg2MCwiZXhwIjoxNzYxNDQ5ODYwfQ.w4r2_QMWCqlRFboALjkt-p_JJwV63wiXbBE_419uA_U
 
 #------//----------//  Get  logged in user profile------//----------//
 #

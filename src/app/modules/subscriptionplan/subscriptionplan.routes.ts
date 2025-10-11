@@ -20,7 +20,14 @@ router.get("/", subscriptionplanControllers.getAllSubscriptionplans);
 
 router.get("/:id", subscriptionplanControllers.getSubscriptionplanById);
 
-router.patch("/:id", subscriptionplanControllers.updateSubscriptionplan);
+router.patch(
+  "/:id",
+  auth(),
+  validateRequest(
+    SubscriptionplanSchemaValidation.updateSubscriptionplanSchema,
+  ),
+  subscriptionplanControllers.updateSubscriptionplan,
+);
 
 router.delete("/:id", subscriptionplanControllers.deleteSubscriptionplan);
 
