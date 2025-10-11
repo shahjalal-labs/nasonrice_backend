@@ -62,6 +62,8 @@ const getAllSubscriptionplanFromDB = async () => {
       updatedAt: true,
     },
   });
+  if (!results.length)
+    throw new ApiError(404, "No Subscription plan available");
   return results;
 };
 

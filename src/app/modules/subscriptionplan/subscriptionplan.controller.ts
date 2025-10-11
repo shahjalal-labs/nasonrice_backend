@@ -33,20 +33,18 @@ const getAllSubscriptionplans = catchAsync(
   },
 );
 
-const getSubscriptionplanById = catchAsync(
-  async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result =
-      await subscriptionplanServices.getSubscriptionplanByIdFromDB(id);
+const getSubscriptionplanById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result =
+    await subscriptionplanServices.getSubscriptionplanByIdFromDB(id);
 
-    sendResponse(res, {
-      success: true,
-      statusCode: 200,
-      message: "Subscription plan retrieved successfully",
-      data: result,
-    });
-  },
-);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Subscription plan retrieved successfully",
+    data: result,
+  });
+});
 
 const deleteSubscriptionplan = catchAsync(
   async (req: Request, res: Response) => {
