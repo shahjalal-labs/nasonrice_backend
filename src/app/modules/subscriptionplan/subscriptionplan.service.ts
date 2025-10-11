@@ -1,5 +1,7 @@
 import { Subscriptionplan } from "@prisma/client";
 import prisma from "../../../shared/prisma";
+import ApiError from "../../../errors/ApiErrors";
+import stripe from "../../../config/stripe";
 
 /* const createSubscriptionplanIntoDB = async (data: any) => {
   await prisma.subscriptionplan.create({ data });
@@ -37,7 +39,7 @@ const createSubscriptionPlanIntoDB = async (req: Request) => {
     product: product.id,
   });
 
-  const result = await prisma.subscription.create({
+  const result = await prisma.subscriptionplan.create({
     data: {
       features,
       interval: prices.recurring ? prices.recurring.interval : null,

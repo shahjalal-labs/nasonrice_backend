@@ -120,7 +120,6 @@ model FlightBooking {
 model ProductBooking {
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
   productId       String        @db.ObjectId
-  // product     Product  @relation(fields: [productId], references: [id])
   userId          String        @db.ObjectId
   user            User          @relation(fields: [userId], references: [id])
   flightBookingId String        @db.ObjectId
@@ -130,10 +129,7 @@ model ProductBooking {
   totalPrice      Float
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
-  // paymentStatus PaymentStatus @default(Unpaid)
   paymentId       String?
-  // paymentMethodId String?
-  // Product     Product  @relation(fields: [productId], references: [id])
   product         Product       @relation(fields: [productId], references: [id])
 
   @@map("bookings")
@@ -164,7 +160,7 @@ model SubscriptionPlan{
  interval String?
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
-
+@@map("subscriptionplan")
 }
 
 
@@ -177,7 +173,15 @@ model UserSubscription{
   priceId String
   subscriptionPayId String
   features Json
-  status
+  status   PaymentStatus @default(ACTIVE)
+  subscripotionPlan SubscriptionPlan? @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, subscriptionId])
+  @@unique([userId, priceId])
+  @@map("userSubscription")
 }
 
 model Notification {
@@ -229,8 +233,8 @@ enum ProductCategory {
 }
 
 enum PaymentStatus {
-  Unpaid
-  Paid
+  ACTIVE
+  DEACTIVE
 }
 
 enum FlightStatus {
