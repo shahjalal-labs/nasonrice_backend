@@ -1,3 +1,4 @@
+import { Subscriptionplan } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 
 const createSubscriptionplanIntoDB = async (data: any) => {
@@ -15,9 +16,15 @@ const getSubscriptionplanByIdFromDB = async (id: string) => {
   return result;
 };
 
-const updateSubscriptionplanIntoDB = async (id: string, data: any) => {
-  await prisma.subscriptionplan.update({ where: { id }, data });
-  return;
+const updateSubscriptionplanIntoDB = async (
+  id: string,
+  data: Subscriptionplan,
+) => {
+  const updatedPlan = await prisma.subscriptionplan.update({
+    where: { id },
+    data,
+  });
+  return updatedPlan;
 };
 
 const deleteSubscriptionplanFromDB = async (id: string) => {
