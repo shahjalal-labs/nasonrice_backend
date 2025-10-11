@@ -58,7 +58,7 @@ const moduleRoutes = [
     route: reviewRoutes,
   },
   {
-    path: "/plans",
+    path: "/subscriptionplans",
     route: subscriptionplanRoutes,
   },
 ];
