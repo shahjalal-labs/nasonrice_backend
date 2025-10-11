@@ -149,36 +149,35 @@ model PaymentActivity {
   @@map("payment_activities")
 }
 
-model SubscriptionPlan{
- id String @id @default(auto()) @map("_id") @db.ObjectId
- title String @unique
- subscriptionTitleType SubscriptionTitleType @unique
- priceId String @unique
- productId String @unique
- features Json 
- type  SubscriptionType
- interval String?
- createdAt DateTime @default(now())
- updatedAt DateTime @updatedAt
- userSubscription UserSubscription[]
-@@map("subscriptionplan")
+model SubscriptionPlan {
+  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
+  title                 String                 @unique
+  subscriptionTitleType SubscriptionTitleType? @unique
+  priceId               String                 @unique
+  productId             String                 @unique
+  features              Json
+  type                  SubscriptionType
+  interval              String?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  userSubscription      UserSubscription[]
+
+  @@map("subscriptionplan")
 }
 
-
-
-model UserSubscription{
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+model UserSubscription {
+  id                    String                @id @default(auto()) @map("_id") @db.ObjectId
   subscriptionTitleType SubscriptionTitleType
-  userId String @db.ObjectId
-  subscriptionId String @db.ObjectId
-  priceId String
-  subscriptionPayId String
-  features Json
-  status   PaymentStatus @default(ACTIVE)
-  subscripotionPlan SubscriptionPlan? @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
-  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId                String                @db.ObjectId
+  subscriptionId        String                @db.ObjectId
+  priceId               String
+  subscriptionPayId     String
+  features              Json
+  status                PaymentStatus         @default(ACTIVE)
+  subscripotionPlan     SubscriptionPlan?     @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  user                  User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
 
   @@unique([userId, subscriptionId])
   @@unique([userId, priceId])
@@ -249,10 +248,10 @@ enum SubscriptionTitleType {
   YEARLY
 }
 
-enum SubscriptionType{
-   FREE
-   ONETIME
-   SUBSCRIPTION
-   MONTHLY
-   YEARLY
+enum SubscriptionType {
+  FREE
+  ONETIME
+  SUBSCRIPTION
+  MONTHLY
+  YEARLY
 }

@@ -14,9 +14,7 @@ Content-Type: application/json
 {
   "name": "Pro Plan",
   "amount": 15,
-  "type": "subscription",
-  "interval": "month",
-  "subscriptionTitleType": "MONTHLY",
+  "type": "one_time",
   "features": [
     "Access to premium content",
     "Priority customer support",
