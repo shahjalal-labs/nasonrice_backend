@@ -16,7 +16,7 @@ router.post(
   subscriptionplanControllers.createSubscriptionplan,
 );
 
-router.get("/", subscriptionplanControllers.getAllSubscriptionplans);
+/* router.get("/", subscriptionplanControllers.getAllSubscriptionplans);
 
 router.get("/:id", subscriptionplanControllers.getSubscriptionplanById);
 
@@ -34,5 +34,5 @@ router.delete(
   auth(),
   subscriptionplanControllers.deleteSubscriptionplan,
 );
-
+*/
 export const subscriptionplanRoutes = router;
