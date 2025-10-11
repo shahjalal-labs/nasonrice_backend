@@ -69,6 +69,7 @@ const getAllSubscriptionplanFromDB = async () => {
 
 const getSubscriptionplanByIdFromDB = async (id: string) => {
   const result = await prisma.subscriptionPlan.findUnique({ where: { id } });
+  if (!result) throw new ApiError(404, "Subscription plan not found");
   return result;
 };
 
