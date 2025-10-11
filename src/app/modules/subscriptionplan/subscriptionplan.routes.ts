@@ -29,6 +29,10 @@ router.patch(
   subscriptionplanControllers.updateSubscriptionplan,
 );
 
-router.delete("/:id", subscriptionplanControllers.deleteSubscriptionplan);
+router.delete(
+  "/:id",
+  auth(),
+  subscriptionplanControllers.deleteSubscriptionplan,
+);
 
 export const subscriptionplanRoutes = router;

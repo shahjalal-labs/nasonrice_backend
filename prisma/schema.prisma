@@ -153,19 +153,13 @@ model PaymentActivity {
   @@map("payment_activities")
 }
 
-model Subscriptionplan {
-  id               String             @id @default(auto()) @map("_id") @db.ObjectId
-  name             String             @unique
-  description      String
-  price            Float
-  bestDeal         String?
-  benefits         String[]
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  UserSubscription UserSubscription[]
+model SubscriptionPlan{
+ id String @id @default(auto()) @map("_id") @db.ObjectId
+ title String @unique
 
-  @@map("subscriptionplan")
 }
+
+
 
 model UserSubscription {
   id              String             @id @default(auto()) @map("_id") @db.ObjectId
@@ -242,7 +236,7 @@ enum FlightStatus {
   Multicity
 }
 
-enum SubscriptionStatus {
+enum SubscriptionTitleType {
   Active
   Canceled
   Expired
