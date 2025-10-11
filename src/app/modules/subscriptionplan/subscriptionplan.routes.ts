@@ -10,9 +10,9 @@ const router = express.Router();
 router.post(
   "/create",
   auth(),
-  validateRequest(
-    SubscriptionplanSchemaValidation.createSubscriptionplanSchema,
-  ),
+  // validateRequest(
+  //   SubscriptionplanSchemaValidation.createSubscriptionplanSchema,
+  // ),
   subscriptionplanControllers.createSubscriptionplan,
 );
 

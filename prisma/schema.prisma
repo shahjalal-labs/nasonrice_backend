@@ -160,6 +160,7 @@ model SubscriptionPlan{
  interval String?
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
+ userSubscription UserSubscription[]
 @@map("subscriptionplan")
 }
 

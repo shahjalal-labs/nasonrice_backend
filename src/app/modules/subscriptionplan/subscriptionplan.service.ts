@@ -1,4 +1,4 @@
-import { Subscriptionplan } from "@prisma/client";
+import { Subscriptionplan, SubscriptionType } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import stripe from "../../../config/stripe";
@@ -12,7 +12,7 @@ const createSubscriptionPlanIntoDB = async (req: Request) => {
   const { name, amount, type, interval, subscriptionTitleType, features } =
     req.body;
 
-  const existingSubscription = await prisma.subscription.findUnique({
+  const existingSubscription = await prisma.subscriptionPlan.findUnique({
     where: { subscriptionTitleType },
   });
 
@@ -39,7 +39,7 @@ const createSubscriptionPlanIntoDB = async (req: Request) => {
     product: product.id,
   });
 
-  const result = await prisma.subscriptionplan.create({
+  const result = await prisma.subscriptionPlan.create({
     data: {
       features,
       interval: prices.recurring ? prices.recurring.interval : null,
@@ -57,7 +57,7 @@ const createSubscriptionPlanIntoDB = async (req: Request) => {
 };
 
 const getAllSubscriptionplanFromDB = async () => {
-  const results = await prisma.subscriptionplan.findMany({
+  const results = await prisma.subscriptionPlan.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -70,7 +70,7 @@ const getAllSubscriptionplanFromDB = async () => {
 };
 
 const getSubscriptionplanByIdFromDB = async (id: string) => {
-  const result = await prisma.subscriptionplan.findUnique({ where: { id } });
+  const result = await prisma.subscriptionPlan.findUnique({ where: { id } });
   return result;
 };
 
@@ -78,7 +78,7 @@ const updateSubscriptionplanIntoDB = async (
   id: string,
   data: Subscriptionplan,
 ) => {
-  const updatedPlan = await prisma.subscriptionplan.update({
+  const updatedPlan = await prisma.subscriptionPlan.update({
     where: { id },
     data,
   });
@@ -86,7 +86,7 @@ const updateSubscriptionplanIntoDB = async (
 };
 
 const deleteSubscriptionplanFromDB = async (id: string) => {
-  await prisma.subscriptionplan.delete({ where: { id } });
+  await prisma.subscriptionPlan.delete({ where: { id } });
   return;
 };
 
