@@ -2,15 +2,11 @@ import { SubscriptionPlan, SubscriptionType } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import stripe from "../../../config/stripe";
+import { ICreateSubscriptionPlan } from "./subscriptionplan.interface";
 
-/* const createSubscriptionplanIntoDB = async (data: any) => {
-  await prisma.subscriptionplan.create({ data });
-  return;
-}; */
-
-const createSubscriptionPlanIntoDB = async (req: Request) => {
+const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
   const { name, amount, type, interval, subscriptionTitleType, features } =
-    req.body;
+    data;
 
   const existingSubscription = await prisma.subscriptionPlan.findUnique({
     where: { subscriptionTitleType },
@@ -74,17 +70,6 @@ const getSubscriptionplanByIdFromDB = async (id: string) => {
   return result;
 };
 
-/* const updateSubscriptionplanIntoDB = async (
-  id: string,
-  data: SubscriptionPlan,
-) => {
-  const updatedPlan = await prisma.subscriptionPlan.update({
-    where: { id },
-    data,
-  });
-  return updatedPlan;
-}; */
-
 const deleteSubscriptionplanFromDB = async (id: string) => {
   await prisma.subscriptionPlan.delete({ where: { id } });
   return;
@@ -94,6 +79,5 @@ export const subscriptionplanServices = {
   createSubscriptionPlanIntoDB,
   getAllSubscriptionplanFromDB,
   getSubscriptionplanByIdFromDB,
-  // updateSubscriptionplanIntoDB,
   deleteSubscriptionplanFromDB,
 };

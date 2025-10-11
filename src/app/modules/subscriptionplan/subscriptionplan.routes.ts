@@ -10,29 +10,20 @@ const router = express.Router();
 router.post(
   "/create",
   auth(),
-  // validateRequest(
-  //   SubscriptionplanSchemaValidation.createSubscriptionplanSchema,
-  // ),
+  validateRequest(
+    SubscriptionplanSchemaValidation.createSubscriptionplanSchema,
+  ),
   subscriptionplanController.createSubscriptionPlan,
 );
 
-/* router.get("/", subscriptionplanControllers.getAllSubscriptionplans);
+router.get("/", subscriptionplanController.getAllSubscriptionplans);
 
-router.get("/:id", subscriptionplanControllers.getSubscriptionplanById);
-
-router.patch(
-  "/:id",
-  auth(),
-  validateRequest(
-    SubscriptionplanSchemaValidation.updateSubscriptionplanSchema,
-  ),
-  subscriptionplanControllers.updateSubscriptionplan,
-);
+router.get("/:id", subscriptionplanController.getSubscriptionplanById);
 
 router.delete(
   "/:id",
   auth(),
-  subscriptionplanControllers.deleteSubscriptionplan,
+  subscriptionplanController.deleteSubscriptionplan,
 );
-*/
+
 export const subscriptionplanRoutes = router;
