@@ -156,25 +156,28 @@ model PaymentActivity {
 model SubscriptionPlan{
  id String @id @default(auto()) @map("_id") @db.ObjectId
  title String @unique
+ subscriptionTitleType SubscriptionTitleType @unique
+ priceId String @unique
+ productId String @unique
+ features Json 
+ type  SubscriptionType
+ interval String?
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
 
 }
 
 
 
-model UserSubscription {
-  id              String             @id @default(auto()) @map("_id") @db.ObjectId
-  userId          String             @db.ObjectId
-  planId          String             @db.ObjectId
-  status          SubscriptionStatus
-  startDate       DateTime           @default(now())
-  endDate         DateTime?
-  nextBillingDate DateTime?
-  paymentId       String?
-  user            User               @relation(fields: [userId], references: [id])
-  plan            Subscriptionplan    @relation(fields: [planId], references: [id])
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
-  @@map("user_subscriptions")
+model UserSubscription{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  subscriptionTitleType SubscriptionTitleType
+  userId String @db.ObjectId
+  subscriptionId String @db.ObjectId
+  priceId String
+  subscriptionPayId String
+  features Json
+  status
 }
 
 model Notification {
@@ -237,7 +240,14 @@ enum FlightStatus {
 }
 
 enum SubscriptionTitleType {
-  Active
-  Canceled
-  Expired
+  MONTHLY
+  YEARLY
+}
+
+enum SubscriptionType{
+   FREE
+   ONETIME
+   SUBSCRIPTION
+   MONTHLY
+   YEARLY
 }
