@@ -1,9 +1,9 @@
 //
 import express from "express";
-import { subscriptionplanControllers } from "./subscriptionplan.controller";
 import validateRequest from "../../middlewares/validateRequest";
 import { SubscriptionplanSchemaValidation } from "./subscriptionplan.validation";
 import auth from "../../middlewares/auth";
+import { subscriptionplanController } from "./subscriptionplan.controller";
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.post(
   // validateRequest(
   //   SubscriptionplanSchemaValidation.createSubscriptionplanSchema,
   // ),
-  subscriptionplanControllers.createSubscriptionplan,
+  subscriptionplanController.createSubscriptionPlan,
 );
 
 /* router.get("/", subscriptionplanControllers.getAllSubscriptionplans);
