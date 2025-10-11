@@ -13,11 +13,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDIzMjNjZWZjYTgy
 POST {{baseUrl}}/subscriptionplans/create
 Content-Type: application/json
 
-{
-  "name": "Sample Subscriptionplan"
-}
 
-
+  {
+    "name": "Basic Plan",
+    "description": "Real-time flight tracking & updates.",
+    "price": 9,
+    "benefits": [
+      "Access to real-time tracking monitor",
+      "Basic updates for your pet's journey"
+    ]
+  }
 
 
 PATCH {{baseUrl}}/subscriptionplans/:id
