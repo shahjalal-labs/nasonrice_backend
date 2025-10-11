@@ -15,12 +15,13 @@ Content-Type: application/json
 
 
   {
-    "name": "Basic Plan",
-    "description": "Real-time flight tracking & updates.",
-    "price": 9,
+    "name": "Platinum Plan",
+    "description": "4 free flight nanny consultations per year.",
+    "price": 19,
     "benefits": [
-      "Access to real-time tracking monitor",
-      "Basic updates for your pet's journey"
+      "Everything in Premium Plan",
+      "4 free flight nanny consultations per year",
+      "VIP customer support with dedicated manager"
     ]
   }
 
