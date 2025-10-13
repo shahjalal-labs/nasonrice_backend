@@ -1,12 +1,29 @@
-## Airport city findout
+## 1. Airport city findout
 
 - find out airport or city: by city name or airport name through keywords query:
 
 - airport and city not found for bangladesh and middle east countries. checked with jeddah, dhaka, qatar,Dammam, Egypt etc.
 
+## `api: https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT,CITY&keyword=qatar`
+
+> failure response:
+
+```
+{
+	"meta": {
+		"count": 0,
+		"links": {
+			"self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT,CITY&keyword=qatar"
+		}
+	},
+	"data": []
+}
+
+```
+
 ## `api: https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT,CITY&keyword=Lebanon`
 
-response:
+> success response:
 
 ```
 {
