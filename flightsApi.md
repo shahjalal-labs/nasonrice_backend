@@ -1,4 +1,4 @@
-## 1. Airport city findout
+## 1. AIRPORT OR CITY FIND OUT
 
 - find out airport or city: by city name or airport name through keywords query:
 
@@ -678,6 +678,8 @@
 ---
 
 ## 2. find out fligths through origin to destination in a fixed date by location code
+
+issue: failed to find out flights from middle east
 
 > failure response:
 
@@ -2344,3 +2346,284 @@
 	}
 }
 ```
+
+## 3. flight pricing:
+
+issue: price can be change very fast. therefor, when booking, price can missmatch and through error. it will allow booking if price not changed
+
+**api**`: POST https://test.api.amadeus.com/v1/shopping/flight-offers/pricing`
+body data:
+
+```
+{
+    "data": {
+      "type": "flight-offers-pricing",
+      "flightOffers": [
+        {
+          "type": "flight-offer",
+          "id": "1",
+          "source": "GDS",
+          "itineraries": [
+            {
+              "duration": "PT20H50M",
+              "segments": [
+                {
+                  "id": "13",
+                  "departure": { "iataCode": "FCO", "at": "2025-11-25T10:50:00" },
+                  "arrival": { "iataCode": "SIN", "at": "2025-11-26T05:40:00" },
+                  "carrierCode": "SQ",
+                  "number": "365"
+                },
+                {
+                  "id": "14",
+                  "departure": { "iataCode": "SIN", "at": "2025-11-26T12:30:00" },
+                  "arrival": { "iataCode": "BWN", "at": "2025-11-26T14:40:00" },
+                  "carrierCode": "SQ",
+                  "number": "148"
+                }
+              ]
+            }
+          ],
+          "price": { "currency": "EUR", "total": "679.78" },
+          "validatingAirlineCodes": ["SQ"],
+          "travelerPricings": [
+            {
+              "travelerId": "1",
+              "fareOption": "STANDARD",
+              "travelerType": "ADULT",
+              "price": {
+                "currency": "EUR",
+                "total": "679.78",
+                "base": "615.00"
+              },
+              "fareDetailsBySegment": [
+                {
+                  "segmentId": "13",
+                  "cabin": "ECONOMY",
+                  "class": "Q"
+                },
+                {
+                  "segmentId": "14",
+                  "cabin": "ECONOMY",
+                  "class": "Q"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+
+```
+
+> success response:
+
+```
+{
+	"data": {
+		"type": "flight-offers-pricing",
+		"flightOffers": [
+			{
+				"type": "flight-offer",
+				"id": "1",
+				"source": "GDS",
+				"instantTicketingRequired": false,
+				"nonHomogeneous": false,
+				"paymentCardRequired": false,
+				"lastTicketingDate": "2025-11-25",
+				"itineraries": [
+					{
+						"segments": [
+							{
+								"departure": {
+									"iataCode": "FCO",
+									"terminal": "3",
+									"at": "2025-11-25T10:50:00"
+								},
+								"arrival": {
+									"iataCode": "SIN",
+									"at": "2025-11-26T05:40:00"
+								},
+								"carrierCode": "SQ",
+								"number": "365",
+								"aircraft": {
+									"code": "359"
+								},
+								"operating": {
+									"carrierCode": "SQ"
+								},
+								"duration": "PT11H50M",
+								"id": "13",
+								"numberOfStops": 0,
+								"co2Emissions": [
+									{
+										"weight": 420,
+										"weightUnit": "KG",
+										"cabin": "ECONOMY"
+									}
+								]
+							},
+							{
+								"departure": {
+									"iataCode": "SIN",
+									"terminal": "2",
+									"at": "2025-11-26T12:30:00"
+								},
+								"arrival": {
+									"iataCode": "BWN",
+									"at": "2025-11-26T14:40:00"
+								},
+								"carrierCode": "SQ",
+								"number": "148",
+								"aircraft": {
+									"code": "7M8"
+								},
+								"operating": {
+									"carrierCode": "SQ"
+								},
+								"duration": "PT2H10M",
+								"id": "14",
+								"numberOfStops": 0,
+								"co2Emissions": [
+									{
+										"weight": 76,
+										"weightUnit": "KG",
+										"cabin": "ECONOMY"
+									}
+								]
+							}
+						]
+					}
+				],
+				"price": {
+					"currency": "EUR",
+					"total": "679.78",
+					"base": "615.00",
+					"fees": [
+						{
+							"amount": "0.00",
+							"type": "SUPPLIER"
+						},
+						{
+							"amount": "0.00",
+							"type": "TICKETING"
+						},
+						{
+							"amount": "0.00",
+							"type": "FORM_OF_PAYMENT"
+						}
+					],
+					"grandTotal": "679.78",
+					"billingCurrency": "EUR"
+				},
+				"pricingOptions": {
+					"fareType": [
+						"PUBLISHED"
+					],
+					"includedCheckedBagsOnly": false
+				},
+				"validatingAirlineCodes": [
+					"SQ"
+				],
+				"travelerPricings": [
+					{
+						"travelerId": "1",
+						"fareOption": "STANDARD",
+						"travelerType": "ADULT",
+						"price": {
+							"currency": "EUR",
+							"total": "679.78",
+							"base": "615.00",
+							"taxes": [
+								{
+									"amount": "2.09",
+									"code": "EX"
+								},
+								{
+									"amount": "5.99",
+									"code": "SG"
+								},
+								{
+									"amount": "17.25",
+									"code": "YR"
+								},
+								{
+									"amount": "8.00",
+									"code": "HB"
+								},
+								{
+									"amount": "24.89",
+									"code": "IT"
+								},
+								{
+									"amount": "2.00",
+									"code": "L7"
+								},
+								{
+									"amount": "1.21",
+									"code": "MJ"
+								},
+								{
+									"amount": "3.35",
+									"code": "VT"
+								}
+							],
+							"refundableTaxes": "47.53"
+						},
+						"fareDetailsBySegment": [
+							{
+								"segmentId": "13",
+								"cabin": "ECONOMY",
+								"fareBasis": "Q15ITOL",
+								"brandedFare": "YCLVALUE",
+								"class": "Q",
+								"includedCheckedBags": {
+									"weight": 25,
+									"weightUnit": "KG"
+								}
+							},
+							{
+								"segmentId": "14",
+								"cabin": "ECONOMY",
+								"fareBasis": "Q15ITOL",
+								"brandedFare": "YCLVALUE",
+								"class": "Q",
+								"includedCheckedBags": {
+									"weight": 25,
+									"weightUnit": "KG"
+								}
+							}
+						]
+					}
+				]
+			}
+		],
+		"bookingRequirements": {
+			"emailAddressRequired": true,
+			"mobilePhoneNumberRequired": true
+		}
+	},
+	"dictionaries": {
+		"locations": {
+			"FCO": {
+				"cityCode": "ROM",
+				"countryCode": "IT"
+			},
+			"BWN": {
+				"cityCode": "BWN",
+				"countryCode": "BN"
+			},
+			"SIN": {
+				"cityCode": "SIN",
+				"countryCode": "SG"
+			}
+		}
+	}
+}
+```
+
+## flight booking:
+
+issue: Hard to understand the process.
