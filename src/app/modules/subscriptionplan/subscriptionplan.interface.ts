@@ -1,6 +1,6 @@
 //
 export interface ICreateSubscriptionPlan {
-  name: string;
+  title: string;
   amount: number;
   type: "one_time" | "subscription";
   interval?: "month" | "year";

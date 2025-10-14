@@ -3,11 +3,11 @@ import { z } from "zod";
 
 const createSubscriptionplanSchema = z
   .object({
-    name: z.string().min(3),
+    title: z.string().min(3),
     amount: z.number().positive(),
     type: z.enum(["one_time", "subscription"]),
-    interval: z.enum(["month", "year"]).optional(),
-    subscriptionTitleType: z.enum(["MONTHLY", "YEARLY"]).optional(),
+    interval: z.enum(["month", "year"]),
+    subscriptionTitleType: z.enum(["MONTHLY", "YEARLY"]),
     features: z.array(z.string()).min(3),
   })
   .strict();

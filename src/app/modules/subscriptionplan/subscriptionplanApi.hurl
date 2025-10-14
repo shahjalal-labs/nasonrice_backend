@@ -12,9 +12,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 
 Content-Type: application/json
 {
-  "name": "Pro Plan",
-  "amount": 15,
-  "type": "one_time",
+  "title": "Platinum Plan",
+  "amount": 35,
+  "type": "subscription",
+  "interval":"year",
+  "subscriptionTitleType":"YEARLY",
   "features": [
     "Access to premium content",
     "Priority customer support",

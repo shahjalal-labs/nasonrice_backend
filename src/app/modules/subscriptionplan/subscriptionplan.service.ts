@@ -6,7 +6,7 @@ import stripe from "../../../config/stripe";
 import { ICreateSubscriptionPlan } from "./subscriptionplan.interface";
 
 const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
-  const { name, amount, type, interval, subscriptionTitleType, features } =
+  const { title, amount, type, interval, subscriptionTitleType, features } =
     data;
 
   const existingSubscription = await prisma.subscriptionPlan.findUnique({
@@ -20,7 +20,7 @@ const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
     );
   }
 
-  const product = await stripe.products.create({ name });
+  const product = await stripe.products.create({ name: title });
 
   if (!product) {
     throw new ApiError(400, "Product creation failed");
@@ -43,7 +43,7 @@ const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
       priceId: prices.id,
       productId: product.id,
       subscriptionTitleType,
-      title: name,
+      title,
       type: prices.recurring
         ? SubscriptionType.SUBSCRIPTION
         : SubscriptionType.ONETIME,
