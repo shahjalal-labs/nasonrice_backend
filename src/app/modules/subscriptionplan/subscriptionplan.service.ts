@@ -118,9 +118,45 @@ const deleteSubscriptionplanFromDB = async (id: string) => {
   return;
 };
 
+const createSubscriptionIntoDB = async (
+  priceId: string,
+  paymentMethodId: string,
+  customerId: string,
+  userId: string,
+) => {
+  const existingSubscription = await prisma.userSubscription.findUnique({
+    where: {
+      userId_priceId: { userId, priceId },
+    },
+  });
+
+  if (existingSubscription) {
+    throw new ApiError(
+      400,
+      "User already has an active subscription for this plan.",
+    );
+  }
+
+  await stripe.paymentMethods.attach(paymentMethodId, { customer: customerId });
+  await stripe.customers.update(customerId, {
+    invoice_settings: { default_payment_method: paymentMethodId },
+  });
+
+  return await stripe.subscriptions.create({
+    customer: customerId,
+    items: [{ price: priceId }],
+    // expand: ["latest_invoice.payment_intent"],
+    metadata: {
+      priceId,
+      userId,
+    },
+  });
+};
+
 export const subscriptionplanServices = {
   createSubscriptionPlanIntoDB,
   getAllSubscriptionplanFromDB,
   getSubscriptionplanByIdFromDB,
   deleteSubscriptionplanFromDB,
+  createSubscriptionIntoDB,
 };
