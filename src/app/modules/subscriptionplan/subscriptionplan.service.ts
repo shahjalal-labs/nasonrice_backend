@@ -5,6 +5,7 @@ import ApiError from "../../../errors/ApiErrors";
 import stripe from "../../../config/stripe";
 import { ICreateSubscriptionPlan } from "./subscriptionplan.interface";
 import { promisify } from "util";
+import { getOrCreateAddMoneyCustomer } from "../payment/getOrCreateStripeCustomer";
 
 const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
   const { title, amount, type, interval, subscriptionTitleType, features } =
@@ -121,9 +122,15 @@ const deleteSubscriptionplanFromDB = async (id: string) => {
 const createSubscriptionIntoDB = async (
   priceId: string,
   paymentMethodId: string,
-  customerId: string,
   userId: string,
 ) => {
+  const customerId = await getOrCreateAddMoneyCustomer(userId, paymentMethodId);
+  console.log(
+    customerId,
+    "[1;31mcustomerId in subscriptionplan.service.ts at line 125[0m",
+  );
+  if (!priceId) throw new ApiError(400, "Price ID is required");
+
   const existingSubscription = await prisma.userSubscription.findUnique({
     where: {
       userId_priceId: { userId, priceId },

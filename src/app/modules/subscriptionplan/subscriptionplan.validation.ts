@@ -15,7 +15,6 @@ const createSubscriptionplanSchema = z
 const createSubscriptionSchema = z
   .object({
     paymentMethodId: z.string().min(3),
-    customerId: z.string().min(2),
   })
   .strict();
 

@@ -28,7 +28,7 @@ router.delete(
 );
 
 router.post(
-  "/create-subscription/:id",
+  "/create-subscription/:priceId",
   auth(),
   validateRequest(SubscriptionplanSchemaValidation.createSubscriptionSchema),
   subscriptionplanController.createSubscription,
