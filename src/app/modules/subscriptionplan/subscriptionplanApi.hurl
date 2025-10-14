@@ -41,3 +41,13 @@ DELETE {{baseUrl}}/subscriptionplans/68edc77391384340ee77bb0f
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU 
 
 
+
+POST {{baseUrl}}/subscriptionplans/create-subscription/price_1SH0YB9nrMVeASAleDglXxPa
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU 
+
+Content-Type: application/json
+
+{
+  "paymentMethodId": "pm_1SH0YB9nrMVeASAleDglXxPa",
+  "customerId": "cus_M0d1c2c1d2d3d4d5d6d7d8d9d0d7"
+}
