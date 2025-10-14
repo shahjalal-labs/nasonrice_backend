@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { subscriptionplanServices } from "./subscriptionplan.service";
+import prisma from "../../../shared/prisma";
 
 const createSubscriptionPlan = catchAsync(async (req, res) => {
   const result = await subscriptionplanServices.createSubscriptionPlanIntoDB(
@@ -93,6 +94,16 @@ const updateSubscriptionStatus = catchAsync(async (req, res) => {
 
 const cancelSubscription = catchAsync(async (req, res) => {
   const { id: userId } = req.user;
+
+  const result =
+    await subscriptionplanServices.cancelSubscriptionFromDB(userId);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Subscription cancelled successfully",
+    data: result,
+  });
 });
 
 export const subscriptionplanController = {

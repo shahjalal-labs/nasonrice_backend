@@ -42,5 +42,10 @@ router.patch(
   ),
   subscriptionplanController.updateSubscriptionStatus,
 );
+router.patch(
+  "/cancel-subscription",
+  auth(),
+  subscriptionplanController.cancelSubscription,
+);
 
 export const subscriptionplanRoutes = router;

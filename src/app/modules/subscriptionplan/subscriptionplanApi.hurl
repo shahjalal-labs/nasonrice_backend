@@ -67,3 +67,10 @@ Content-Type: application/json
   "priceId": "price_1SH0YB9nrMVeASAleDglXxPa",
   "status": "ACTIVE"
 }
+
+
+# cancel subscription
+PATCH {{baseUrl}}/subscriptionplans/cancel-subscription
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc2MDQzMDg4MiwiZXhwIjoxNzYxNzI2ODgyfQ.FznwF49bAWM1qAGdFlU2Rf6orKOFZIHgyCN5CxlUZ0I 
+
+
