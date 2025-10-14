@@ -48,7 +48,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 
 # create subscription
 POST {{baseUrl}}/subscriptionplans/create-subscription/price_1SH0YB9nrMVeASAleDglXxPa
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc2MDQzMDg4MiwiZXhwIjoxNzYxNzI2ODgyfQ.FznwF49bAWM1qAGdFlU2Rf6orKOFZIHgyCN5CxlUZ0I  
 
 Content-Type: application/json
 
@@ -65,7 +65,7 @@ Content-Type: application/json
 
 {
   "priceId": "price_1SH0YB9nrMVeASAleDglXxPa",
-  "status": "ACTIVE"
+  "status": "DEACTIVE"
 }
 
 

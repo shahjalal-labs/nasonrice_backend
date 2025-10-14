@@ -137,7 +137,8 @@ const createSubscriptionIntoDB = async (
     },
   });
 
-  if (existingSubscription) {
+  console.log(`existingSubscription `, existingSubscription);
+  if (existingSubscription?.status === "ACTIVE") {
     throw new ApiError(
       400,
       "User already has an active subscription for this plan.",
@@ -226,7 +227,16 @@ const cancelSubscriptionFromDB = async (userId: string) => {
   if (!existingSubscription) {
     throw new ApiError(404, "No subscription found");
   }
-  await stripe.subscriptions.cancel(existingSubscription.subscriptionPayId);
+  console.log(`subscriptionPayId`, existingSubscription.subscriptionPayId);
+
+  const stripeSubscription = await stripe.subscriptions.retrieve(
+    existingSubscription.subscriptionPayId,
+  );
+
+  // Only cancel if the subscription is active in Stripe
+  if (stripeSubscription.status !== "canceled") {
+    await stripe.subscriptions.cancel(existingSubscription.subscriptionPayId);
+  }
 
   const updatedSubscription = await prisma.userSubscription.updateMany({
     where: { userId, status: "ACTIVE" },
