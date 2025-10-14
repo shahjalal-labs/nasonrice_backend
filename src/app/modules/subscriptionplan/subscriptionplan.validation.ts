@@ -18,10 +18,12 @@ const createSubscriptionSchema = z
   })
   .strict();
 
-const updateSubscriptionStatusValidationSchema = z.object({
-  priceId: z.string().min(3),
-  status: z.enum(["ACTIVE", "DEACTIVE"]),
-});
+const updateSubscriptionStatusValidationSchema = z
+  .object({
+    priceId: z.string().min(3),
+    status: z.enum(["ACTIVE", "DEACTIVE"]),
+  })
+  .strict();
 
 const updateSubscriptionplanSchema = createSubscriptionplanSchema.partial();
 

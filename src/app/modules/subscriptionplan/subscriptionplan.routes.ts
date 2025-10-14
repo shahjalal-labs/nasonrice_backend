@@ -34,4 +34,13 @@ router.post(
   subscriptionplanController.createSubscription,
 );
 
+router.patch(
+  "/update-status",
+  auth(),
+  validateRequest(
+    SubscriptionplanSchemaValidation.updateSubscriptionStatusValidationSchema,
+  ),
+  subscriptionplanController.updateSubscriptionStatus,
+);
+
 export const subscriptionplanRoutes = router;
