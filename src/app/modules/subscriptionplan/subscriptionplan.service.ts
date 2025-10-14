@@ -191,7 +191,7 @@ const createSubscriptionIntoDB = async (
   return result;
 };
 
-const updateSubscriptionStatusInDB = async (
+const updateSubscriptionStatusIntoDB = async (
   userId: string,
   priceId: string,
   status: "ACTIVE" | "DEACTIVE",
@@ -229,5 +229,5 @@ export const subscriptionplanServices = {
   getSubscriptionplanByIdFromDB,
   deleteSubscriptionplanFromDB,
   createSubscriptionIntoDB,
-  updateSubscriptionStatusInDB,
+  updateSubscriptionStatusIntoDB,
 };

@@ -74,10 +74,28 @@ const createSubscription = catchAsync(async (req, res) => {
   });
 });
 
+const updateSubscriptionStatus = catchAsync(async (req, res) => {
+  const { id: userId } = req.user;
+  const { priceId, status } = req.body;
+
+  const result = await subscriptionplanServices.updateSubscriptionStatusIntoDB(
+    userId,
+    priceId,
+    status,
+  );
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Subscription status updated successfully",
+    data: result,
+  });
+});
+
 export const subscriptionplanController = {
   createSubscriptionPlan,
   getAllSubscriptionplans,
   getSubscriptionplanById,
   deleteSubscriptionplan,
   createSubscription,
+  updateSubscriptionStatus,
 };
