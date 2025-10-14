@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 
-DELETE {{baseUrl}}/subscriptionplans/68e9d50d5b3883291064fb28
+DELETE {{baseUrl}}/subscriptionplans/68edc77391384340ee77bb0f
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJjMDFiMTAzNTZkZiIsImVtYWlsIjoibWlyLmRldmVsb3Blci5oYXNhbkBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsImlhdCI6MTc1OTEyNDQwNSwiZXhwIjoxNzYwNDIwNDA1fQ.fMPWmJrnxykxj8v3OcN2J4jsTH9LNcQYY8kKyNLbNNU 
 
 

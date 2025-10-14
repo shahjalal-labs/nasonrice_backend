@@ -4,6 +4,7 @@ import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import stripe from "../../../config/stripe";
 import { ICreateSubscriptionPlan } from "./subscriptionplan.interface";
+import { promisify } from "util";
 
 const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
   const { title, amount, type, interval, subscriptionTitleType, features } =
@@ -53,7 +54,7 @@ const createSubscriptionPlanIntoDB = async (data: ICreateSubscriptionPlan) => {
   return result;
 };
 
-const getAllSubscriptionplanFromDB = async () => {
+/* const getAllSubscriptionplanFromDB = async () => {
   const results = await prisma.subscriptionPlan.findMany({
     orderBy: {
       createdAt: "desc",
@@ -66,7 +67,7 @@ const getAllSubscriptionplanFromDB = async () => {
   if (!results.length)
     throw new ApiError(404, "No Subscription plan available");
   return results;
-};
+}; */
 
 const getSubscriptionplanByIdFromDB = async (id: string) => {
   const result = await prisma.subscriptionPlan.findUnique({ where: { id } });
@@ -74,7 +75,45 @@ const getSubscriptionplanByIdFromDB = async (id: string) => {
   return result;
 };
 
+const getAllSubscriptionplanFromDB = async () => {
+  const products = await prisma.subscriptionPlan.findMany({
+    select: {
+      id: true,
+      title: true,
+      priceId: true,
+      features: true,
+    },
+  });
+
+  const plansWithPrice = await Promise.all(
+    products.map(async (product) => {
+      try {
+        const price = await stripe.prices.retrieve(product.priceId);
+        return {
+          ...product,
+          price: price.unit_amount ? price.unit_amount / 100 : null,
+        };
+      } catch (error) {
+        console.error(
+          `Failed to fetch Stripe price for ID ${product.priceId}:`,
+          error,
+        );
+        return {
+          ...product,
+          price: null,
+        };
+      }
+    }),
+  );
+
+  return plansWithPrice;
+};
+
 const deleteSubscriptionplanFromDB = async (id: string) => {
+  const subscriptionPlan = await prisma.subscriptionPlan.findUnique({
+    where: { id },
+  });
+  if (!subscriptionPlan) throw new ApiError(404, "Subscription plan not found");
   await prisma.subscriptionPlan.delete({ where: { id } });
   return;
 };
