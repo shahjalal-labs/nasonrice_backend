@@ -9,25 +9,26 @@ generator client {
 
 //-----//-----//-------START USER MODEL- -----//-----//-------
 model User {
-  id                    String             @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String                 @id @default(auto()) @map("_id") @db.ObjectId
   firstName             String
   lastName              String?
   phoneNumber           String?
-  email                 String             @unique
+  email                 String                 @unique
   password              String
   nationality           String?
   fcmToken              String?
   profileImage          String?
-  role                  UserRole           @default(User)
-  status                UserStatus         @default(Active)
-  totalPay              Float              @default(0)
+  role                  UserRole               @default(User)
+  status                UserStatus             @default(Active)
+  totalPay              Float                  @default(0)
   accountId             String?
   addMoneyCustomerId    String?
-  createdAt             DateTime           @default(now())
-  updatedAt             DateTime           @updatedAt
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
   Pet                   Pet[]
   Product               Product[]
   ProductBookingBooking ProductBooking[]
+  subscriptionType      SubscriptionTitleType?
   PaymentActivity       PaymentActivity[]
   FlightBooking         FlightBooking[]
   Review                Review[]
