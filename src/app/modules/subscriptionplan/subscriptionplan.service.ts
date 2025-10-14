@@ -1,5 +1,9 @@
 //
-import { SubscriptionPlan, SubscriptionTitleType, SubscriptionType } from "@prisma/client";
+import {
+  SubscriptionPlan,
+  SubscriptionTitleType,
+  SubscriptionType,
+} from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/ApiErrors";
 import stripe from "../../../config/stripe";
@@ -149,7 +153,7 @@ const createSubscriptionIntoDB = async (
     invoice_settings: { default_payment_method: paymentMethodId },
   });
 
-  const stripeSubscription await stripe.subscriptions.create({
+  const stripeSubscription = await stripe.subscriptions.create({
     customer: customerId,
     items: [{ price: priceId }],
     // expand: ["latest_invoice.payment_intent"],
@@ -173,8 +177,9 @@ const createSubscriptionIntoDB = async (
       userId: userId,
       priceId: priceId,
       subscriptionId: subscription?.id,
-      subscriptionTitleType: subscription?.subscriptionTitleType as SubscriptionTitleType,
-      subscriptionPayId: stripeSubscription.id
+      subscriptionTitleType:
+        subscription?.subscriptionTitleType as SubscriptionTitleType,
+      subscriptionPayId: stripeSubscription.id,
     },
     update: {
       status: "ACTIVE",
@@ -182,7 +187,10 @@ const createSubscriptionIntoDB = async (
   });
   await prisma.user.update({
     where: { id: userId },
-    data: { subscriptionType: subscription.subscriptionTitleType as SubscriptionTitleType },
+    data: {
+      subscriptionType:
+        subscription.subscriptionTitleType as SubscriptionTitleType,
+    },
   });
   return result;
 };
