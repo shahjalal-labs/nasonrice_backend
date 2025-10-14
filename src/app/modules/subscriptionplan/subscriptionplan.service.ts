@@ -149,7 +149,7 @@ const createSubscriptionIntoDB = async (
     invoice_settings: { default_payment_method: paymentMethodId },
   });
 
-  return await stripe.subscriptions.create({
+  await stripe.subscriptions.create({
     customer: customerId,
     items: [{ price: priceId }],
     // expand: ["latest_invoice.payment_intent"],
@@ -158,6 +158,33 @@ const createSubscriptionIntoDB = async (
       userId,
     },
   });
+
+  const subscription = await prisma.subscriptionPlan.findUnique({
+    where: { priceId },
+  });
+
+  if (!subscription) {
+    throw new ApiError(404, `Subscription with priceId: ${priceId} not found`);
+  }
+  const result = await prisma.userSubscription.upsert({
+    where: { userId_priceId: { userId, priceId } },
+    create: {
+      features: subscription?.features || {},
+      userId: userId,
+      priceId: priceId,
+      subscriptionId: subscription?.id,
+      subscriptionTitleType: subscription?.subscriptionTitleType,
+      subscriptionPayId: subscriptionPayId,
+    },
+    update: {
+      status: "ACTIVE",
+    },
+  });
+  await prisma.user.update({
+    where: { id: userId },
+    data: { subscriptionType: subscription.subscriptionTitleType },
+  });
+  return result;
 };
 
 export const subscriptionplanServices = {

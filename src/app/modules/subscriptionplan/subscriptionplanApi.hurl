@@ -48,5 +48,5 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDNjN2RiOTY4YmJj
 Content-Type: application/json
 
 {
-  "paymentMethodId": "pm_1SH0YB9nrMVeASAleDglXxPa"
+  "paymentMethodId": "pm_1SI0t69nrMVeASAlWVEBYl2Y"
 }
