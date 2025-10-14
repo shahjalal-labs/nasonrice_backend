@@ -26,4 +26,6 @@ router.delete(
   subscriptionplanController.deleteSubscriptionplan,
 );
 
+router.post("/create-subscription/:id", validateRequest(undefined), auth());
+
 export const subscriptionplanRoutes = router;

@@ -55,10 +55,10 @@ const deleteSubscriptionplan = catchAsync(
   },
 );
 
-const createSubscription = catchAsync(async (req: Request, res: Response) => {
+const createSubscription = catchAsync(async (req, res) => {
   const priceId = req.params.priceId as string;
-  const paymentMethodId = req.query.paymentMethodId as string;
-  const customerId = req.user.stripeCustomerId as string;
+  const paymentMethodId = req.body.paymentMethodId as string;
+  const customerId = req.body.stripeCustomerId as string;
   const userId = req.user.id as string;
 
   const result = await subscriptionplanServices.createSubscriptionIntoDB(
@@ -81,4 +81,5 @@ export const subscriptionplanController = {
   getAllSubscriptionplans,
   getSubscriptionplanById,
   deleteSubscriptionplan,
+  createSubscription,
 };

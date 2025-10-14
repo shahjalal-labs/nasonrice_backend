@@ -12,9 +12,17 @@ const createSubscriptionplanSchema = z
   })
   .strict();
 
+const createSubscriptionSchema = z
+  .object({
+    paymentMethodId: z.string().min(3),
+    customerId: z.string().min(2),
+  })
+  .strict();
+
 const updateSubscriptionplanSchema = createSubscriptionplanSchema.partial();
 
 export const SubscriptionplanSchemaValidation = {
   createSubscriptionplanSchema,
   updateSubscriptionplanSchema,
+  createSubscriptionSchema,
 };
