@@ -211,7 +211,14 @@ const updateSubscriptionStatusIntoDB = async (
     );
   }
 
-  await prisma.userSubscription.update({
+  if (existingSubscription.status === status) {
+    throw new ApiError(
+      400,
+      `Subscription status is already ${status} for user ${userId} with priceId ${priceId}`,
+    );
+  }
+
+  const result = await prisma.userSubscription.update({
     where: {
       userId_priceId: { userId, priceId },
     },
@@ -219,6 +226,7 @@ const updateSubscriptionStatusIntoDB = async (
       status,
     },
   });
+  return result;
 };
 const cancelSubscriptionFromDB = async (userId: string) => {
   const existingSubscription = await prisma.userSubscription.findFirst({

@@ -3,8 +3,8 @@
 ```bash
 .
 ├── bun.lock
-├── ck.html
-├── developer.md
+├── credential.md
+├─j─ developer.md
 ├── module.js
 ├── newfile.md
 ├── package.json
@@ -89,6 +89,14 @@
 │   │   │   │   ├── review.routes.ts
 │   │   │   │   ├── review.service.ts
 │   │   │   │   └── review.validation.ts
+│   │   │   ├── subscriptionplan
+│   │   │   │   ├── refractorSubscriptionplanPrompt.md
+│   │   │   │   ├── subscriptionplanApi.hurl
+│   │   │   │   ├── subscriptionplan.controller.ts
+│   │   │   │   ├── subscriptionplan.interface.ts
+│   │   │   │   ├── subscriptionplan.routes.ts
+│   │   │   │   ├── subscriptionplan.service.ts
+│   │   │   │   └── subscriptionplan.validation.ts
 │   │   │   └── user
 │   │   │       ├── userApi.hurl
 │   │   │       ├── user.controller.ts
@@ -144,6 +152,6 @@
 ├── vercel.json
 └── vps_deploy.md
 
-28 directories, 114 files
+29 directories, 121 files
 
 ```
