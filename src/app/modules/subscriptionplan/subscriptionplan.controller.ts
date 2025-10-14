@@ -91,6 +91,10 @@ const updateSubscriptionStatus = catchAsync(async (req, res) => {
   });
 });
 
+const cancelSubscription = catchAsync(async (req, res) => {
+  const { id: userId } = req.user;
+});
+
 export const subscriptionplanController = {
   createSubscriptionPlan,
   getAllSubscriptionplans,
@@ -98,4 +102,5 @@ export const subscriptionplanController = {
   deleteSubscriptionplan,
   createSubscription,
   updateSubscriptionStatus,
+  cancelSubscription,
 };

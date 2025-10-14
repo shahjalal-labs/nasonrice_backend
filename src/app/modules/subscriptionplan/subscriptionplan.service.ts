@@ -196,32 +196,47 @@ const updateSubscriptionStatusIntoDB = async (
   priceId: string,
   status: "ACTIVE" | "DEACTIVE",
 ) => {
-  try {
-    const existingSubscription = await prisma.userSubscription.findFirst({
-      where: {
-        userId,
-        priceId,
-      },
-    });
+  const existingSubscription = await prisma.userSubscription.findFirst({
+    where: {
+      userId,
+      priceId,
+    },
+  });
 
-    if (!existingSubscription) {
-      throw new ApiError(
-        404,
-        `No subscription found for user ${userId} with priceId ${priceId}`,
-      );
-    }
-
-    await prisma.userSubscription.update({
-      where: {
-        userId_priceId: { userId, priceId },
-      },
-      data: {
-        status,
-      },
-    });
-  } catch (error) {
-    throw new ApiError(500, "Failed to update subscription status");
+  if (!existingSubscription) {
+    throw new ApiError(
+      404,
+      `No subscription found for user ${userId} with priceId ${priceId}`,
+    );
   }
+
+  await prisma.userSubscription.update({
+    where: {
+      userId_priceId: { userId, priceId },
+    },
+    data: {
+      status,
+    },
+  });
+};
+const cancelSubscriptionFromDB = async (userId: string) => {
+  const existingSubscription = await prisma.userSubscription.findFirst({
+    where: { userId },
+  });
+  if (!existingSubscription) {
+    throw new ApiError(404, "No subscription found");
+  }
+  await stripe.subscriptions.cancel(existingSubscription.subscriptionPayId);
+
+  const updatedSubscription = await prisma.userSubscription.updateMany({
+    where: { userId, status: "ACTIVE" },
+    data: { status: "DEACTIVE" },
+  });
+  await prisma.user.update({
+    where: { id: userId },
+    data: { subscriptionType: null },
+  });
+  return updatedSubscription;
 };
 export const subscriptionplanServices = {
   createSubscriptionPlanIntoDB,
@@ -230,4 +245,5 @@ export const subscriptionplanServices = {
   deleteSubscriptionplanFromDB,
   createSubscriptionIntoDB,
   updateSubscriptionStatusIntoDB,
+  cancelSubscriptionFromDB,
 };
