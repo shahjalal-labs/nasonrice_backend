@@ -129,10 +129,6 @@ const createSubscriptionIntoDB = async (
   userId: string,
 ) => {
   const customerId = await getOrCreateAddMoneyCustomer(userId, paymentMethodId);
-  console.log(
-    customerId,
-    "[1;31mcustomerId in subscriptionplan.service.ts at line 125[0m",
-  );
   if (!priceId) throw new ApiError(400, "Price ID is required");
 
   const existingSubscription = await prisma.userSubscription.findUnique({
@@ -195,10 +191,43 @@ const createSubscriptionIntoDB = async (
   return result;
 };
 
+const updateSubscriptionStatusInDB = async (
+  userId: string,
+  priceId: string,
+  status: "ACTIVE" | "DEACTIVE",
+) => {
+  try {
+    const existingSubscription = await prisma.userSubscription.findFirst({
+      where: {
+        userId,
+        priceId,
+      },
+    });
+
+    if (!existingSubscription) {
+      throw new ApiError(
+        404,
+        `No subscription found for user ${userId} with priceId ${priceId}`,
+      );
+    }
+
+    await prisma.userSubscription.update({
+      where: {
+        userId_priceId: { userId, priceId },
+      },
+      data: {
+        status,
+      },
+    });
+  } catch (error) {
+    throw new ApiError(500, "Failed to update subscription status");
+  }
+};
 export const subscriptionplanServices = {
   createSubscriptionPlanIntoDB,
   getAllSubscriptionplanFromDB,
   getSubscriptionplanByIdFromDB,
   deleteSubscriptionplanFromDB,
   createSubscriptionIntoDB,
+  updateSubscriptionStatusInDB,
 };
