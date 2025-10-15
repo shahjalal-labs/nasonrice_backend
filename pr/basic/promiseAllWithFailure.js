@@ -14,6 +14,8 @@ async function testFail() {
       "[1;31mresults in promiseAllWithFailure.js at line 12[0m",
     );
   } catch (error) {
-    console.error(error);
+    console.error("Promise.all rejected", error);
   }
 }
+
+testFail();
