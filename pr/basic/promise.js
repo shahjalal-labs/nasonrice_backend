@@ -6,3 +6,19 @@
 const randomOutcome = () => {
   return new Promise();
 };
+
+const error = new Promise((resolve, reject) => {
+  let condition = false;
+  condition
+    ? resolve("data")
+    : reject({
+        message: "error",
+      });
+});
+
+try {
+  const data = await error;
+  console.log(data);
+} catch (error) {
+  console.log(`error`, error);
+}
