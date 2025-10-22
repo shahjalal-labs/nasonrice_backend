@@ -12,7 +12,10 @@
 ├── pr
 │   └── basic
 │       ├── map.js
+│       ├── promiseAllAsyncAwait.js
+│       ├── promiseAllFailureIndividually.js
 │       ├── promiseAll.js
+│       ├── promiseAllWithFailure.js
 │       └── promise.js
 ├── prisma
 │   └── schema.prisma
@@ -154,6 +157,6 @@
 ├── vercel.json
 └── vps_deploy.md
 
-29 directories, 123 files
+29 directories, 126 files
 
 ```
