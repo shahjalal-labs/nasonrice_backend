@@ -204,37 +204,37 @@ const files = {
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const create${capModule}IntoDB = async (data: any) => {
+const create${capModule} = async (data: any) => {
   await prisma.${moduleName}.create({ data });
   return;
 };
 
-const getAll${capModule}FromDB = async () => {
+const getAll${capModule} = async () => {
   const results = await prisma.${moduleName}.findMany();
   return results;
 };
 
-const get${capModule}ByIdFromDB = async (id: string) => {
+const get${capModule}ById = async (id: string) => {
   const result = await prisma.${moduleName}.findUnique({ where: { id } });
   return result;
 };
 
-const update${capModule}IntoDB = async (id: string, data: any) => {
+const update${capModule} = async (id: string, data: any) => {
   await prisma.${moduleName}.update({ where: { id }, data });
   return;
 };
 
-const delete${capModule}FromDB = async (id: string) => {
+const delete${capModule} = async (id: string) => {
   await prisma.${moduleName}.delete({ where: { id } });
   return;
 };
 
 export const ${moduleName}Services = {
-  create${capModule}IntoDB,
-  getAll${capModule}FromDB,
-  get${capModule}ByIdFromDB,
-  update${capModule}IntoDB,
-  delete${capModule}FromDB,
+  create${capModule},
+  getAll${capModule},
+  get${capModule}ById,
+  update${capModule},
+  delete${capModule},
 };
   `,
 
@@ -244,7 +244,7 @@ import sendResponse from '../../../shared/sendResponse';
 import catchAsync from "../../../shared/catchAsync";
 
 const create${capModule} = catchAsync (async (req, res) => {
-  await ${moduleName}Services.create${capModule}IntoDB(req.body);
+  await ${moduleName}Services.create${capModule}(req.body);
   sendResponse(res, {
     success: true,
     statusCode: 201,
@@ -253,7 +253,7 @@ const create${capModule} = catchAsync (async (req, res) => {
 });
 
 const getAll${capModule}s = catchAsync(async (req, res) => {
-  const result = await ${moduleName}Services.getAll${capModule}FromDB();
+  const result = await ${moduleName}Services.getAll${capModule}();
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -263,7 +263,7 @@ const getAll${capModule}s = catchAsync(async (req, res) => {
 });
 
 const get${capModule}ById = catchAsync(async (req, res) => {
-  const result = await ${moduleName}Services.get${capModule}ByIdFromDB(req.params.id);
+  const result = await ${moduleName}Services.get${capModule}ById(req.params.id);
   sendResponse(res, {
     success: true,
     statusCode: 200,
