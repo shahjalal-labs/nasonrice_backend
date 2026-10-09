@@ -3,3 +3,11 @@ dist
 .vecel
 .env
 credential.md
+
+# Keep secrets out of version control
+.env.*
+!.env.example
+*.env
+http-client.env.json
+*.key
+*.pem
